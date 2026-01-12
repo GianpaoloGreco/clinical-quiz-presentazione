@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Quiz - Presentazione Flussi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #fff; overflow: hidden; }
+        .presentation { width: 100vw; height: 100vh; position: relative; }
+        .slide { display: none; width: 100%; height: 100%; padding: 30px 50px 80px; animation: fadeIn 0.4s; flex-direction: column; }
+        .slide.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Header */
+        .slide-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .slide-badge { padding: 6px 16px; border-radius: 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        .slide-badge.admin { background: #1976D2; }
+        .slide-badge.creator { background: #FF9800; }
+        .slide-badge.mobile { background: #4CAF50; }
+        .slide-badge.overview { background: #9C27B0; }
+        .slide-number { color: rgba(255,255,255,0.4); font-size: 13px; }
+
+        /* Thumbnail Strip */
+        .thumb-strip { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.03); border-radius: 12px; }
+        .thumb-item { width: 120px; height: 75px; border-radius: 8px; overflow: hidden; opacity: 0.4; transition: all 0.3s; cursor: pointer; border: 2px solid transparent; position: relative; }
+        .thumb-item:hover { opacity: 0.7; }
+        .thumb-item.active { opacity: 1; border-color: #667eea; box-shadow: 0 0 20px rgba(102,126,234,0.4); }
+        .thumb-item img { width: 100%; height: 100%; object-fit: cover; background: #fff; }
+        .thumb-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.8); padding: 3px 5px; font-size: 8px; text-align: center; }
+        .thumb-item.active .thumb-label { background: #667eea; }
+
+        /* Title */
+        .slide-title { font-size: 32px; font-weight: 700; margin-bottom: 5px; color: #fff; }
+        .slide-subtitle { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+
+        /* Content */
+        .slide-content { flex: 1; display: flex; gap: 40px; align-items: flex-start; overflow: hidden; }
+        .slide-description { flex: 0 0 420px; max-height: 100%; overflow-y: auto; }
+        .slide-description p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.85); margin-bottom: 15px; }
+        .slide-image { flex: 1; display: flex; justify-content: center; align-items: center; height: 100%; }
+        .slide-image img { max-height: 100%; max-width: 100%; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .slide-image.mobile img { max-height: 85%; }
+
+        /* Feature box */
+        .feature-box { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px; margin-top: 15px; border-left: 3px solid #667eea; }
+        .feature-box h4 { color: #667eea; margin-bottom: 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .feature-box ul { list-style: none; }
+        .feature-box li { padding: 5px 0; font-size: 13px; color: rgba(255,255,255,0.75); padding-left: 20px; position: relative; }
+        .feature-box li::before { content: '→'; position: absolute; left: 0; color: #667eea; }
+        .highlight { color: #667eea; font-weight: 600; }
+        .highlight.admin { color: #42A5F5; }
+        .highlight.creator { color: #FFA726; }
+        .highlight.mobile { color: #66BB6A; }
+
+        /* Intro slides */
+        .intro-slide { justify-content: center; align-items: center; text-align: center; }
+        .intro-slide .slide-title { font-size: 52px; margin-bottom: 15px; }
+        .intro-slide .slide-subtitle { font-size: 20px; max-width: 700px; }
+        .intro-icon { font-size: 70px; margin-bottom: 25px; }
+        .flow-steps { display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
+        .flow-step { background: rgba(255,255,255,0.1); padding: 12px 20px; border-radius: 25px; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .flow-step .step-num { background: rgba(255,255,255,0.2); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 11px; }
+
+        /* Overview */
+        .overview-section { display: flex; gap: 30px; flex: 1; align-items: stretch; }
+        .overview-card { flex: 1; background: rgba(255,255,255,0.05); border-radius: 16px; padding: 25px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; }
+        .overview-card h3 { font-size: 20px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .overview-card p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 15px; }
+        .overview-card .flow-img { flex: 1; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.98); border-radius: 10px; padding: 10px; min-height: 180px; }
+        .overview-card .flow-img img { max-width: 100%; max-height: 220px; object-fit: contain; }
+
+        /* Navigation */
+        .nav-controls { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 100; }
+        .nav-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 25px; border-radius: 25px; cursor: pointer; font-size: 13px; transition: all 0.3s; }
+        .nav-btn:hover { background: rgba(255,255,255,0.2); }
+        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s; }
+        .keyboard-hint { position: fixed; bottom: 25px; right: 30px; font-size: 11px; color: rgba(255,255,255,0.3); }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="presentation">
+
+        <!-- SLIDE 1: Overview Sistema (Prima pagina) -->
+        <div class="slide active" data-slide="1">
+            <div class="slide-header">
+                <span class="slide-badge overview">Overview</span>
+                <span class="slide-number">1 / 25</span>
+            </div>
+            <h1 class="slide-title" style="text-align: center;">Clinical Quiz - Overview Sistema</h1>
+            <p class="slide-subtitle" style="text-align: center; max-width: 900px; margin: 0 auto 15px;">
+                Clinical Quiz è una piattaforma web interattiva progettata per la creazione e gestione di quiz medici durante congressi, eventi formativi e corsi ECM.
+                Il sistema integra intelligenza artificiale GPT-4 per fornire feedback educativi personalizzati ai partecipanti.
+            </p>
+            <div style="flex: 1; display: flex; justify-content: center; align-items: center; background: #fff; border-radius: 12px; margin: 10px 40px; padding: 25px;">
+                <img src="figma_wireframes/flow_overview.svg" alt="Flow Overview" style="max-height: 100%; max-width: 100%;">
+            </div>
+        </div>
+
+        <!-- SLIDE 2: Intro dettagli flussi -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <span class="slide-badge overview">Panoramica</span>
+                <span class="slide-number">2 / 25</span>
+            </div>
+            <h1 class="slide-title" style="text-align: center;">Dettaglio dei Flussi Applicativi</h1>
+            <p class="slide-subtitle" style="text-align: center;">Tre tipologie di utenti con percorsi dedicati e interconnessi</p>
+            <div class="overview-section" style="gap: 20px; padding: 0 20px;">
+                <div class="overview-card" style="padding: 15px;">
+                    <h3 style="font-size: 16px; margin-bottom: 8px;">🔷 Flusso Admin</h3>
+                    <p style="font-size: 12px; margin-bottom: 10px;">Gestione piattaforma, creazione Creator, report e statistiche globali.</p>
+                    <div class="flow-img" style="padding: 8px;"><img src="figma_wireframes/flow_admin.svg" alt="Flow Admin" style="max-height: 280px;"></div>
+                </div>
+                <div class="overview-card" style="padding: 15px;">
+                    <h3 style="font-size: 16px; margin-bottom: 8px;">🔶 Flusso Creator</h3>
+                    <p style="font-size: 12px; margin-bottom: 10px;">Wizard 5 step, import domande, pubblicazione QR e monitoraggio live.</p>
+                    <div class="flow-img" style="padding: 8px;"><img src="figma_wireframes/flow_creator.svg" alt="Flow Creator" style="max-height: 280px;"></div>
+                </div>
+                <div class="overview-card" style="padding: 15px;">
+                    <h3 style="font-size: 16px; margin-bottom: 8px;">📱 Flusso Partecipante</h3>
+                    <p style="font-size: 12px; margin-bottom: 10px;">Accesso QR, quiz con difficoltà adattiva, feedback AI e classifica.</p>
+                    <div class="flow-img" style="padding: 8px;"><img src="figma_wireframes/flow_participant.svg" alt="Flow Participant" style="max-height: 280px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Intro Admin -->
+        <div class="slide intro-slide" data-slide="3">
+            <div class="intro-icon">👨‍💼</div>
+            <h1 class="slide-title">Flusso Admin</h1>
+            <p class="slide-subtitle">Amministrazione completa della piattaforma Clinical Quiz</p>
+            <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">1</span> Login</div>
+                <div class="flow-step"><span class="step-num">2</span> Dashboard</div>
+                <div class="flow-step"><span class="step-num">3</span> Gestione Utenti</div>
+                <div class="flow-step"><span class="step-num">4</span> Crea Creator</div>
+                <div class="flow-step"><span class="step-num">5</span> Report</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: Login Admin -->
+        <div class="slide" data-slide="4" data-flow="admin" data-step="1">
+            <div class="slide-header">
+                <span class="slide-badge admin">Admin</span>
+                <span class="slide-number">4 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-admin"></div>
+            <h1 class="slide-title">Login Piattaforma</h1>
+            <p class="slide-subtitle">Flusso Admin • Step 1 di 5</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Schermata di accesso unificata per <span class="highlight admin">Admin</span> e <span class="highlight creator">Creator</span>. Il sistema riconosce automaticamente il tipo di utente dalle credenziali e reindirizza alla dashboard appropriata.</p>
+                    <p>Le credenziali Admin vengono generate dal team di sviluppo durante il setup iniziale della piattaforma. L'Admin riceve username e password via canale sicuro e può modificare la password al primo accesso.</p>
+                    <p>L'interfaccia è minimalista e professionale, con campo username e password chiaramente etichettati. Il pulsante "ACCEDI" avvia la validazione e il redirect alla dashboard corretta.</p>
+                    <div class="feature-box">
+                        <h4>Specifiche Tecniche</h4>
+                        <ul>
+                            <li>Autenticazione con validazione server-side</li>
+                            <li>Sessione sicura con token JWT</li>
+                            <li>Log accessi per compliance GDPR</li>
+                            <li>Redirect automatico per tipo utente</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_login.svg" alt="Login">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: Dashboard Admin -->
+        <div class="slide" data-slide="5" data-flow="admin" data-step="2">
+            <div class="slide-header">
+                <span class="slide-badge admin">Admin</span>
+                <span class="slide-number">5 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-admin-2"></div>
+            <h1 class="slide-title">Dashboard Admin</h1>
+            <p class="slide-subtitle">Flusso Admin • Step 2 di 5</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>La Dashboard Admin è il <span class="highlight admin">centro di controllo</span> dell'intera piattaforma. Fornisce una visione immediata dello stato di salute del sistema e delle attività in corso.</p>
+                    <p>Le tre metriche principali in alto mostrano: il numero di Creator attualmente attivi sulla piattaforma, il totale dei quiz creati dall'inizio, e il conteggio cumulativo di tutte le partecipazioni registrate.</p>
+                    <p>La tabella "Attività Recente" mostra in tempo reale gli ultimi eventi: quale Creator ha creato o avviato un quiz, quando, e quanti partecipanti hanno già risposto. Questo permette all'Admin di monitorare l'utilizzo della piattaforma.</p>
+                    <p>La sidebar laterale fornisce accesso rapido a tutte le sezioni: Dashboard per la panoramica, Gestione Utenti per amministrare i Creator, e Report per le statistiche aggregate.</p>
+                    <div class="feature-box">
+                        <h4>Metriche e Funzionalità</h4>
+                        <ul>
+                            <li>KPI in tempo reale: Creator, Quiz, Partecipazioni</li>
+                            <li>Log attività con filtri per data e Creator</li>
+                            <li>Navigazione rapida via sidebar persistente</li>
+                            <li>Notifiche per eventi importanti (nuovo Creator, quiz completati)</li>
+                            <li>Refresh automatico dati ogni 30 secondi</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_admin_dashboard.svg" alt="Admin Dashboard">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: Gestione Utenti -->
+        <div class="slide" data-slide="6" data-flow="admin" data-step="3">
+            <div class="slide-header">
+                <span class="slide-badge admin">Admin</span>
+                <span class="slide-number">6 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-admin-3"></div>
+            <h1 class="slide-title">Gestione Utenti</h1>
+            <p class="slide-subtitle">Flusso Admin • Step 3 di 5</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Sezione dedicata alla <span class="highlight admin">gestione completa degli account Creator</span>. L'Admin visualizza tutti gli organizzatori registrati sulla piattaforma con informazioni dettagliate.</p>
+                    <p>La tabella mostra per ogni Creator: nome completo, email di contatto, numero di quiz creati, e stato dell'account (Attivo o Inattivo). Lo stato inattivo impedisce l'accesso ma preserva tutti i dati storici.</p>
+                    <p>La barra di ricerca permette di filtrare rapidamente per nome o email. La paginazione gestisce liste numerose mantenendo performance ottimali.</p>
+                    <p>Per ogni riga sono disponibili azioni rapide: "Edit" per modificare i dati del Creator, "Del" per disattivare l'account (soft delete che mantiene lo storico per compliance).</p>
+                    <div class="feature-box">
+                        <h4>Azioni Disponibili</h4>
+                        <ul>
+                            <li>Ricerca full-text su nome ed email</li>
+                            <li>Ordinamento per colonna (nome, quiz, stato)</li>
+                            <li>Modifica dati anagrafici Creator</li>
+                            <li>Reset password con invio email automatico</li>
+                            <li>Disattivazione account (preserva storico quiz)</li>
+                            <li>Riattivazione account precedentemente disattivato</li>
+                            <li>Creazione nuovo Creator (pulsante "+ Nuovo Creator")</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_admin_users.svg" alt="Gestione Utenti">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: Crea Creator -->
+        <div class="slide" data-slide="7" data-flow="admin" data-step="4">
+            <div class="slide-header">
+                <span class="slide-badge admin">Admin</span>
+                <span class="slide-number">7 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-admin-4"></div>
+            <h1 class="slide-title">Nuovo Account Creator</h1>
+            <p class="slide-subtitle">Flusso Admin • Step 4 di 5</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Form per la creazione di un <span class="highlight admin">nuovo account Creator</span>. Ogni organizzatore di eventi medici necessita di un account per accedere alla piattaforma e creare i propri quiz.</p>
+                    <p>L'Admin inserisce i dati del nuovo Creator: nome completo per l'identificazione, username univoco che sarà usato per il login, email valida per comunicazioni e recupero password.</p>
+                    <p>La password viene generata automaticamente dal sistema con criteri di sicurezza (minimo 12 caratteri, maiuscole, numeri, simboli) oppure può essere inserita manualmente dall'Admin.</p>
+                    <p>Il checkbox "Invia credenziali via email" permette l'invio automatico di un'email al nuovo Creator con le istruzioni di accesso. Una copia viene sempre inviata all'Admin per backup e tracciabilità.</p>
+                    <div class="feature-box">
+                        <h4>Campi e Validazioni</h4>
+                        <ul>
+                            <li>Nome completo: obbligatorio, min 3 caratteri</li>
+                            <li>Username: obbligatorio, univoco, no spazi</li>
+                            <li>Email: obbligatorio, formato valido, univoca</li>
+                            <li>Password: auto-generata o manuale (min 12 char)</li>
+                            <li>Note interne: opzionale, visibile solo Admin</li>
+                            <li>Email automatica con template personalizzato</li>
+                            <li>Copia credenziali all'Admin per backup</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_admin_create_user.svg" alt="Crea Creator">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: Report Admin -->
+        <div class="slide" data-slide="8" data-flow="admin" data-step="5">
+            <div class="slide-header">
+                <span class="slide-badge admin">Admin</span>
+                <span class="slide-number">8 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-admin-5"></div>
+            <h1 class="slide-title">Report Aggregati</h1>
+            <p class="slide-subtitle">Flusso Admin • Step 5 di 5</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Sezione per la <span class="highlight admin">business intelligence</span> della piattaforma. L'Admin accede a statistiche aggregate che mostrano l'andamento complessivo e permettono analisi approfondite.</p>
+                    <p>I filtri temporali permettono di analizzare periodi specifici: ultimo mese, trimestre, anno, o range personalizzato. È possibile anche filtrare per singolo Creator per valutare le performance individuali.</p>
+                    <p>Le card in alto mostrano i KPI principali: Creator attivi nel periodo, quiz creati, partecipazioni totali, e media risposte corrette (indicatore qualità quiz).</p>
+                    <p>Il grafico "Andamento Partecipazioni" visualizza il trend temporale, utile per identificare picchi durante eventi o congressi. La sezione "Top Eventi" evidenzia i quiz con maggiore engagement.</p>
+                    <div class="feature-box">
+                        <h4>Funzionalità Analytics</h4>
+                        <ul>
+                            <li>Filtri: periodo temporale, Creator specifico</li>
+                            <li>KPI: Creator attivi, Quiz, Partecipazioni, % corrette</li>
+                            <li>Grafico trend partecipazioni (line chart)</li>
+                            <li>Classifica Top 10 eventi per partecipanti</li>
+                            <li>Tabella dettaglio attività recenti</li>
+                            <li>Export dati in formato Excel (.xlsx)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_admin_report.svg" alt="Admin Report">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: Intro Creator -->
+        <div class="slide intro-slide" data-slide="9">
+            <div class="intro-icon">🎯</div>
+            <h1 class="slide-title">Flusso Creator</h1>
+            <p class="slide-subtitle">Creazione quiz, personalizzazione e monitoraggio eventi</p>
+            <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">1</span> Dashboard</div>
+                <div class="flow-step"><span class="step-num">2</span> Wizard 5 Step</div>
+                <div class="flow-step"><span class="step-num">3</span> QR Code</div>
+                <div class="flow-step"><span class="step-num">4</span> Dettaglio Quiz</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Creator Dashboard -->
+        <div class="slide" data-slide="10" data-flow="creator" data-step="1">
+            <div class="slide-header">
+                <span class="slide-badge creator">Creator</span>
+                <span class="slide-number">10 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-creator-1"></div>
+            <h1 class="slide-title">Dashboard Creator</h1>
+            <p class="slide-subtitle">Flusso Creator • Step 1 di 8</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>La Dashboard Creator è la <span class="highlight creator">home personale e unica schermata principale</span> dell'organizzatore eventi. Contiene tutto il necessario: statistiche, lista quiz e accesso alla creazione.</p>
+                    <p>Le tre card metriche mostrano: quiz attualmente attivi, totale cumulativo di partecipanti a tutti gli eventi, e la media delle risposte esatte (indicatore di qualità/difficoltà dei quiz).</p>
+                    <p>La lista "I Miei Quiz" è un contenitore scrollabile che mostra tutti i quiz ordinati per data. Per ogni quiz è visibile: titolo, stato (Attivo/Bozza/Concluso), data evento e luogo - le stesse informazioni inserite nello Step 1.</p>
+                    <p>Il pulsante prominente "+ Nuovo Quiz" avvia il wizard di creazione guidato in 5 step. Cliccando "Apri" su un quiz esistente si accede alla pagina di dettaglio quiz.</p>
+                    <div class="feature-box">
+                        <h4>Funzionalità Dashboard</h4>
+                        <ul>
+                            <li>Interfaccia semplificata: tutto in una schermata</li>
+                            <li>Metriche: Quiz Attivi, Partecipanti, Media Risposte Esatte</li>
+                            <li>Lista quiz scrollabile con tutti i dettagli</li>
+                            <li>Indicatore scroll per navigare la lista</li>
+                            <li>Accesso rapido a creazione nuovo quiz</li>
+                            <li>Link diretto a dettaglio ogni quiz</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_creator_dashboard.svg" alt="Creator Dashboard">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11-15: Wizard Steps -->
+        <div class="slide" data-slide="11" data-flow="creator" data-step="2">
+            <div class="slide-header">
+                <span class="slide-badge creator">Creator</span>
+                <span class="slide-number">11 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-creator-2"></div>
+            <h1 class="slide-title">Wizard - Step 1: Info Base</h1>
+            <p class="slide-subtitle">Flusso Creator • Step 2 di 8</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Primo step del wizard di creazione. Il Creator inserisce le <span class="highlight creator">informazioni fondamentali</span> che identificano l'evento e il quiz associato.</p>
+                    <p>Il progress indicator orizzontale mostra chiaramente i 5 step del wizard con numeri e label. Lo step attuale è evidenziato in blu, quelli completati mostrano un check, quelli futuri sono grigi.</p>
+                    <p>Il Titolo Quiz è il nome che verrà mostrato ai partecipanti nell'header mobile e nei report. Deve essere descrittivo e identificare chiaramente l'evento (es. "Congresso Nazionale Cardiologia 2024").</p>
+                    <p>La Descrizione appare nella schermata di registrazione e può contenere istruzioni specifiche per i partecipanti. Data e Luogo sono opzionali ma utili per i report.</p>
+                    <div class="feature-box">
+                        <h4>Campi Step 1</h4>
+                        <ul>
+                            <li>Titolo Quiz: obbligatorio, max 100 caratteri</li>
+                            <li>Descrizione: obbligatoria, rich text supportato</li>
+                            <li>Data Evento: opzionale, date picker</li>
+                            <li>Luogo: opzionale, testo libero</li>
+                            <li>Navigazione: Annulla (torna a dashboard), Avanti</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_wizard_step1.svg" alt="Wizard Step 1">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="12" data-flow="creator" data-step="3">
+            <div class="slide-header">
+                <span class="slide-badge creator">Creator</span>
+                <span class="slide-number">12 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-creator-3"></div>
+            <h1 class="slide-title">Wizard - Step 2: Grafica</h1>
+            <p class="slide-subtitle">Flusso Creator • Step 3 di 8</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Secondo step per la <span class="highlight creator">personalizzazione grafica</span>. Il Creator può brandizzare l'esperienza quiz con l'identità visiva del proprio evento o organizzazione.</p>
+                    <p>L'area upload logo supporta drag & drop e click per selezionare file. Formati accettati: PNG e JPG. Dimensione massima 2MB. Il logo apparirà nell'header mobile e nei report PDF.</p>
+                    <p>I tre color picker permettono di definire: Colore Primario (header, pulsanti principali, elementi di focus), Colore Secondario (testi secondari, bordi, sfondi alternativi), Colore Accento (evidenziazioni, badge, notifiche).</p>
+                    <p>L'anteprima in tempo reale mostra come appariranno gli elementi grafici nell'interfaccia mobile, permettendo di verificare la leggibilità e la coerenza visiva prima di procedere.</p>
+                    <div class="feature-box">
+                        <h4>Opzioni Personalizzazione</h4>
+                        <ul>
+                            <li>Logo: PNG/JPG, max 2MB, ratio consigliato 2:1</li>
+                            <li>Colore Primario: header, CTA buttons</li>
+                            <li>Colore Secondario: elementi UI secondari</li>
+                            <li>Colore Accento: highlights, badges</li>
+                            <li>Anteprima real-time con preview mobile</li>
+                            <li>Preset colori suggeriti per accessibilità</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_wizard_step2.svg" alt="Wizard Step 2">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="13" data-flow="creator" data-step="4">
+            <div class="slide-header">
+                <span class="slide-badge creator">Creator</span>
+                <span class="slide-number">13 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-creator-4"></div>
+            <h1 class="slide-title">Wizard - Step 3: Privacy</h1>
+            <p class="slide-subtitle">Flusso Creator • Step 4 di 8</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Terzo step per la <span class="highlight creator">configurazione privacy e GDPR</span>. Il Creator decide quali dati personali richiedere ai partecipanti in base alle necessità dell'evento.</p>
+                    <p>I checkbox permettono di selezionare i campi da mostrare nel form di registrazione: Nome e Cognome (consigliati per la classifica), Email (per follow-up o invio certificati), Professione (per segmentazione report).</p>
+                    <p>Il toggle "Consenso GDPR" attiva la richiesta obbligatoria di accettazione privacy prima di iniziare il quiz. Se attivo, il partecipante deve spuntare il checkbox per procedere.</p>
+                    <p>Il testo privacy è personalizzabile per adattarsi alle policy specifiche dell'organizzazione. Un link "Leggi informativa" può rimandare a una pagina dedicata con l'informativa completa.</p>
+                    <div class="feature-box">
+                        <h4>Configurazione Privacy</h4>
+                        <ul>
+                            <li>Campi selezionabili: Nome, Cognome, Email, Professione</li>
+                            <li>Toggle consenso GDPR obbligatorio</li>
+                            <li>Testo privacy personalizzabile</li>
+                            <li>Link a informativa estesa opzionale</li>
+                            <li>Dati visibili solo a Creator e Admin</li>
+                            <li>Compliance GDPR automatica</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_wizard_step3.svg" alt="Wizard Step 3">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="14" data-flow="creator" data-step="5">
+            <div class="slide-header">
+                <span class="slide-badge creator">Creator</span>
+                <span class="slide-number">14 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-creator-5"></div>
+            <h1 class="slide-title">Wizard - Step 4: Import Domande</h1>
+            <p class="slide-subtitle">Flusso Creator • Step 5 di 8</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Quarto step per l'<span class="highlight creator">importazione domande da Google Form</span>. Questa integrazione permette ai Creator di preparare le domande in un ambiente familiare e flessibile.</p>
+                    <p>Il Creator incolla l'URL del Google Form nel campo dedicato e clicca "Importa". Il sistema si connette alle API di Google e estrae automaticamente tutte le informazioni strutturate dal form.</p>
+                    <p>Per ogni domanda vengono importati: testo della domanda, tutte le opzioni di risposta, indicazione di quale sia la risposta corretta, livello di difficoltà (Facile/Media/Difficile), eventuali link a media (immagini, video YouTube).</p>
+                    <p>La tabella mostra un'anteprima delle domande importate. Il Creator può riordinare le domande con drag & drop, rimuovere domande non desiderate, o modificare singoli elementi prima di procedere.</p>
+                    <div class="feature-box">
+                        <h4>Funzionalità Import</h4>
+                        <ul>
+                            <li>Integrazione diretta con Google Forms API</li>
+                            <li>Estrazione automatica: domande, risposte, difficoltà</li>
+                            <li>Supporto media: immagini inline, video YouTube</li>
+                            <li>Preview tabellare con tutti i dati</li>
+                            <li>Riordino drag & drop delle domande</li>
+                            <li>Rimozione singole domande</li>
+                            <li>Contatore domande importate</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_wizard_step4.svg" alt="Wizard Step 4">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="15" data-flow="creator" data-step="6">
+            <div class="slide-header">
+                <span class="slide-badge creator">Creator</span>
+                <span class="slide-number">15 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-creator-6"></div>
+            <h1 class="slide-title">Wizard - Step 5: Classifica</h1>
+            <p class="slide-subtitle">Flusso Creator • Step 6 di 8</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Ultimo step del wizard per la <span class="highlight creator">configurazione della classifica</span>. Le impostazioni sono organizzate in sezioni con checkbox per una selezione chiara e immediata.</p>
+                    <p>La sezione "Privacy Username" offre tre opzioni mutualmente esclusive: Nome pubblico (Mario Rossi), Nome privato con solo iniziali (M.R.), o completamente anonimo (#123). Il Creator decide il livello di privacy appropriato per l'evento.</p>
+                    <p>La sezione "Posizioni Visibili" permette di scegliere quanti partecipanti mostrare: Top 10, Top 20, o Tutti. Queste opzioni bilanciano competitività e inclusività.</p>
+                    <p>Le "Opzioni Aggiuntive" includono: mostrare punteggio in classifica, aggiornamento real-time, notifica cambio posizione, abilitazione condivisione social del risultato.</p>
+                    <p>L'anteprima mostra in tempo reale come apparirà la classifica. Al termine, "Salva Bozza" per completare dopo, o "Pubblica" per attivare il quiz.</p>
+                    <div class="feature-box">
+                        <h4>Opzioni Configurazione</h4>
+                        <ul>
+                            <li>Privacy: Nome pubblico / Iniziali / Anonimo</li>
+                            <li>Posizioni: Top 10 / Top 20 / Tutti</li>
+                            <li>Mostra punteggio in classifica</li>
+                            <li>Aggiornamento classifica in tempo reale</li>
+                            <li>Notifica cambio posizione</li>
+                            <li>Condivisione social risultato</li>
+                            <li>Anteprima live della classifica</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_wizard_step5.svg" alt="Wizard Step 5">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 16: QR Code -->
+        <div class="slide" data-slide="16" data-flow="creator" data-step="7">
+            <div class="slide-header">
+                <span class="slide-badge creator">Creator</span>
+                <span class="slide-number">16 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-creator-7"></div>
+            <h1 class="slide-title">QR Code & Codice Stanza</h1>
+            <p class="slide-subtitle">Flusso Creator • Step 7 di 8</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Dopo la pubblicazione, il sistema genera automaticamente gli <span class="highlight creator">strumenti di accesso</span> per i partecipanti. Questa schermata conferma il successo e fornisce tutto il necessario per condividere il quiz.</p>
+                    <p>Il QR Code è generato in alta risoluzione (minimo 1024x1024 pixel) per garantire la scansionabilità anche su schermi proiettati o stampe di grandi dimensioni. Il pulsante "Scarica PNG" salva l'immagine localmente.</p>
+                    <p>Il Codice Stanza è un identificativo alfanumerico univoco (formato: EVT-ANNO-XXX) facile da comunicare verbalmente durante l'evento. I partecipanti possono digitarlo manualmente se non possono scansionare il QR.</p>
+                    <p>L'URL diretto (es. clinicalquiz.app/q/EVT-2024-ABC) può essere copiato e condiviso via email, chat, o inserito in presentazioni. Cliccando "Copia Link" l'URL viene copiato negli appunti.</p>
+                    <div class="feature-box">
+                        <h4>Strumenti di Condivisione</h4>
+                        <ul>
+                            <li>QR Code: PNG alta risoluzione, scaricabile</li>
+                            <li>Codice Stanza: alfanumerico, facile da dettare</li>
+                            <li>URL diretto: copiabile con un click</li>
+                            <li>Banner conferma pubblicazione</li>
+                            <li>Accesso immediato post-pubblicazione</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_qr_code.svg" alt="QR Code">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: Event Detail -->
+        <div class="slide" data-slide="17" data-flow="creator" data-step="8">
+            <div class="slide-header">
+                <span class="slide-badge creator">Creator</span>
+                <span class="slide-number">17 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-creator-8"></div>
+            <h1 class="slide-title">Dettaglio Quiz</h1>
+            <p class="slide-subtitle">Flusso Creator • Step 8 di 8</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Pagina di <span class="highlight creator">dettaglio e monitoraggio in tempo reale</span>. Il Creator visualizza tutte le statistiche live durante lo svolgimento dell'evento e può gestire il quiz.</p>
+                    <p>L'header mostra titolo evento, stato (badge verde "Attivo"), e azioni rapide: "Modifica" per tornare al wizard, "Termina" per chiudere il quiz ai nuovi partecipanti.</p>
+                    <p>Le 5 metriche in tempo reale mostrano: partecipanti totali che hanno iniziato, completati con percentuale, attualmente in corso, punteggio medio raggiunto, tempo medio di completamento.</p>
+                    <p>La sezione "Classifica Live" si aggiorna automaticamente ogni 5 secondi mostrando i top performer. Il Creator può proiettare questa sezione su schermo per i partecipanti in sala.</p>
+                    <p>Il pulsante "Esporta Excel" permette di scaricare tutti i dati dei partecipanti in formato Excel (.xlsx) per analisi successive o archiviazione.</p>
+                    <div class="feature-box">
+                        <h4>Funzionalità Dettaglio Quiz</h4>
+                        <ul>
+                            <li>Refresh automatico ogni 5 secondi</li>
+                            <li>Metriche real-time: partecipanti, completati, in corso</li>
+                            <li>Classifica live con posizioni aggiornate</li>
+                            <li>Statistiche per difficoltà domande</li>
+                            <li>Tabella partecipanti con stato individuale</li>
+                            <li>Export dati in formato Excel (.xlsx)</li>
+                            <li>Modalità presentazione per proiezione</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <img src="figma_wireframes/wireframe_event_detail.svg" alt="Event Detail">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 18: Intro Mobile -->
+        <div class="slide intro-slide" data-slide="18">
+            <div class="intro-icon">📱</div>
+            <h1 class="slide-title">Flusso Partecipante</h1>
+            <p class="slide-subtitle">Esperienza mobile ottimizzata con feedback AI educativo</p>
+            <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">1</span> Landing</div>
+                <div class="flow-step"><span class="step-num">2</span> Registrazione</div>
+                <div class="flow-step"><span class="step-num">3</span> Quiz</div>
+                <div class="flow-step"><span class="step-num">4</span> Feedback</div>
+                <div class="flow-step"><span class="step-num">5</span> Risultati</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 19-25: Mobile screens -->
+        <div class="slide" data-slide="19" data-flow="mobile" data-step="1">
+            <div class="slide-header">
+                <span class="slide-badge mobile">Partecipante</span>
+                <span class="slide-number">19 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-mobile-1"></div>
+            <h1 class="slide-title">Landing Mobile</h1>
+            <p class="slide-subtitle">Flusso Partecipante • Step 1 di 7</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Prima schermata che il partecipante visualizza sul proprio smartphone. L'interfaccia è <span class="highlight mobile">ottimizzata per dispositivi mobile</span> con elementi touch-friendly e layout responsive.</p>
+                    <p>Il logo dell'evento (se configurato dal Creator) appare in alto per confermare visivamente che si sta accedendo al quiz corretto. Il messaggio di benvenuto introduce brevemente l'esperienza.</p>
+                    <p>Il campo "Codice Stanza" permette l'inserimento manuale del codice alfanumerico comunicato verbalmente durante l'evento. Il formato standard (EVT-XXXX-XXX) aiuta a evitare errori di digitazione.</p>
+                    <p>In alternativa, il pulsante "Scansiona QR Code" attiva la fotocamera per la scansione diretta del QR proiettato o stampato. Questa è la modalità più rapida e consigliata per eventi live.</p>
+                    <div class="feature-box">
+                        <h4>Modalità di Accesso</h4>
+                        <ul>
+                            <li>Scansione QR: attiva fotocamera, riconoscimento automatico</li>
+                            <li>Codice manuale: input testuale con validazione formato</li>
+                            <li>Validazione real-time del codice inserito</li>
+                            <li>Feedback errore se codice non valido o quiz non attivo</li>
+                            <li>Logo evento personalizzato visibile</li>
+                            <li>Design ottimizzato per one-hand use</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image mobile">
+                    <img src="figma_wireframes/wireframe_mobile_landing.svg" alt="Mobile Landing">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="20" data-flow="mobile" data-step="2">
+            <div class="slide-header">
+                <span class="slide-badge mobile">Partecipante</span>
+                <span class="slide-number">20 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-mobile-2"></div>
+            <h1 class="slide-title">Registrazione & Inizio</h1>
+            <p class="slide-subtitle">Flusso Partecipante • Step 2 di 7</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Schermata di <span class="highlight mobile">registrazione rapida</span> prima dell'inizio del quiz. I campi mostrati sono quelli configurati dal Creator nello Step 3 del wizard.</p>
+                    <p>Il logo e nome evento confermano al partecipante che sta accedendo al quiz corretto. Il messaggio di benvenuto può contenere istruzioni specifiche definite dal Creator.</p>
+                    <p>I campi form sono ottimizzati per input mobile: tastiere appropriate per ogni tipo (testo, email), autocomplete disabilitato per privacy, validazione inline con feedback visivo.</p>
+                    <p>Se il Creator ha attivato il consenso GDPR, appare un checkbox obbligatorio con link all'informativa completa. Il partecipante deve accettare per procedere.</p>
+                    <p>Il box informativo mostra: numero di domande nel quiz e tempo stimato di completamento, aiutando il partecipante a decidere se procedere.</p>
+                    <div class="feature-box">
+                        <h4>Elementi Registrazione</h4>
+                        <ul>
+                            <li>Campi dinamici basati su config Creator</li>
+                            <li>Validazione inline con feedback visivo</li>
+                            <li>Checkbox GDPR obbligatorio (se attivo)</li>
+                            <li>Link informativa privacy estesa</li>
+                            <li>Info quiz: numero domande, tempo stimato</li>
+                            <li>Pulsante "INIZIA QUIZ" prominente</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image mobile">
+                    <img src="figma_wireframes/wireframe_mobile_start.svg" alt="Mobile Start">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="21" data-flow="mobile" data-step="3">
+            <div class="slide-header">
+                <span class="slide-badge mobile">Partecipante</span>
+                <span class="slide-number">21 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-mobile-3"></div>
+            <h1 class="slide-title">Schermata Domanda</h1>
+            <p class="slide-subtitle">Flusso Partecipante • Step 3 di 7</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Schermata principale del quiz con <span class="highlight mobile">domanda e opzioni di risposta</span>. L'interfaccia è progettata per massimizzare la leggibilità e la velocità di risposta.</p>
+                    <p>Il badge difficoltà in alto indica il livello corrente della domanda (Facile/Media/Difficile) con colori distintivi. La progress bar mostra l'avanzamento e il punteggio è sempre visibile.</p>
+                    <p>Il timer circolare countdown mostra i secondi rimanenti. Il colore cambia da verde a giallo a rosso negli ultimi 10 secondi per creare urgenza senza stress eccessivo.</p>
+                    <p>La card domanda contiene il testo formattato. Sotto, le 4 opzioni di risposta sono presentate come card selezionabili. Toccando un'opzione si evidenzia con bordo colorato.</p>
+                    <p>Il pulsante "CONFERMA" finalizza la risposta. Se il timer scade prima della conferma, viene registrata l'opzione selezionata, o nessuna risposta se non selezionata.</p>
+                    <div class="feature-box">
+                        <h4>Elementi UI Quiz</h4>
+                        <ul>
+                            <li>Badge difficoltà: Facile (verde) / Media (giallo) / Difficile (rosso)</li>
+                            <li>Progress bar: avanzamento visivo domande</li>
+                            <li>Punteggio attuale sempre visibile</li>
+                            <li>Timer circolare con cambio colore</li>
+                            <li>4 opzioni touch-friendly con feedback selezione</li>
+                            <li>Conferma esplicita prima di procedere</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image mobile">
+                    <img src="figma_wireframes/wireframe_mobile_question.svg" alt="Mobile Question">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="22" data-flow="mobile" data-step="4">
+            <div class="slide-header">
+                <span class="slide-badge mobile">Partecipante</span>
+                <span class="slide-number">22 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-mobile-4"></div>
+            <h1 class="slide-title">Risposta Corretta</h1>
+            <p class="slide-subtitle">Flusso Partecipante • Step 4 di 7</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Schermata di feedback quando il partecipante risponde <span class="highlight mobile">correttamente</span>. L'icona verde e il badge difficoltà mostrano chiaramente il livello della domanda appena superata.</p>
+                    <p>Il sistema utilizza un algoritmo di <strong>difficoltà adattiva</strong>: il punteggio varia in base alla difficoltà della domanda (es. Facile: 10 pts, Media: 15 pts, Difficile: 20 pts). Il badge colorato indica sempre il livello corrente.</p>
+                    <p>La progressione è dinamica: dopo 3 risposte corrette consecutive in una categoria, il partecipante accede alle domande di difficoltà superiore. Viceversa, dopo 2 risposte errate si scende di un livello.</p>
+                    <p>Le domande di ogni categoria vengono estratte in modo casuale per ciascun partecipante, garantendo un'esperienza unica. Si consiglia di inserire molte domande per categoria per massimizzare la varietà.</p>
+                    <p>Il breve feedback educativo conferma perché la risposta era corretta, rinforzando la conoscenza. Il punteggio totale aggiornato è sempre visibile.</p>
+                    <div class="feature-box">
+                        <h4>Sistema Difficoltà Adattiva</h4>
+                        <ul>
+                            <li>Punteggio variabile: Facile 10 / Media 15 / Difficile 20 pts</li>
+                            <li>Salita livello: 3 risposte corrette consecutive</li>
+                            <li>Discesa livello: 2 risposte errate</li>
+                            <li>Domande estratte random per partecipante</li>
+                            <li>Badge difficoltà sempre visibile</li>
+                            <li>Consigliato: molte domande per categoria</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image mobile">
+                    <img src="figma_wireframes/wireframe_mobile_correct.svg" alt="Mobile Correct">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="23" data-flow="mobile" data-step="5">
+            <div class="slide-header">
+                <span class="slide-badge mobile">Partecipante</span>
+                <span class="slide-number">23 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-mobile-5"></div>
+            <h1 class="slide-title">Risposta Errata + AI Feedback</h1>
+            <p class="slide-subtitle">Flusso Partecipante • Step 5 di 7</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Schermata per risposta <span class="highlight mobile">errata con feedback AI</span>. Questo è il momento educativo chiave dove l'intelligenza artificiale GPT-4 Mini fornisce una spiegazione personalizzata.</p>
+                    <p>L'icona rossa segnala chiaramente l'errore, ma il tono è costruttivo. La risposta corretta è evidenziata immediatamente. <strong>Non ci sono punti negativi</strong>: sbagliare significa semplicemente "sprecare" una domanda.</p>
+                    <p>Il "Feedback del Dr. AI" è generato in tempo reale da GPT-4 Mini. Il modello impersona un medico chirurgo esperto che spiega perché la risposta era sbagliata e fornisce un approfondimento clinico contestuale.</p>
+                    <div class="feature-box">
+                        <h4>📋 Regole del Punteggio</h4>
+                        <ul>
+                            <li><strong>Nessun punto negativo</strong>: gli errori non sottraggono punti</li>
+                            <li><strong>Domanda sprecata</strong>: sbagliando si perde l'opportunità di guadagnare punti</li>
+                            <li><strong>Esempio</strong>: quiz con 9 domande (3 Facili + 3 Medie + 3 Difficili)</li>
+                            <li>Punteggio massimo: (3×10) + (3×15) + (3×20) = <strong>135 punti</strong></li>
+                            <li>Se sbagli 1 domanda Media: massimo raggiungibile = 120 punti</li>
+                            <li><strong>Difficoltà adattiva</strong>: 3 corrette → sali livello, 2 errate → scendi livello</li>
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h4>🤖 Caratteristiche AI Feedback</h4>
+                        <ul>
+                            <li>Modello: GPT-4 Mini (ottimizzato per velocità)</li>
+                            <li>Persona: medico chirurgo professionista</li>
+                            <li>Contenuto: spiegazione errore + risposta corretta</li>
+                            <li>Tempo generazione: &lt; 2 secondi</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image mobile">
+                    <img src="figma_wireframes/wireframe_mobile_wrong.svg" alt="Mobile Wrong">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="24" data-flow="mobile" data-step="6">
+            <div class="slide-header">
+                <span class="slide-badge mobile">Partecipante</span>
+                <span class="slide-number">24 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-mobile-6"></div>
+            <h1 class="slide-title">Risultati Personali</h1>
+            <p class="slide-subtitle">Flusso Partecipante • Step 6 di 7</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>Schermata di <span class="highlight mobile">riepilogo finale</span> al termine del quiz. Il partecipante visualizza il proprio risultato complessivo con statistiche dettagliate.</p>
+                    <p>Il punteggio totale è mostrato in grande evidenza al centro, con un'animazione di reveal che crea suspense. Sotto, le statistiche dettagliano la performance.</p>
+                    <p>Le statistiche mostrano: risposte corrette su totale (es. 12/15), percentuale di successo calcolata, tempo totale impiegato per completare il quiz.</p>
+                    <p>Il feedback finale è generato automaticamente basandosi sulla percentuale: &gt;90% eccellente, 70-90% buono, 50-70% sufficiente, &lt;50% da migliorare. Il tono è sempre incoraggiante.</p>
+                    <p>Il pulsante "VEDI CLASSIFICA" porta alla leaderboard dove il partecipante può vedere la propria posizione rispetto agli altri.</p>
+                    <div class="feature-box">
+                        <h4>Contenuto Riepilogo</h4>
+                        <ul>
+                            <li>Punteggio totale con animazione reveal</li>
+                            <li>Risposte corrette: X/Y formato</li>
+                            <li>Percentuale successo calcolata</li>
+                            <li>Tempo totale di completamento</li>
+                            <li>Feedback motivazionale basato su %</li>
+                            <li>CTA: accesso a classifica generale</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image mobile">
+                    <img src="figma_wireframes/wireframe_mobile_results.svg" alt="Mobile Results">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="25" data-flow="mobile" data-step="7">
+            <div class="slide-header">
+                <span class="slide-badge mobile">Partecipante</span>
+                <span class="slide-number">25 / 26</span>
+            </div>
+            <div class="thumb-strip" id="thumbs-mobile-7"></div>
+            <h1 class="slide-title">Classifica</h1>
+            <p class="slide-subtitle">Flusso Partecipante • Step 7 di 7</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>La <span class="highlight mobile">classifica in tempo reale</span> mostra il posizionamento di tutti i partecipanti. Questa schermata può essere aggiornata durante l'evento per vedere le posizioni cambiare.</p>
+                    <p>La propria posizione è evidenziata con sfondo colorato per identificazione immediata (es. "#7 Tu"). Le prime 3 posizioni hanno icone medaglia (oro, argento, bronzo).</p>
+                    <p>La visualizzazione dei nomi segue la configurazione del Creator: nome completo, solo iniziali, o anonimo. Questo permette di bilanciare competitività e privacy.</p>
+                    <p><strong>Importante:</strong> Il quiz non può essere ripetuto. Una volta completato, il partecipante torna sempre su questa pagina della classifica. Questo garantisce equità e previene tentativi multipli per migliorare il punteggio.</p>
+                    <p>Il pulsante "CONDIVIDI" permette di generare un'immagine condivisibile sui social, mentre "CHIUDI" termina la sessione. La pagina resta sempre accessibile tramite lo stesso codice stanza.</p>
+                    <div class="feature-box">
+                        <h4>Funzionalità Classifica</h4>
+                        <ul>
+                            <li>Posizione personale evidenziata visivamente</li>
+                            <li>Top 3 con icone medaglia (oro, argento, bronzo)</li>
+                            <li>Quiz non ripetibile - equità garantita</li>
+                            <li>Pagina sempre accessibile post-completamento</li>
+                            <li>Aggiornamento automatico real-time</li>
+                            <li>Condivisione social del risultato</li>
+                            <li>Avviso visivo che il quiz non è ripetibile</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image mobile">
+                    <img src="figma_wireframes/wireframe_mobile_leaderboard.svg" alt="Mobile Leaderboard">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 26: Conclusione -->
+        <div class="slide intro-slide" data-slide="26">
+            <div class="intro-icon">✅</div>
+            <h1 class="slide-title">Riepilogo</h1>
+            <p class="slide-subtitle">Clinical Quiz: 25 schermate, 3 flussi utente, 1 piattaforma completa</p>
+            <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">5</span> Schermate Admin</div>
+                <div class="flow-step"><span class="step-num">8</span> Schermate Creator</div>
+                <div class="flow-step"><span class="step-num">7</span> Schermate Mobile</div>
+                <div class="flow-step"><span class="step-num">5</span> Flowchart</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()">← Precedente</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Successiva →</button>
+    </div>
+    <div class="keyboard-hint">Usa ← → per navigare</div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 26;
+
+        // Thumbnail configurations
+        const flowThumbs = {
+            admin: [
+                { slide: 4, img: 'wireframe_login.svg', label: 'Login' },
+                { slide: 5, img: 'wireframe_admin_dashboard.svg', label: 'Dashboard' },
+                { slide: 6, img: 'wireframe_admin_users.svg', label: 'Gestione Utenti' },
+                { slide: 7, img: 'wireframe_admin_create_user.svg', label: 'Crea Creator' },
+                { slide: 8, img: 'wireframe_admin_report.svg', label: 'Report' }
+            ],
+            creator: [
+                { slide: 10, img: 'wireframe_creator_dashboard.svg', label: 'Dashboard' },
+                { slide: 11, img: 'wireframe_wizard_step1.svg', label: 'Step 1' },
+                { slide: 12, img: 'wireframe_wizard_step2.svg', label: 'Step 2' },
+                { slide: 13, img: 'wireframe_wizard_step3.svg', label: 'Step 3' },
+                { slide: 14, img: 'wireframe_wizard_step4.svg', label: 'Step 4' },
+                { slide: 15, img: 'wireframe_wizard_step5.svg', label: 'Step 5' },
+                { slide: 16, img: 'wireframe_qr_code.svg', label: 'QR Code' },
+                { slide: 17, img: 'wireframe_event_detail.svg', label: 'Dettaglio' }
+            ],
+            mobile: [
+                { slide: 19, img: 'wireframe_mobile_landing.svg', label: 'Landing' },
+                { slide: 20, img: 'wireframe_mobile_start.svg', label: 'Start' },
+                { slide: 21, img: 'wireframe_mobile_question.svg', label: 'Domanda' },
+                { slide: 22, img: 'wireframe_mobile_correct.svg', label: 'Corretta' },
+                { slide: 23, img: 'wireframe_mobile_wrong.svg', label: 'Errata + AI' },
+                { slide: 24, img: 'wireframe_mobile_results.svg', label: 'Risultati' },
+                { slide: 25, img: 'wireframe_mobile_leaderboard.svg', label: 'Classifica' }
+            ]
+        };
+
+        function generateThumbs(flow, currentStep) {
+            const thumbs = flowThumbs[flow];
+            if (!thumbs) return '';
+
+            return thumbs.map((t, i) => `
+                <div class="thumb-item ${i + 1 === currentStep ? 'active' : ''}" onclick="goToSlide(${t.slide})">
+                    <img src="figma_wireframes/${t.img}" alt="${t.label}">
+                    <div class="thumb-label">${t.label}</div>
+                </div>
+            `).join('');
+        }
+
+        function updateThumbs() {
+            const slide = document.querySelector(`[data-slide="${currentSlide}"]`);
+            if (!slide) return;
+
+            const flow = slide.dataset.flow;
+            const step = parseInt(slide.dataset.step);
+
+            if (flow && step) {
+                const thumbStrip = slide.querySelector('.thumb-strip');
+                if (thumbStrip) {
+                    thumbStrip.innerHTML = generateThumbs(flow, step);
+                }
+            }
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(s => s.classList.remove('active'));
+
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+
+            const targetSlide = document.querySelector(`[data-slide="${currentSlide}"]`);
+            if (targetSlide) {
+                targetSlide.classList.add('active');
+                updateThumbs();
+            }
+
+            document.getElementById('progressBar').style.width = `${(currentSlide / totalSlides) * 100}%`;
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').textContent = currentSlide === totalSlides ? 'Fine' : 'Successiva →';
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
