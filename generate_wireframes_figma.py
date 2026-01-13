@@ -1079,43 +1079,49 @@ def create_mobile_question():
 
     add_phone_frame(dwg, main, 0, 0, 375, 812, 'Domanda 3/15')
 
-    # Progress bar
-    add_rounded_rect(dwg, main, 20, 90, 335, 8, COLORS['frame'], rx=4)
-    add_rounded_rect(dwg, main, 20, 90, 67, 8, COLORS['primary'], rx=4)  # 20% progress
+    # Small logo in header
+    logo = dwg.g(id='logo_small')
+    add_rounded_rect(dwg, logo, 20, 90, 80, 35, COLORS['frame'], rx=4, stroke=COLORS['border'])
+    add_text(dwg, logo, 60, 113, 'LOGO', size=10, color=COLORS['text_light'], anchor='middle')
+    main.add(logo)
 
     # Difficulty badge
-    add_rounded_rect(dwg, main, 137, 110, 100, 24, COLORS['warning'], rx=12)
-    add_text(dwg, main, 187, 127, 'Difficoltà: Media', size=10, color='#FFFFFF', anchor='middle', weight='bold')
+    add_rounded_rect(dwg, main, 137, 90, 100, 24, COLORS['warning'], rx=12)
+    add_text(dwg, main, 187, 107, 'Difficoltà: Media', size=10, color='#FFFFFF', anchor='middle', weight='bold')
 
     # Timer
-    add_circle(dwg, main, 330, 150, 25, '#FFFFFF')
-    main.add(dwg.circle(center=(330, 150), r=25, fill='none', stroke=COLORS['warning'], stroke_width=3))
-    add_text(dwg, main, 330, 156, '45', size=14, color=COLORS['warning'], anchor='middle', weight='bold')
+    add_circle(dwg, main, 330, 105, 20, '#FFFFFF')
+    main.add(dwg.circle(center=(330, 105), r=20, fill='none', stroke=COLORS['warning'], stroke_width=3))
+    add_text(dwg, main, 330, 111, '45', size=12, color=COLORS['warning'], anchor='middle', weight='bold')
+
+    # Progress bar
+    add_rounded_rect(dwg, main, 20, 140, 335, 8, COLORS['frame'], rx=4)
+    add_rounded_rect(dwg, main, 20, 140, 67, 8, COLORS['primary'], rx=4)  # 20% progress
 
     # Points
-    add_text(dwg, main, 40, 156, '24 pts', size=14, color=COLORS['text'], weight='bold')
+    add_text(dwg, main, 40, 170, '24 pts', size=14, color=COLORS['text'], weight='bold')
 
     # Question card
     question = dwg.g(id='question')
-    add_card(dwg, question, 20, 170, 335, 140)
-    add_text(dwg, question, 187, 210, 'Qual è il trattamento di prima', size=14, color=COLORS['text'], anchor='middle', weight='bold')
-    add_text(dwg, question, 187, 235, 'linea per la fibrillazione', size=14, color=COLORS['text'], anchor='middle', weight='bold')
-    add_text(dwg, question, 187, 260, 'atriale parossistica?', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_card(dwg, question, 20, 190, 335, 120)
+    add_text(dwg, question, 187, 225, 'Qual è il trattamento di prima', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, question, 187, 250, 'linea per la fibrillazione', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, question, 187, 275, 'atriale parossistica?', size=14, color=COLORS['text'], anchor='middle', weight='bold')
     main.add(question)
 
     # Answer options
     options = ['A) Beta-bloccanti', 'B) ACE inibitori', 'C) Anticoagulanti', 'D) Calcio antagonisti']
     for i, opt in enumerate(options):
-        opt_y = 340 + i * 80
+        opt_y = 330 + i * 75
         opt_group = dwg.g(id=f'option_{i}')
-        add_card(dwg, opt_group, 20, opt_y, 335, 65)
-        add_circle(dwg, opt_group, 55, opt_y + 32, 12, '#FFFFFF')
-        main.add(dwg.circle(center=(55, opt_y + 32), r=12, fill='none', stroke=COLORS['primary'], stroke_width=2))
-        add_text(dwg, opt_group, 80, opt_y + 38, opt, size=14, color=COLORS['text'])
+        add_card(dwg, opt_group, 20, opt_y, 335, 60)
+        add_circle(dwg, opt_group, 55, opt_y + 30, 12, '#FFFFFF')
+        main.add(dwg.circle(center=(55, opt_y + 30), r=12, fill='none', stroke=COLORS['primary'], stroke_width=2))
+        add_text(dwg, opt_group, 80, opt_y + 36, opt, size=14, color=COLORS['text'])
         main.add(opt_group)
 
     # Confirm button
-    add_button(dwg, main, 40, 700, 295, 55, 'CONFERMA', COLORS['primary'])
+    add_button(dwg, main, 40, 640, 295, 55, 'CONFERMA', COLORS['primary'])
 
     # Title
     add_text(dwg, main, 187, 780, 'WIREFRAME: MOBILE QUESTION', size=10, color=COLORS['text'], anchor='middle', weight='bold')
@@ -1135,26 +1141,32 @@ def create_mobile_correct():
 
     add_phone_frame(dwg, main, 0, 0, 375, 812, 'Domanda 3/15')
 
-    # Progress bar
-    add_rounded_rect(dwg, main, 20, 90, 335, 8, COLORS['frame'], rx=4)
-    add_rounded_rect(dwg, main, 20, 90, 67, 8, COLORS['primary'], rx=4)
+    # Small logo in header
+    logo = dwg.g(id='logo_small')
+    add_rounded_rect(dwg, logo, 20, 90, 80, 35, COLORS['frame'], rx=4, stroke=COLORS['border'])
+    add_text(dwg, logo, 60, 113, 'LOGO', size=10, color=COLORS['text_light'], anchor='middle')
+    main.add(logo)
 
     # Difficulty badge
-    add_rounded_rect(dwg, main, 137, 110, 100, 24, COLORS['warning'], rx=12)
-    add_text(dwg, main, 187, 127, 'Difficoltà: Media', size=10, color='#FFFFFF', anchor='middle', weight='bold')
+    add_rounded_rect(dwg, main, 137, 90, 100, 24, COLORS['warning'], rx=12)
+    add_text(dwg, main, 187, 107, 'Difficoltà: Media', size=10, color='#FFFFFF', anchor='middle', weight='bold')
+
+    # Progress bar
+    add_rounded_rect(dwg, main, 20, 140, 335, 8, COLORS['frame'], rx=4)
+    add_rounded_rect(dwg, main, 20, 140, 67, 8, COLORS['primary'], rx=4)
 
     # Success icon
-    add_circle(dwg, main, 187, 190, 45, COLORS['success'])
-    add_text(dwg, main, 187, 205, '✓', size=36, color='#FFFFFF', anchor='middle')
+    add_circle(dwg, main, 187, 210, 45, COLORS['success'])
+    add_text(dwg, main, 187, 225, '✓', size=36, color='#FFFFFF', anchor='middle')
 
     # Message
-    add_text(dwg, main, 187, 270, 'Corretto!', size=24, color=COLORS['success'], anchor='middle', weight='bold')
-    add_text(dwg, main, 187, 305, '+15 punti', size=16, color=COLORS['success'], anchor='middle')
+    add_text(dwg, main, 187, 290, 'Corretto!', size=24, color=COLORS['success'], anchor='middle', weight='bold')
+    add_text(dwg, main, 187, 320, '+15 punti', size=16, color=COLORS['success'], anchor='middle')
 
     # Feedback card
     feedback = dwg.g(id='feedback')
-    add_card(dwg, feedback, 20, 350, 335, 250)
-    add_text(dwg, feedback, 187, 390, 'Feedback', size=16, color=COLORS['text'], anchor='middle', weight='bold')
+    add_card(dwg, feedback, 20, 360, 335, 220)
+    add_text(dwg, feedback, 187, 395, 'Feedback', size=16, color=COLORS['text'], anchor='middle', weight='bold')
     add_text(dwg, feedback, 40, 430, 'Esatto! I beta-bloccanti sono', size=12, color=COLORS['text_light'])
     add_text(dwg, feedback, 40, 455, 'effettivamente il trattamento di', size=12, color=COLORS['text_light'])
     add_text(dwg, feedback, 40, 480, 'prima linea per il controllo della', size=12, color=COLORS['text_light'])
@@ -1162,10 +1174,10 @@ def create_mobile_correct():
     main.add(feedback)
 
     # Points
-    add_text(dwg, main, 187, 640, 'Punteggio attuale: 34 pts', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, main, 187, 620, 'Punteggio attuale: 34 pts', size=14, color=COLORS['text'], anchor='middle', weight='bold')
 
     # Continue button
-    add_button(dwg, main, 40, 700, 295, 55, 'PROSSIMA DOMANDA →', COLORS['primary'])
+    add_button(dwg, main, 40, 660, 295, 55, 'PROSSIMA DOMANDA →', COLORS['primary'])
 
     # Title
     add_text(dwg, main, 187, 780, 'WIREFRAME: MOBILE CORRECT', size=10, color=COLORS['text'], anchor='middle', weight='bold')
@@ -1185,26 +1197,32 @@ def create_mobile_wrong():
 
     add_phone_frame(dwg, main, 0, 0, 375, 812, 'Domanda 3/15')
 
-    # Progress bar
-    add_rounded_rect(dwg, main, 20, 90, 335, 8, COLORS['frame'], rx=4)
-    add_rounded_rect(dwg, main, 20, 90, 67, 8, COLORS['primary'], rx=4)
+    # Small logo in header
+    logo = dwg.g(id='logo_small')
+    add_rounded_rect(dwg, logo, 20, 90, 80, 35, COLORS['frame'], rx=4, stroke=COLORS['border'])
+    add_text(dwg, logo, 60, 113, 'LOGO', size=10, color=COLORS['text_light'], anchor='middle')
+    main.add(logo)
 
     # Difficulty badge
-    add_rounded_rect(dwg, main, 137, 100, 100, 24, COLORS['warning'], rx=12)
-    add_text(dwg, main, 187, 117, 'Difficoltà: Media', size=10, color='#FFFFFF', anchor='middle', weight='bold')
+    add_rounded_rect(dwg, main, 137, 90, 100, 24, COLORS['warning'], rx=12)
+    add_text(dwg, main, 187, 107, 'Difficoltà: Media', size=10, color='#FFFFFF', anchor='middle', weight='bold')
+
+    # Progress bar
+    add_rounded_rect(dwg, main, 20, 140, 335, 8, COLORS['frame'], rx=4)
+    add_rounded_rect(dwg, main, 20, 140, 67, 8, COLORS['primary'], rx=4)
 
     # Error icon
-    add_circle(dwg, main, 187, 170, 40, COLORS['error'])
-    add_text(dwg, main, 187, 182, '✗', size=32, color='#FFFFFF', anchor='middle')
+    add_circle(dwg, main, 187, 195, 40, COLORS['error'])
+    add_text(dwg, main, 187, 207, '✗', size=32, color='#FFFFFF', anchor='middle')
 
     # Message
-    add_text(dwg, main, 187, 235, 'Non corretto', size=20, color=COLORS['error'], anchor='middle', weight='bold')
-    add_text(dwg, main, 187, 265, 'Risposta corretta: A) Beta-bloccanti', size=12, color=COLORS['success'], anchor='middle', weight='bold')
+    add_text(dwg, main, 187, 260, 'Non corretto', size=20, color=COLORS['error'], anchor='middle', weight='bold')
+    add_text(dwg, main, 187, 290, 'Risposta corretta: A) Beta-bloccanti', size=12, color=COLORS['success'], anchor='middle', weight='bold')
 
     # AI Feedback card
     feedback = dwg.g(id='ai_feedback')
-    add_card(dwg, feedback, 20, 320, 335, 300)
-    add_text(dwg, feedback, 187, 360, 'Feedback del Dr. AI', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_card(dwg, feedback, 20, 320, 335, 270)
+    add_text(dwg, feedback, 187, 355, 'Feedback del Dr. AI', size=14, color=COLORS['text'], anchor='middle', weight='bold')
 
     lines = [
         'Gli ACE inibitori, sebbene utili nel',
@@ -1218,14 +1236,14 @@ def create_mobile_wrong():
         'controllando la frequenza ventricolare.'
     ]
     for i, line in enumerate(lines):
-        add_text(dwg, feedback, 40, 400 + i * 22, line, size=11, color=COLORS['text_light'])
+        add_text(dwg, feedback, 40, 390 + i * 20, line, size=11, color=COLORS['text_light'])
     main.add(feedback)
 
     # Points
-    add_text(dwg, main, 187, 655, 'Punteggio attuale: 19 pts', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, main, 187, 620, 'Punteggio attuale: 19 pts', size=14, color=COLORS['text'], anchor='middle', weight='bold')
 
     # Continue button
-    add_button(dwg, main, 40, 700, 295, 55, 'PROSEGUI →', COLORS['primary'])
+    add_button(dwg, main, 40, 660, 295, 55, 'PROSEGUI →', COLORS['primary'])
 
     # Title
     add_text(dwg, main, 187, 780, 'WIREFRAME: MOBILE WRONG + AI', size=10, color=COLORS['text'], anchor='middle', weight='bold')
@@ -1245,38 +1263,44 @@ def create_mobile_results():
 
     add_phone_frame(dwg, main, 0, 0, 375, 812, 'Risultati')
 
+    # Logo centered
+    logo = dwg.g(id='logo')
+    add_rounded_rect(dwg, logo, 147, 90, 80, 35, COLORS['frame'], rx=4, stroke=COLORS['border'])
+    add_text(dwg, logo, 187, 113, 'LOGO', size=10, color=COLORS['text_light'], anchor='middle')
+    main.add(logo)
+
     # Congrats
-    add_text(dwg, main, 187, 130, 'Quiz Completato!', size=22, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, main, 187, 155, 'Quiz Completato!', size=22, color=COLORS['text'], anchor='middle', weight='bold')
 
     # Score card
     score = dwg.g(id='score_card')
-    add_card(dwg, score, 100, 160, 175, 120)
-    add_circle(dwg, score, 187, 210, 35, COLORS['primary'])
-    add_text(dwg, score, 187, 220, '78', size=24, color='#FFFFFF', anchor='middle', weight='bold')
-    add_text(dwg, score, 187, 265, 'punti', size=12, color=COLORS['text_light'], anchor='middle')
+    add_card(dwg, score, 100, 175, 175, 110)
+    add_circle(dwg, score, 187, 220, 35, COLORS['primary'])
+    add_text(dwg, score, 187, 230, '78', size=24, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, score, 187, 270, 'punti', size=12, color=COLORS['text_light'], anchor='middle')
     main.add(score)
 
     # Stats card
     stats = dwg.g(id='stats_card')
-    add_card(dwg, stats, 40, 310, 295, 140)
-    add_text(dwg, stats, 187, 350, 'Statistiche', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_card(dwg, stats, 40, 305, 295, 130)
+    add_text(dwg, stats, 187, 340, 'Statistiche', size=14, color=COLORS['text'], anchor='middle', weight='bold')
 
     stat_items = [('Risposte corrette', '12/15'), ('Percentuale', '80%'), ('Tempo totale', '8:32')]
     for i, (label, value) in enumerate(stat_items):
-        add_text(dwg, stats, 60, 390 + i * 28, label, size=12, color=COLORS['text_light'])
-        add_text(dwg, stats, 315, 390 + i * 28, value, size=12, color=COLORS['text'], anchor='end', weight='bold')
+        add_text(dwg, stats, 60, 375 + i * 28, label, size=12, color=COLORS['text_light'])
+        add_text(dwg, stats, 315, 375 + i * 28, value, size=12, color=COLORS['text'], anchor='end', weight='bold')
     main.add(stats)
 
     # AI Final feedback
     ai_feedback = dwg.g(id='ai_final')
-    add_card(dwg, ai_feedback, 40, 480, 295, 130)
-    add_text(dwg, ai_feedback, 187, 515, 'Feedback Finale', size=14, color=COLORS['text'], anchor='middle', weight='bold')
-    add_text(dwg, ai_feedback, 187, 550, 'Ottimo lavoro! Hai dimostrato', size=11, color=COLORS['text_light'], anchor='middle')
-    add_text(dwg, ai_feedback, 187, 575, 'una buona conoscenza della materia.', size=11, color=COLORS['text_light'], anchor='middle')
+    add_card(dwg, ai_feedback, 40, 455, 295, 120)
+    add_text(dwg, ai_feedback, 187, 490, 'Feedback Finale', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, ai_feedback, 187, 520, 'Ottimo lavoro! Hai dimostrato', size=11, color=COLORS['text_light'], anchor='middle')
+    add_text(dwg, ai_feedback, 187, 545, 'una buona conoscenza della materia.', size=11, color=COLORS['text_light'], anchor='middle')
     main.add(ai_feedback)
 
     # Buttons
-    add_button(dwg, main, 40, 650, 295, 55, 'VEDI CLASSIFICA', COLORS['success'])
+    add_button(dwg, main, 40, 610, 295, 55, 'VEDI CLASSIFICA', COLORS['success'])
 
     # Title
     add_text(dwg, main, 187, 780, 'WIREFRAME: MOBILE RESULTS', size=10, color=COLORS['text'], anchor='middle', weight='bold')
@@ -1296,15 +1320,21 @@ def create_mobile_leaderboard():
 
     add_phone_frame(dwg, main, 0, 0, 375, 812, 'Classifica')
 
+    # Logo centered
+    logo = dwg.g(id='logo')
+    add_rounded_rect(dwg, logo, 147, 90, 80, 35, COLORS['frame'], rx=4, stroke=COLORS['border'])
+    add_text(dwg, logo, 187, 113, 'LOGO', size=10, color=COLORS['text_light'], anchor='middle')
+    main.add(logo)
+
     # Title
-    add_text(dwg, main, 187, 110, 'Top 20', size=20, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, main, 187, 155, 'Top 20', size=20, color=COLORS['text'], anchor='middle', weight='bold')
 
     # Your position highlight
     your_pos = dwg.g(id='your_position')
-    add_rounded_rect(dwg, your_pos, 20, 130, 335, 60, '#E3F2FD', rx=8, stroke=COLORS['primary'], stroke_width=2)
-    add_text(dwg, your_pos, 50, 168, '#7', size=16, color=COLORS['primary'], weight='bold')
-    add_text(dwg, your_pos, 90, 168, 'Tu', size=14, color=COLORS['text'], weight='bold')
-    add_text(dwg, your_pos, 330, 168, '78 pts', size=14, color=COLORS['primary'], anchor='end', weight='bold')
+    add_rounded_rect(dwg, your_pos, 20, 175, 335, 55, '#E3F2FD', rx=8, stroke=COLORS['primary'], stroke_width=2)
+    add_text(dwg, your_pos, 50, 210, '#7', size=16, color=COLORS['primary'], weight='bold')
+    add_text(dwg, your_pos, 90, 210, 'Tu', size=14, color=COLORS['text'], weight='bold')
+    add_text(dwg, your_pos, 330, 210, '78 pts', size=14, color=COLORS['primary'], anchor='end', weight='bold')
     main.add(your_pos)
 
     # Leaderboard
@@ -1317,27 +1347,24 @@ def create_mobile_leaderboard():
         ('6', '6. Elena G.', '98'),
     ]
     for i, (pos, name, pts) in enumerate(leaders):
-        y = 210 + i * 65
+        y = 245 + i * 58
         row = dwg.g(id=f'row_{i}')
-        add_card(dwg, row, 20, y, 335, 55)
+        add_card(dwg, row, 20, y, 335, 50)
         medal_colors = [COLORS['warning'], '#C0C0C0', '#CD7F32']
         pos_color = medal_colors[i] if i < 3 else COLORS['text_light']
-        add_text(dwg, row, 50, y + 35, pos, size=14, color=pos_color, weight='bold')
-        add_text(dwg, row, 90, y + 35, name, size=14, color=COLORS['text'])
-        add_text(dwg, row, 330, y + 35, f'{pts} pts', size=12, color=COLORS['text_light'], anchor='end')
+        add_text(dwg, row, 50, y + 32, pos, size=14, color=pos_color, weight='bold')
+        add_text(dwg, row, 90, y + 32, name, size=14, color=COLORS['text'])
+        add_text(dwg, row, 330, y + 32, f'{pts} pts', size=12, color=COLORS['text_light'], anchor='end')
         main.add(row)
 
-    # Info notes
-    add_text(dwg, main, 187, 610, 'Aggiornamento in tempo reale', size=11, color=COLORS['text_light'], anchor='middle')
-
     # Warning box - quiz non ripetibile
-    add_rounded_rect(dwg, main, 40, 635, 295, 45, '#FFF3E0', rx=6, stroke=COLORS['warning'])
-    add_text(dwg, main, 187, 655, 'Il quiz non può essere ripetuto.', size=10, color=COLORS['warning'], anchor='middle', weight='bold')
-    add_text(dwg, main, 187, 670, 'Questa pagina resterà sempre accessibile.', size=9, color=COLORS['text_light'], anchor='middle')
+    add_rounded_rect(dwg, main, 40, 610, 295, 45, '#FFF3E0', rx=6, stroke=COLORS['warning'])
+    add_text(dwg, main, 187, 630, 'Il quiz non può essere ripetuto.', size=10, color=COLORS['warning'], anchor='middle', weight='bold')
+    add_text(dwg, main, 187, 645, 'Questa pagina resterà sempre accessibile.', size=9, color=COLORS['text_light'], anchor='middle')
 
     # Buttons
-    add_button(dwg, main, 40, 695, 140, 45, 'CONDIVIDI', COLORS['secondary'])
-    add_button(dwg, main, 195, 695, 140, 45, 'CHIUDI', COLORS['primary'])
+    add_button(dwg, main, 40, 670, 140, 45, 'CONDIVIDI', COLORS['secondary'])
+    add_button(dwg, main, 195, 670, 140, 45, 'CHIUDI', COLORS['primary'])
 
     # Title
     add_text(dwg, main, 187, 790, 'WIREFRAME: MOBILE LEADERBOARD', size=10, color=COLORS['text'], anchor='middle', weight='bold')
