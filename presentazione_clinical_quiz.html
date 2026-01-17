@@ -832,15 +832,105 @@
             </div>
         </div>
 
-        <!-- SLIDE 26: Conclusione -->
+        <!-- ========================== -->
+        <!-- SEZIONE: QUIZ AD ALBERO   -->
+        <!-- ========================== -->
+
+        <!-- SLIDE 26: Intro Quiz ad Albero -->
         <div class="slide intro-slide" data-slide="26">
+            <div class="intro-icon">🌳</div>
+            <h1 class="slide-title">Modalità Alternativa</h1>
+            <p class="slide-subtitle">Quiz ad Albero Decisionale</p>
+            <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">1</span> Schema Albero</div>
+                <div class="flow-step"><span class="step-num">2</span> Tree Builder</div>
+                <div class="flow-step"><span class="step-num">3</span> Mobile Question</div>
+                <div class="flow-step"><span class="step-num">4</span> Mobile Results</div>
+            </div>
+            <p style="margin-top: 30px; color: #666; font-size: 16px;">
+                Un'alternativa al flusso lineare: ogni risposta determina il percorso successivo
+            </p>
+        </div>
+
+        <!-- SLIDE 27: Schema Albero Decisionale -->
+        <div class="slide" data-slide="27">
+            <div class="slide-content full-width">
+                <h2 class="slide-title" style="margin-bottom: 10px;">Schema Albero Decisionale</h2>
+                <p style="color: #666; margin-bottom: 15px;">Struttura ramificata: ogni risposta porta a domande diverse</p>
+                <div class="slide-image" style="max-height: 680px;">
+                    <img src="figma_wireframes/wireframe_tree_schema.svg" alt="Tree Schema" style="max-height: 650px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 28: Tree Builder Creator -->
+        <div class="slide" data-slide="28">
+            <div class="slide-content full-width">
+                <h2 class="slide-title" style="margin-bottom: 10px;">Tree Builder - Interfaccia Creator</h2>
+                <p style="color: #666; margin-bottom: 15px;">Costruisci visualmente il percorso decisionale con drag & drop</p>
+                <div class="slide-image" style="max-height: 680px;">
+                    <img src="figma_wireframes/wireframe_tree_builder.svg" alt="Tree Builder" style="max-height: 650px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 29: Tree Mobile Question -->
+        <div class="slide" data-slide="29" data-flow="tree" data-step="3">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2 class="slide-title">Domanda con Percorsi</h2>
+                    <span class="step-badge">Tree Quiz 3/4</span>
+                    <div class="thumb-strip"></div>
+                    <p class="slide-description">L'utente vede dove porterà ogni risposta</p>
+                    <ul class="feature-list">
+                        <li><strong>Indicatore percorso:</strong> Mostra livello attuale e tipo di ramo</li>
+                        <li><strong>Path progress:</strong> Visualizzazione grafica del percorso fatto</li>
+                        <li><strong>Etichette risposta:</strong> Ogni opzione indica il percorso che attiva</li>
+                        <li><strong>Percorso Emergenza:</strong> Per risposte critiche (rosso)</li>
+                        <li><strong>Percorso Urgenza:</strong> Per risposte importanti (arancio)</li>
+                        <li><strong>Percorso Standard:</strong> Per risposte normali (blu)</li>
+                        <li><strong>Trasparenza:</strong> L'utente sa dove sta andando</li>
+                    </ul>
+                </div>
+                <div class="slide-image mobile">
+                    <img src="figma_wireframes/wireframe_tree_mobile_question.svg" alt="Tree Mobile Question">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 30: Tree Mobile Results -->
+        <div class="slide" data-slide="30" data-flow="tree" data-step="4">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2 class="slide-title">Risultato Percorso</h2>
+                    <span class="step-badge">Tree Quiz 4/4</span>
+                    <div class="thumb-strip"></div>
+                    <p class="slide-description">Valutazione personalizzata basata sul percorso effettuato</p>
+                    <ul class="feature-list">
+                        <li><strong>Visualizzazione percorso:</strong> Mostra tutti i nodi attraversati</li>
+                        <li><strong>Badge di competenza:</strong> Esperto, Intermedio, Base</li>
+                        <li><strong>Punteggio dettagliato:</strong> Breakdown per tipo di risposta</li>
+                        <li><strong>Bonus profondità:</strong> Più livelli = più punti</li>
+                        <li><strong>Valutazione AI:</strong> Feedback specifico per il percorso scelto</li>
+                        <li><strong>Risultato unico:</strong> Ogni percorso ha una valutazione diversa</li>
+                    </ul>
+                </div>
+                <div class="slide-image mobile">
+                    <img src="figma_wireframes/wireframe_tree_mobile_results.svg" alt="Tree Mobile Results">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 31: Conclusione -->
+        <div class="slide intro-slide" data-slide="31">
             <div class="intro-icon">✅</div>
             <h1 class="slide-title">Riepilogo</h1>
-            <p class="slide-subtitle">Clinical Quiz: 25 schermate, 3 flussi utente, 1 piattaforma completa</p>
+            <p class="slide-subtitle">Clinical Quiz: 29 schermate, 4 modalità, 1 piattaforma completa</p>
             <div class="flow-steps">
                 <div class="flow-step"><span class="step-num">5</span> Schermate Admin</div>
                 <div class="flow-step"><span class="step-num">8</span> Schermate Creator</div>
                 <div class="flow-step"><span class="step-num">7</span> Schermate Mobile</div>
+                <div class="flow-step"><span class="step-num">4</span> Quiz ad Albero</div>
                 <div class="flow-step"><span class="step-num">5</span> Flowchart</div>
             </div>
         </div>
@@ -855,7 +945,7 @@
 
     <script>
         let currentSlide = 1;
-        const totalSlides = 26;
+        const totalSlides = 31;
 
         // Thumbnail configurations
         const flowThumbs = {
@@ -884,6 +974,12 @@
                 { slide: 23, img: 'wireframe_mobile_wrong.svg', label: 'Errata + AI' },
                 { slide: 24, img: 'wireframe_mobile_results.svg', label: 'Risultati' },
                 { slide: 25, img: 'wireframe_mobile_leaderboard.svg', label: 'Classifica' }
+            ],
+            tree: [
+                { slide: 27, img: 'wireframe_tree_schema.svg', label: 'Schema' },
+                { slide: 28, img: 'wireframe_tree_builder.svg', label: 'Builder' },
+                { slide: 29, img: 'wireframe_tree_mobile_question.svg', label: 'Domanda' },
+                { slide: 30, img: 'wireframe_tree_mobile_results.svg', label: 'Risultati' }
             ]
         };
 

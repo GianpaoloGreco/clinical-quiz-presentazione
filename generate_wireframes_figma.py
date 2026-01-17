@@ -1375,6 +1375,507 @@ def create_mobile_leaderboard():
 
 
 # ============================================
+# WIREFRAME: TREE QUIZ - SCHEMA ALBERO
+# ============================================
+
+def create_tree_schema():
+    dwg = svgwrite.Drawing(f'{OUTPUT_DIR}/wireframe_tree_schema.svg', size=(1200, 800))
+    main = dwg.g(id='tree_schema')
+
+    # Background
+    add_rounded_rect(dwg, main, 0, 0, 1200, 800, '#FAFAFA', rx=0)
+
+    # Title
+    add_text(dwg, main, 600, 40, 'Quiz ad Albero Decisionale - Schema', size=24, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, main, 600, 65, 'Ogni risposta determina il percorso successivo', size=14, color=COLORS['text_light'], anchor='middle')
+
+    # Legend
+    legend = dwg.g(id='legend')
+    add_rounded_rect(dwg, legend, 20, 90, 200, 120, '#FFFFFF', rx=8, stroke=COLORS['border'])
+    add_text(dwg, legend, 120, 115, 'Legenda', size=12, color=COLORS['text'], anchor='middle', weight='bold')
+
+    # Legend items
+    add_circle(dwg, legend, 45, 140, 8, COLORS['success'])
+    add_text(dwg, legend, 60, 145, 'Risposta corretta', size=10, color=COLORS['text'])
+    add_circle(dwg, legend, 45, 165, 8, COLORS['error'])
+    add_text(dwg, legend, 60, 170, 'Risposta errata', size=10, color=COLORS['text'])
+    add_circle(dwg, legend, 45, 190, 8, COLORS['primary'])
+    add_text(dwg, legend, 60, 195, 'Nodo convergenza', size=10, color=COLORS['text'])
+    main.add(legend)
+
+    # Root node (D1)
+    root = dwg.g(id='root')
+    add_rounded_rect(dwg, root, 525, 100, 150, 60, COLORS['primary'], rx=8)
+    add_text(dwg, root, 600, 125, 'D1', size=16, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, root, 600, 145, 'Domanda Iniziale', size=10, color='#FFFFFF', anchor='middle')
+    main.add(root)
+
+    # Level 2 - Two branches
+    # Left branch (correct)
+    l2_left = dwg.g(id='l2_left')
+    add_rounded_rect(dwg, l2_left, 300, 220, 130, 50, COLORS['success'], rx=8)
+    add_text(dwg, l2_left, 365, 240, 'D2a', size=14, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, l2_left, 365, 258, 'Approfondimento', size=9, color='#FFFFFF', anchor='middle')
+    main.add(l2_left)
+
+    # Right branch (wrong)
+    l2_right = dwg.g(id='l2_right')
+    add_rounded_rect(dwg, l2_right, 770, 220, 130, 50, COLORS['error'], rx=8)
+    add_text(dwg, l2_right, 835, 240, 'D2b', size=14, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, l2_right, 835, 258, 'Recupero', size=9, color='#FFFFFF', anchor='middle')
+    main.add(l2_right)
+
+    # Arrows from root
+    main.add(dwg.line(start=(560, 160), end=(365, 220), stroke=COLORS['success'], stroke_width=2))
+    main.add(dwg.line(start=(640, 160), end=(835, 220), stroke=COLORS['error'], stroke_width=2))
+    add_text(dwg, main, 440, 185, 'Corretta', size=9, color=COLORS['success'])
+    add_text(dwg, main, 740, 185, 'Errata', size=9, color=COLORS['error'])
+
+    # Level 3
+    # From D2a - two more branches
+    l3_1 = dwg.g(id='l3_1')
+    add_rounded_rect(dwg, l3_1, 150, 330, 120, 45, COLORS['success'], rx=8)
+    add_text(dwg, l3_1, 210, 350, 'D3a', size=12, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, l3_1, 210, 365, 'Esperto', size=8, color='#FFFFFF', anchor='middle')
+    main.add(l3_1)
+
+    l3_2 = dwg.g(id='l3_2')
+    add_rounded_rect(dwg, l3_2, 350, 330, 120, 45, COLORS['warning'], rx=8)
+    add_text(dwg, l3_2, 410, 350, 'D3b', size=12, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, l3_2, 410, 365, 'Intermedio', size=8, color='#FFFFFF', anchor='middle')
+    main.add(l3_2)
+
+    # From D2b - two branches
+    l3_3 = dwg.g(id='l3_3')
+    add_rounded_rect(dwg, l3_3, 700, 330, 120, 45, COLORS['warning'], rx=8)
+    add_text(dwg, l3_3, 760, 350, 'D3c', size=12, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, l3_3, 760, 365, 'Rinforzo', size=8, color='#FFFFFF', anchor='middle')
+    main.add(l3_3)
+
+    l3_4 = dwg.g(id='l3_4')
+    add_rounded_rect(dwg, l3_4, 900, 330, 120, 45, COLORS['error'], rx=8)
+    add_text(dwg, l3_4, 960, 350, 'D3d', size=12, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, l3_4, 960, 365, 'Base', size=8, color='#FFFFFF', anchor='middle')
+    main.add(l3_4)
+
+    # Arrows level 2->3
+    main.add(dwg.line(start=(320, 270), end=(210, 330), stroke=COLORS['success'], stroke_width=2))
+    main.add(dwg.line(start=(400, 270), end=(410, 330), stroke=COLORS['warning'], stroke_width=2))
+    main.add(dwg.line(start=(800, 270), end=(760, 330), stroke=COLORS['warning'], stroke_width=2))
+    main.add(dwg.line(start=(870, 270), end=(960, 330), stroke=COLORS['error'], stroke_width=2))
+
+    # Level 4 - Convergence nodes
+    conv1 = dwg.g(id='conv1')
+    add_rounded_rect(dwg, conv1, 230, 440, 140, 50, COLORS['primary'], rx=25)
+    add_text(dwg, conv1, 300, 460, 'CONV-A', size=12, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, conv1, 300, 478, 'Convergenza', size=8, color='#FFFFFF', anchor='middle')
+    main.add(conv1)
+
+    conv2 = dwg.g(id='conv2')
+    add_rounded_rect(dwg, conv2, 780, 440, 140, 50, COLORS['primary'], rx=25)
+    add_text(dwg, conv2, 850, 460, 'CONV-B', size=12, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, conv2, 850, 478, 'Convergenza', size=8, color='#FFFFFF', anchor='middle')
+    main.add(conv2)
+
+    # Arrows to convergence
+    main.add(dwg.line(start=(210, 375), end=(270, 440), stroke=COLORS['text_light'], stroke_width=1.5))
+    main.add(dwg.line(start=(410, 375), end=(330, 440), stroke=COLORS['text_light'], stroke_width=1.5))
+    main.add(dwg.line(start=(760, 375), end=(820, 440), stroke=COLORS['text_light'], stroke_width=1.5))
+    main.add(dwg.line(start=(960, 375), end=(880, 440), stroke=COLORS['text_light'], stroke_width=1.5))
+
+    # Final nodes
+    end1 = dwg.g(id='end1')
+    add_rounded_rect(dwg, end1, 200, 550, 100, 40, '#9C27B0', rx=20)
+    add_text(dwg, end1, 250, 575, 'FINE A', size=11, color='#FFFFFF', anchor='middle', weight='bold')
+    main.add(end1)
+
+    end2 = dwg.g(id='end2')
+    add_rounded_rect(dwg, end2, 350, 550, 100, 40, '#9C27B0', rx=20)
+    add_text(dwg, end2, 400, 575, 'FINE B', size=11, color='#FFFFFF', anchor='middle', weight='bold')
+    main.add(end2)
+
+    end3 = dwg.g(id='end3')
+    add_rounded_rect(dwg, end3, 750, 550, 100, 40, '#9C27B0', rx=20)
+    add_text(dwg, end3, 800, 575, 'FINE C', size=11, color='#FFFFFF', anchor='middle', weight='bold')
+    main.add(end3)
+
+    end4 = dwg.g(id='end4')
+    add_rounded_rect(dwg, end4, 900, 550, 100, 40, '#9C27B0', rx=20)
+    add_text(dwg, end4, 950, 575, 'FINE D', size=11, color='#FFFFFF', anchor='middle', weight='bold')
+    main.add(end4)
+
+    # Arrows to end
+    main.add(dwg.line(start=(270, 490), end=(250, 550), stroke='#9C27B0', stroke_width=2))
+    main.add(dwg.line(start=(330, 490), end=(400, 550), stroke='#9C27B0', stroke_width=2))
+    main.add(dwg.line(start=(820, 490), end=(800, 550), stroke='#9C27B0', stroke_width=2))
+    main.add(dwg.line(start=(880, 490), end=(950, 550), stroke='#9C27B0', stroke_width=2))
+
+    # Rules box
+    rules = dwg.g(id='rules')
+    add_rounded_rect(dwg, rules, 20, 620, 1160, 160, '#FFFFFF', rx=8, stroke=COLORS['border'])
+    add_text(dwg, rules, 600, 650, 'Regole del Quiz ad Albero', size=16, color=COLORS['text'], anchor='middle', weight='bold')
+
+    rule_lines = [
+        '1. Ogni risposta determina la domanda successiva - non esiste un percorso unico',
+        '2. Risposta corretta: percorso di approfondimento (+15 punti base + bonus profondità)',
+        '3. Risposta errata: percorso di recupero (+10 punti, domande di rinforzo)',
+        '4. Nodi di convergenza: punti dove percorsi diversi si riuniscono',
+        '5. Profondità variabile: da 5 a 15 domande in base al percorso scelto',
+        '6. Valutazione finale personalizzata in base al percorso effettuato'
+    ]
+    for i, line in enumerate(rule_lines):
+        add_text(dwg, rules, 50, 685 + i * 22, line, size=11, color=COLORS['text_light'])
+    main.add(rules)
+
+    # Title
+    add_text(dwg, main, 600, 795, 'WIREFRAME: TREE QUIZ SCHEMA', size=10, color=COLORS['text'], anchor='middle', weight='bold')
+
+    dwg.add(main)
+    dwg.save()
+    print('✓ wireframe_tree_schema.svg')
+
+
+# ============================================
+# WIREFRAME: TREE QUIZ - CREATOR BUILDER
+# ============================================
+
+def create_tree_builder():
+    dwg = svgwrite.Drawing(f'{OUTPUT_DIR}/wireframe_tree_builder.svg', size=(1440, 900))
+    main = dwg.g(id='tree_builder')
+
+    # Sidebar
+    add_rounded_rect(dwg, main, 0, 0, 280, 900, '#F5F5F5', rx=0)
+    add_text(dwg, main, 140, 40, 'Clinical Quiz', size=18, color=COLORS['primary'], anchor='middle', weight='bold')
+    add_text(dwg, main, 140, 60, 'Tree Builder', size=12, color=COLORS['text_light'], anchor='middle')
+
+    # Sidebar menu
+    menu_items = ['Dashboard', 'I Miei Alberi']
+    for i, item in enumerate(menu_items):
+        y = 120 + i * 50
+        if i == 1:
+            add_rounded_rect(dwg, main, 15, y - 15, 250, 45, COLORS['primary'], rx=8)
+            add_text(dwg, main, 140, y + 10, item, size=14, color='#FFFFFF', anchor='middle', weight='bold')
+        else:
+            add_text(dwg, main, 140, y + 10, item, size=14, color=COLORS['text'], anchor='middle')
+
+    # Tree list
+    add_text(dwg, main, 20, 230, 'Quiz Albero', size=12, color=COLORS['text_light'])
+    trees = ['Diagnosi Cardiaca', 'Triage Emergenza', 'Farmacologia Base']
+    for i, tree in enumerate(trees):
+        y = 260 + i * 45
+        bg_color = '#E3F2FD' if i == 0 else '#FFFFFF'
+        add_rounded_rect(dwg, main, 15, y, 250, 40, bg_color, rx=6, stroke=COLORS['border'])
+        add_text(dwg, main, 30, y + 25, tree, size=12, color=COLORS['text'])
+
+    # Main content
+    add_rounded_rect(dwg, main, 280, 0, 1160, 900, '#FFFFFF', rx=0)
+
+    # Header
+    add_text(dwg, main, 310, 45, 'Costruttore Albero: Diagnosi Cardiaca', size=20, color=COLORS['text'], weight='bold')
+    add_text(dwg, main, 310, 70, 'Trascina i nodi per costruire il percorso decisionale', size=12, color=COLORS['text_light'])
+
+    # Toolbar
+    toolbar = dwg.g(id='toolbar')
+    add_rounded_rect(dwg, toolbar, 310, 90, 1100, 50, COLORS['frame'], rx=8)
+
+    tools = [('+ Domanda', COLORS['primary']), ('+ Convergenza', COLORS['secondary']), ('+ Fine', '#9C27B0'), ('Collega', COLORS['text_light']), ('Elimina', COLORS['error'])]
+    for i, (tool, color) in enumerate(tools):
+        x = 330 + i * 150
+        add_rounded_rect(dwg, toolbar, x, 100, 130, 30, color, rx=4)
+        add_text(dwg, toolbar, x + 65, 120, tool, size=11, color='#FFFFFF', anchor='middle')
+
+    add_button(dwg, toolbar, 1120, 98, 120, 35, 'SALVA', COLORS['success'])
+    add_button(dwg, toolbar, 1260, 98, 120, 35, 'ANTEPRIMA', COLORS['warning'])
+    main.add(toolbar)
+
+    # Canvas area
+    canvas = dwg.g(id='canvas')
+    add_rounded_rect(dwg, canvas, 310, 160, 780, 580, '#FAFAFA', rx=8, stroke=COLORS['border'])
+
+    # Grid pattern hint
+    for i in range(15):
+        for j in range(11):
+            add_circle(dwg, canvas, 340 + i * 52, 190 + j * 52, 2, '#E0E0E0')
+
+    # Sample tree nodes on canvas
+    # Root
+    root = dwg.g(id='canvas_root')
+    add_rounded_rect(dwg, root, 600, 180, 180, 60, COLORS['primary'], rx=8)
+    add_text(dwg, root, 690, 205, 'START', size=12, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, root, 690, 225, 'Dolore toracico?', size=10, color='#FFFFFF', anchor='middle')
+    main.add(root)
+
+    # Level 2
+    l2a = dwg.g(id='canvas_l2a')
+    add_rounded_rect(dwg, l2a, 420, 290, 160, 55, COLORS['success'], rx=8)
+    add_text(dwg, l2a, 500, 312, 'Sì - ECG anormale?', size=10, color='#FFFFFF', anchor='middle', weight='bold')
+    main.add(l2a)
+
+    l2b = dwg.g(id='canvas_l2b')
+    add_rounded_rect(dwg, l2b, 780, 290, 160, 55, COLORS['warning'], rx=8)
+    add_text(dwg, l2b, 860, 312, 'No - Altri sintomi?', size=10, color='#FFFFFF', anchor='middle', weight='bold')
+    main.add(l2b)
+
+    # Arrows
+    main.add(dwg.line(start=(650, 240), end=(500, 290), stroke=COLORS['success'], stroke_width=2))
+    main.add(dwg.line(start=(730, 240), end=(860, 290), stroke=COLORS['warning'], stroke_width=2))
+
+    # Level 3 nodes
+    l3a = dwg.g(id='canvas_l3a')
+    add_rounded_rect(dwg, l3a, 340, 400, 140, 50, COLORS['success'], rx=8)
+    add_text(dwg, l3a, 410, 430, 'STEMI?', size=10, color='#FFFFFF', anchor='middle')
+    main.add(l3a)
+
+    l3b = dwg.g(id='canvas_l3b')
+    add_rounded_rect(dwg, l3b, 520, 400, 140, 50, COLORS['error'], rx=8)
+    add_text(dwg, l3b, 590, 430, 'Enzimi cardiaci', size=10, color='#FFFFFF', anchor='middle')
+    main.add(l3b)
+
+    # More arrows
+    main.add(dwg.line(start=(450, 345), end=(410, 400), stroke=COLORS['success'], stroke_width=2))
+    main.add(dwg.line(start=(550, 345), end=(590, 400), stroke=COLORS['error'], stroke_width=2))
+
+    # End node
+    end_node = dwg.g(id='canvas_end')
+    add_rounded_rect(dwg, end_node, 380, 510, 120, 45, '#9C27B0', rx=20)
+    add_text(dwg, end_node, 440, 538, 'Diagnosi A', size=10, color='#FFFFFF', anchor='middle', weight='bold')
+    main.add(end_node)
+    main.add(dwg.line(start=(410, 450), end=(430, 510), stroke='#9C27B0', stroke_width=2))
+
+    main.add(canvas)
+
+    # Properties panel
+    props = dwg.g(id='properties')
+    add_rounded_rect(dwg, props, 1110, 160, 280, 580, '#FFFFFF', rx=8, stroke=COLORS['border'])
+    add_text(dwg, props, 1250, 195, 'Proprietà Nodo', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+
+    # Selected node info
+    add_text(dwg, props, 1130, 230, 'Nodo selezionato:', size=11, color=COLORS['text_light'])
+    add_rounded_rect(dwg, props, 1130, 245, 240, 35, COLORS['primary'], rx=4)
+    add_text(dwg, props, 1250, 268, 'START - Dolore toracico?', size=10, color='#FFFFFF', anchor='middle')
+
+    # Form fields
+    add_text(dwg, props, 1130, 310, 'Testo domanda:', size=11, color=COLORS['text_light'])
+    add_input(dwg, props, 1130, 325, 240, 40, 'Il paziente presenta dolore toracico?')
+
+    add_text(dwg, props, 1130, 390, 'Tipo nodo:', size=11, color=COLORS['text_light'])
+    add_rounded_rect(dwg, props, 1130, 405, 240, 35, '#FFFFFF', rx=4, stroke=COLORS['border'])
+    add_text(dwg, props, 1140, 428, 'Domanda a scelta', size=11, color=COLORS['text'])
+
+    add_text(dwg, props, 1130, 465, 'Risposte:', size=11, color=COLORS['text_light'])
+
+    # Response options
+    resp1 = dwg.g(id='resp1')
+    add_rounded_rect(dwg, resp1, 1130, 485, 240, 50, '#E8F5E9', rx=4, stroke=COLORS['success'])
+    add_text(dwg, resp1, 1145, 505, 'Sì', size=11, color=COLORS['text'], weight='bold')
+    add_text(dwg, resp1, 1145, 522, '→ ECG anormale?', size=9, color=COLORS['success'])
+    main.add(resp1)
+
+    resp2 = dwg.g(id='resp2')
+    add_rounded_rect(dwg, resp2, 1130, 545, 240, 50, '#FFF3E0', rx=4, stroke=COLORS['warning'])
+    add_text(dwg, resp2, 1145, 565, 'No', size=11, color=COLORS['text'], weight='bold')
+    add_text(dwg, resp2, 1145, 582, '→ Altri sintomi?', size=9, color=COLORS['warning'])
+    main.add(resp2)
+
+    add_text(dwg, props, 1130, 620, 'Punti base:', size=11, color=COLORS['text_light'])
+    add_input(dwg, props, 1130, 635, 100, 35, '10')
+
+    add_text(dwg, props, 1250, 620, 'Bonus:', size=11, color=COLORS['text_light'])
+    add_input(dwg, props, 1250, 635, 100, 35, '+5')
+
+    add_button(dwg, props, 1130, 695, 240, 35, 'APPLICA MODIFICHE', COLORS['primary'])
+    main.add(props)
+
+    # Stats bar
+    stats = dwg.g(id='stats')
+    add_rounded_rect(dwg, stats, 310, 760, 1080, 60, COLORS['frame'], rx=8)
+
+    stat_items = [('Nodi totali', '12'), ('Domande', '8'), ('Convergenze', '2'), ('Endpoint', '4'), ('Profondità max', '5')]
+    for i, (label, value) in enumerate(stat_items):
+        x = 380 + i * 200
+        add_text(dwg, stats, x, 785, label, size=10, color=COLORS['text_light'], anchor='middle')
+        add_text(dwg, stats, x, 808, value, size=18, color=COLORS['primary'], anchor='middle', weight='bold')
+    main.add(stats)
+
+    # Title
+    add_text(dwg, main, 860, 880, 'WIREFRAME: TREE BUILDER - CREATOR', size=10, color=COLORS['text'], anchor='middle', weight='bold')
+
+    dwg.add(main)
+    dwg.save()
+    print('✓ wireframe_tree_builder.svg')
+
+
+# ============================================
+# WIREFRAME: TREE QUIZ - MOBILE QUESTION
+# ============================================
+
+def create_tree_mobile_question():
+    dwg = svgwrite.Drawing(f'{OUTPUT_DIR}/wireframe_tree_mobile_question.svg', size=(375, 812))
+    main = dwg.g(id='tree_mobile_question')
+
+    add_phone_frame(dwg, main, 0, 0, 375, 812, 'Quiz Albero')
+
+    # Logo
+    logo = dwg.g(id='logo')
+    add_rounded_rect(dwg, logo, 20, 90, 80, 35, COLORS['frame'], rx=4, stroke=COLORS['border'])
+    add_text(dwg, logo, 60, 113, 'LOGO', size=10, color=COLORS['text_light'], anchor='middle')
+    main.add(logo)
+
+    # Path indicator
+    path = dwg.g(id='path_indicator')
+    add_rounded_rect(dwg, path, 110, 90, 155, 35, '#E3F2FD', rx=17)
+    add_text(dwg, path, 187, 108, 'Percorso: Livello 3', size=10, color=COLORS['primary'], anchor='middle', weight='bold')
+    add_text(dwg, path, 187, 120, 'Approfondimento', size=8, color=COLORS['primary'], anchor='middle')
+    main.add(path)
+
+    # Points
+    add_text(dwg, main, 320, 115, '45 pts', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+
+    # Visual path progress
+    progress = dwg.g(id='progress')
+    add_rounded_rect(dwg, progress, 20, 140, 335, 50, '#FAFAFA', rx=8)
+
+    # Path dots
+    path_x = [50, 110, 170, 230, 290, 320]
+    path_colors = [COLORS['success'], COLORS['success'], COLORS['primary'], COLORS['frame'], COLORS['frame'], COLORS['frame']]
+    for i, (x, col) in enumerate(zip(path_x, path_colors)):
+        add_circle(dwg, progress, x, 165, 10 if i == 2 else 6, col)
+        if i < len(path_x) - 1:
+            line_col = COLORS['success'] if i < 2 else COLORS['frame']
+            main.add(dwg.line(start=(x + 8, 165), end=(path_x[i+1] - 8, 165), stroke=line_col, stroke_width=2))
+    add_text(dwg, progress, 230, 180, '?', size=10, color=COLORS['text_light'], anchor='middle')
+    main.add(progress)
+
+    # Question card
+    question = dwg.g(id='question')
+    add_card(dwg, question, 20, 210, 335, 130)
+    add_text(dwg, question, 187, 250, 'In caso di ECG con', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, question, 187, 275, 'sopraslivellamento ST,', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, question, 187, 300, 'quale diagnosi sospetti?', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+    main.add(question)
+
+    # Answer options - each leads to different path
+    options = [
+        ('A) STEMI', 'Percorso Emergenza', COLORS['error']),
+        ('B) NSTEMI', 'Percorso Urgenza', COLORS['warning']),
+        ('C) Angina stabile', 'Percorso Standard', COLORS['primary']),
+        ('D) Non cardiaco', 'Percorso Esclusione', COLORS['text_light'])
+    ]
+    for i, (opt, path_label, path_color) in enumerate(options):
+        opt_y = 360 + i * 80
+        opt_group = dwg.g(id=f'option_{i}')
+        add_card(dwg, opt_group, 20, opt_y, 335, 65)
+        add_circle(dwg, opt_group, 55, opt_y + 32, 12, '#FFFFFF')
+        main.add(dwg.circle(center=(55, opt_y + 32), r=12, fill='none', stroke=COLORS['primary'], stroke_width=2))
+        add_text(dwg, opt_group, 80, opt_y + 28, opt, size=13, color=COLORS['text'], weight='bold')
+        # Path indicator for each option
+        add_rounded_rect(dwg, opt_group, 80, opt_y + 38, 100, 18, path_color, rx=9)
+        add_text(dwg, opt_group, 130, opt_y + 51, path_label, size=8, color='#FFFFFF', anchor='middle')
+        main.add(opt_group)
+
+    # Info
+    add_text(dwg, main, 187, 700, 'Ogni risposta ti porterà su un percorso diverso', size=10, color=COLORS['text_light'], anchor='middle')
+
+    # Confirm button
+    add_button(dwg, main, 40, 720, 295, 55, 'CONFERMA SCELTA', COLORS['primary'])
+
+    # Title
+    add_text(dwg, main, 187, 795, 'WIREFRAME: TREE MOBILE QUESTION', size=10, color=COLORS['text'], anchor='middle', weight='bold')
+
+    dwg.add(main)
+    dwg.save()
+    print('✓ wireframe_tree_mobile_question.svg')
+
+
+# ============================================
+# WIREFRAME: TREE QUIZ - MOBILE RESULTS
+# ============================================
+
+def create_tree_mobile_results():
+    dwg = svgwrite.Drawing(f'{OUTPUT_DIR}/wireframe_tree_mobile_results.svg', size=(375, 812))
+    main = dwg.g(id='tree_mobile_results')
+
+    add_phone_frame(dwg, main, 0, 0, 375, 812, 'Risultato Percorso')
+
+    # Logo
+    logo = dwg.g(id='logo')
+    add_rounded_rect(dwg, logo, 147, 90, 80, 35, COLORS['frame'], rx=4, stroke=COLORS['border'])
+    add_text(dwg, logo, 187, 113, 'LOGO', size=10, color=COLORS['text_light'], anchor='middle')
+    main.add(logo)
+
+    # Title
+    add_text(dwg, main, 187, 155, 'Percorso Completato!', size=20, color=COLORS['text'], anchor='middle', weight='bold')
+
+    # Path visualization
+    path_viz = dwg.g(id='path_viz')
+    add_card(dwg, path_viz, 20, 175, 335, 120)
+    add_text(dwg, path_viz, 187, 200, 'Il tuo percorso', size=12, color=COLORS['text_light'], anchor='middle')
+
+    # Visual path
+    nodes = [
+        (50, 'D1', COLORS['primary']),
+        (95, 'D2a', COLORS['success']),
+        (140, 'D3a', COLORS['success']),
+        (185, 'C-A', COLORS['primary']),
+        (230, 'D4', COLORS['success']),
+        (275, 'D5', COLORS['warning']),
+        (320, 'END', '#9C27B0')
+    ]
+    for i, (x, label, color) in enumerate(nodes):
+        add_circle(dwg, path_viz, x, 250, 15, color)
+        add_text(dwg, path_viz, x, 255, label, size=7, color='#FFFFFF', anchor='middle', weight='bold')
+        if i < len(nodes) - 1:
+            main.add(dwg.line(start=(x + 15, 250), end=(nodes[i+1][0] - 15, 250), stroke=color, stroke_width=2))
+
+    add_text(dwg, path_viz, 187, 285, '7 domande • Profondità: 5 livelli', size=10, color=COLORS['text_light'], anchor='middle')
+    main.add(path_viz)
+
+    # Result badge
+    badge = dwg.g(id='badge')
+    add_rounded_rect(dwg, badge, 100, 310, 175, 80, COLORS['success'], rx=12)
+    add_text(dwg, badge, 187, 345, 'ESPERTO', size=20, color='#FFFFFF', anchor='middle', weight='bold')
+    add_text(dwg, badge, 187, 375, 'Diagnosi Cardiaca', size=11, color='#FFFFFF', anchor='middle')
+    main.add(badge)
+
+    # Score breakdown
+    score = dwg.g(id='score')
+    add_card(dwg, score, 20, 410, 335, 140)
+    add_text(dwg, score, 187, 440, 'Dettaglio Punteggio', size=14, color=COLORS['text'], anchor='middle', weight='bold')
+
+    score_items = [
+        ('Risposte corrette (5x15)', '+75'),
+        ('Risposte parziali (2x10)', '+20'),
+        ('Bonus profondità (5 livelli)', '+25'),
+        ('TOTALE', '120 pts')
+    ]
+    for i, (label, pts) in enumerate(score_items):
+        y = 470 + i * 25
+        weight = 'bold' if i == 3 else 'normal'
+        color = COLORS['success'] if i == 3 else COLORS['text_light']
+        add_text(dwg, score, 40, y, label, size=11, color=COLORS['text_light'] if i < 3 else COLORS['text'], weight=weight)
+        add_text(dwg, score, 335, y, pts, size=11, color=color, anchor='end', weight=weight)
+    main.add(score)
+
+    # AI Feedback
+    feedback = dwg.g(id='feedback')
+    add_card(dwg, feedback, 20, 565, 335, 100)
+    add_text(dwg, feedback, 187, 595, 'Valutazione AI', size=12, color=COLORS['text'], anchor='middle', weight='bold')
+    add_text(dwg, feedback, 187, 620, 'Hai dimostrato ottime capacità', size=11, color=COLORS['text_light'], anchor='middle')
+    add_text(dwg, feedback, 187, 640, 'diagnostiche nel percorso cardiologico.', size=11, color=COLORS['text_light'], anchor='middle')
+    main.add(feedback)
+
+    # Button
+    add_button(dwg, main, 40, 685, 295, 50, 'VEDI CLASSIFICA', COLORS['primary'])
+
+    # Title
+    add_text(dwg, main, 187, 795, 'WIREFRAME: TREE MOBILE RESULTS', size=10, color=COLORS['text'], anchor='middle', weight='bold')
+
+    dwg.add(main)
+    dwg.save()
+    print('✓ wireframe_tree_mobile_results.svg')
+
+
+# ============================================
 # MAIN
 # ============================================
 
@@ -1409,6 +1910,12 @@ if __name__ == '__main__':
     create_mobile_wrong()
     create_mobile_results()
     create_mobile_leaderboard()
+
+    print('\n🌳 TREE QUIZ WIREFRAMES')
+    create_tree_schema()
+    create_tree_builder()
+    create_tree_mobile_question()
+    create_tree_mobile_results()
 
     print('\n' + '=' * 50)
     print(f'✅ Wireframe generati in: {OUTPUT_DIR}')
