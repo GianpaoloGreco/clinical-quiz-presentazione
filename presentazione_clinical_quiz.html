@@ -833,90 +833,89 @@
         </div>
 
         <!-- ========================== -->
-        <!-- SEZIONE: QUIZ AD ALBERO   -->
+        <!-- SEZIONE: SCENARIO FORMATIVO -->
         <!-- ========================== -->
 
-        <!-- SLIDE 26: Intro Quiz ad Albero -->
+        <!-- SLIDE 26: Intro Scenario Formativo -->
         <div class="slide intro-slide" data-slide="26">
-            <div class="intro-icon">🌳</div>
+            <div class="intro-icon">🏥</div>
             <h1 class="slide-title">Modalità Alternativa</h1>
-            <p class="slide-subtitle">Quiz ad Albero Decisionale</p>
+            <p class="slide-subtitle">Scenario Formativo</p>
             <div class="flow-steps">
-                <div class="flow-step"><span class="step-num">1</span> Schema Albero</div>
-                <div class="flow-step"><span class="step-num">2</span> Tree Builder</div>
-                <div class="flow-step"><span class="step-num">3</span> Mobile Question</div>
-                <div class="flow-step"><span class="step-num">4</span> Mobile Results</div>
+                <div class="flow-step"><span class="step-num">1</span> Schema Scenario</div>
+                <div class="flow-step"><span class="step-num">2</span> Scenario Builder</div>
+                <div class="flow-step"><span class="step-num">3</span> Scelta Clinica</div>
+                <div class="flow-step"><span class="step-num">4</span> Esito Paziente</div>
             </div>
             <p style="margin-top: 30px; color: #666; font-size: 16px;">
-                Un'alternativa al flusso lineare: ogni risposta determina il percorso successivo
+                Simulazione di casi clinici: le scelte non sono "giuste o sbagliate" ma "più o meno appropriate"
             </p>
         </div>
 
-        <!-- SLIDE 27: Schema Albero Decisionale -->
+        <!-- SLIDE 27: Schema Scenario Formativo -->
         <div class="slide" data-slide="27">
             <div class="slide-content full-width">
-                <h2 class="slide-title" style="margin-bottom: 10px;">Schema Albero Decisionale</h2>
-                <p style="color: #666; margin-bottom: 15px;">Struttura ramificata: ogni risposta porta a domande diverse</p>
+                <h2 class="slide-title" style="margin-bottom: 10px;">Schema Scenario Formativo</h2>
+                <p style="color: #666; margin-bottom: 15px;">Caso clinico: Paziente con ittero e febbre - Ogni scelta influenza l'esito</p>
                 <div class="slide-image" style="max-height: 680px;">
-                    <img src="figma_wireframes/wireframe_tree_schema.svg" alt="Tree Schema" style="max-height: 650px;">
+                    <img src="figma_wireframes/wireframe_tree_schema.svg" alt="Scenario Schema" style="max-height: 650px;">
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 28: Tree Builder Creator -->
+        <!-- SLIDE 28: Scenario Builder Creator -->
         <div class="slide" data-slide="28">
             <div class="slide-content full-width">
-                <h2 class="slide-title" style="margin-bottom: 10px;">Tree Builder - Interfaccia Creator</h2>
-                <p style="color: #666; margin-bottom: 15px;">Costruisci visualmente il percorso decisionale con drag & drop</p>
+                <h2 class="slide-title" style="margin-bottom: 10px;">Scenario Builder - Interfaccia Creator</h2>
+                <p style="color: #666; margin-bottom: 15px;">Costruisci scenari clinici con scelte ottimali, accettabili e non ottimali</p>
                 <div class="slide-image" style="max-height: 680px;">
-                    <img src="figma_wireframes/wireframe_tree_builder.svg" alt="Tree Builder" style="max-height: 650px;">
+                    <img src="figma_wireframes/wireframe_tree_builder.svg" alt="Scenario Builder" style="max-height: 650px;">
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 29: Tree Mobile Question -->
+        <!-- SLIDE 29: Scenario Mobile Scelta -->
         <div class="slide" data-slide="29" data-flow="tree" data-step="3">
             <div class="slide-content">
                 <div class="slide-text">
-                    <h2 class="slide-title">Domanda con Percorsi</h2>
-                    <span class="step-badge">Tree Quiz 3/4</span>
+                    <h2 class="slide-title">Scelta Clinica</h2>
+                    <span class="step-badge">Scenario 3/4</span>
                     <div class="thumb-strip"></div>
-                    <p class="slide-description">L'utente vede dove porterà ogni risposta</p>
+                    <p class="slide-description">L'utente affronta decisioni cliniche reali</p>
                     <ul class="feature-list">
-                        <li><strong>Indicatore percorso:</strong> Mostra livello attuale e tipo di ramo</li>
-                        <li><strong>Path progress:</strong> Visualizzazione grafica del percorso fatto</li>
-                        <li><strong>Etichette risposta:</strong> Ogni opzione indica il percorso che attiva</li>
-                        <li><strong>Percorso Emergenza:</strong> Per risposte critiche (rosso)</li>
-                        <li><strong>Percorso Urgenza:</strong> Per risposte importanti (arancio)</li>
-                        <li><strong>Percorso Standard:</strong> Per risposte normali (blu)</li>
-                        <li><strong>Trasparenza:</strong> L'utente sa dove sta andando</li>
+                        <li><strong>Caso clinico:</strong> Situazione reale (es. ittero + febbre)</li>
+                        <li><strong>Scelte graduate:</strong> Ottimale, Accettabile, Non ottimale</li>
+                        <li><strong>Nessuna "sbagliata":</strong> Solo più o meno appropriate</li>
+                        <li><strong>Conseguenze reali:</strong> Le scelte influenzano il paziente</li>
+                        <li><strong>Peggioramento:</strong> Scelte non ottimali peggiorano il caso</li>
+                        <li><strong>Recupero possibile:</strong> Si può sempre "salvare" il paziente</li>
                     </ul>
                 </div>
                 <div class="slide-image mobile">
-                    <img src="figma_wireframes/wireframe_tree_mobile_question.svg" alt="Tree Mobile Question">
+                    <img src="figma_wireframes/wireframe_tree_mobile_question.svg" alt="Scenario Mobile Scelta">
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 30: Tree Mobile Results -->
+        <!-- SLIDE 30: Scenario Mobile Esito -->
         <div class="slide" data-slide="30" data-flow="tree" data-step="4">
             <div class="slide-content">
                 <div class="slide-text">
-                    <h2 class="slide-title">Risultato Percorso</h2>
-                    <span class="step-badge">Tree Quiz 4/4</span>
+                    <h2 class="slide-title">Esito Paziente</h2>
+                    <span class="step-badge">Scenario 4/4</span>
                     <div class="thumb-strip"></div>
-                    <p class="slide-description">Valutazione personalizzata basata sul percorso effettuato</p>
+                    <p class="slide-description">Il risultato dipende dal percorso di scelte effettuato</p>
                     <ul class="feature-list">
-                        <li><strong>Visualizzazione percorso:</strong> Mostra tutti i nodi attraversati</li>
-                        <li><strong>Badge di competenza:</strong> Esperto, Intermedio, Base</li>
-                        <li><strong>Punteggio dettagliato:</strong> Breakdown per tipo di risposta</li>
-                        <li><strong>Bonus profondità:</strong> Più livelli = più punti</li>
-                        <li><strong>Valutazione AI:</strong> Feedback specifico per il percorso scelto</li>
-                        <li><strong>Risultato unico:</strong> Ogni percorso ha una valutazione diversa</li>
+                        <li><strong>Esito paziente:</strong> Guarigione, Dimissione, Ricovero, Critico</li>
+                        <li><strong>Punteggio percorso:</strong> 100 (ottimo) → 10 (critico)</li>
+                        <li><strong>Visualizzazione scelte:</strong> Mostra le decisioni prese</li>
+                        <li><strong>Feedback clinico:</strong> Spiegazione del percorso ideale</li>
+                        <li><strong>Apprendimento:</strong> Capire dove migliorare</li>
+                        <li><strong>Classifica:</strong> Confronto con altri partecipanti</li>
                     </ul>
                 </div>
                 <div class="slide-image mobile">
-                    <img src="figma_wireframes/wireframe_tree_mobile_results.svg" alt="Tree Mobile Results">
+                    <img src="figma_wireframes/wireframe_tree_mobile_results.svg" alt="Scenario Mobile Esito">
                 </div>
             </div>
         </div>
@@ -925,12 +924,12 @@
         <div class="slide intro-slide" data-slide="31">
             <div class="intro-icon">✅</div>
             <h1 class="slide-title">Riepilogo</h1>
-            <p class="slide-subtitle">Clinical Quiz: 29 schermate, 4 modalità, 1 piattaforma completa</p>
+            <p class="slide-subtitle">Clinical Quiz: 29 schermate, 2 modalità, 1 piattaforma completa</p>
             <div class="flow-steps">
                 <div class="flow-step"><span class="step-num">5</span> Schermate Admin</div>
                 <div class="flow-step"><span class="step-num">8</span> Schermate Creator</div>
                 <div class="flow-step"><span class="step-num">7</span> Schermate Mobile</div>
-                <div class="flow-step"><span class="step-num">4</span> Quiz ad Albero</div>
+                <div class="flow-step"><span class="step-num">4</span> Scenario Formativo</div>
                 <div class="flow-step"><span class="step-num">5</span> Flowchart</div>
             </div>
         </div>
