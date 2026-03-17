@@ -251,6 +251,70 @@ Questa sezione descrive in dettaglio i percorsi utente (user flow) per ogni tipo
 
 ---
 
+#### UF-C06: Generazione Quiz da PDF con AI
+
+**Attore:** Creator dell'evento
+**Precondizione:** Il Creator è autenticato; ha un quiz in creazione (completati Step 1-3 del wizard)
+**Obiettivo:** Generare automaticamente domande quiz a partire da un documento PDF medico
+
+**Step 4 Alternativo - Generazione da PDF (alternativa a Import Google Form):**
+
+1. Nello Step 4 del wizard, il Creator seleziona la modalità "Genera da PDF" anziché "Importa da Google Form"
+2. Il sistema mostra un'area di upload con drag & drop
+3. Il Creator carica un file PDF (trattato medico, procedura clinica, linee guida, protocollo operativo, ecc.)
+   - Formati accettati: PDF (anche scansionati con OCR)
+   - Dimensione massima: 50 MB
+   - Pagine massime: 500
+4. Il sistema avvia l'analisi automatica del PDF:
+   - Mostra barra di avanzamento con fasi: "Estrazione testo..." → "Normalizzazione..." → "Strutturazione..." → "Indicizzazione..."
+   - Tempo stimato mostrato all'utente
+5. Al termine dell'analisi, il sistema mostra un messaggio di conferma:
+   - "Documento analizzato con successo"
+   - Riepilogo: numero pagine, argomenti principali identificati, lingua rilevata
+   - Mappa dei contenuti estratti (elenco capitoli/sezioni)
+
+**Configurazione Quiz tramite Menu a Tendina:**
+
+6. Il Creator configura il quiz tramite form con dropdown:
+
+   | Campo | Tipo | Obbligatorio | Opzioni |
+   |-------|------|:---:|---------|
+   | Numero domande | Dropdown | **SI** | 5, 10, 15, 20, 25, 30 |
+   | Tipo domanda | Dropdown | NO | Risposta multipla, Vero/Falso, Mix (default: Risposta multipla) |
+   | Distribuzione difficoltà | Dropdown | NO | Manuale / Automatica AI (default: Automatica) |
+   | Domande Facili | Number input | NO | Visibile solo se distribuzione = Manuale |
+   | Domande Medie | Number input | NO | Visibile solo se distribuzione = Manuale |
+   | Domande Difficili | Number input | NO | Visibile solo se distribuzione = Manuale |
+   | Numero opzioni risposta | Dropdown | NO | 3, 4, 5, Random per difficoltà (default: 4) |
+   | Prompt libero | Textarea | NO | Indicazioni per guidare l'AI (es. "Concentrati su farmacologia e interazioni farmacologiche") |
+
+   - Se i campi opzionali non vengono compilati, l'AI decide autonomamente basandosi sul contenuto del PDF e sulla selezione obbligatoria
+   - Se distribuzione manuale: la somma di Facili + Medie + Difficili deve essere uguale al numero totale di domande
+   - "Random per difficoltà": Facili = 3 opzioni, Medie = 4 opzioni, Difficili = 5 opzioni
+
+7. Il Creator clicca "Genera Domande"
+8. Il sistema mostra animazione di generazione ("L'AI sta formulando le domande...")
+9. L'AI genera le domande in base alla configurazione e al contenuto del PDF
+
+**Revisione Domande (Domanda per Domanda):**
+
+10. Il sistema mostra le domande in modalità revisione, una alla volta (riga per riga):
+    - Progress indicator: "Domanda 1 di N"
+    - Card con: testo domanda, opzioni di risposta, risposta corretta evidenziata, livello difficoltà, riferimento al capitolo/sezione del PDF
+    - Per ogni domanda, due azioni:
+      - **"Approva" (✓):** segna la domanda come approvata (bordo verde)
+      - **"Rigenera" (↻):** l'AI genera una nuova domanda sostitutiva (stessa difficoltà e argomento)
+    - Pulsante globale **"Approva Tutte"** per approvare in blocco le domande rimanenti
+    - Contatore: "Approvate: X / N"
+11. Il Creator può scorrere avanti/indietro tra le domande
+12. Le domande rigenerate sostituiscono le precedenti e necessitano di nuova approvazione
+13. **Tutte le domande devono essere approvate** per abilitare il pulsante "Prosegui"
+14. Il Creator clicca "Prosegui" → procede allo Step 5 (Configurazione Classifica) e poi alla pagina del quiz completato con QR code
+
+**Postcondizione:** Le domande sono generate dall'AI, revisionate e approvate dal Creator; il quiz è pronto per la pubblicazione
+
+---
+
 ### 2.3 User Flow: Partecipante (Utente Finale)
 
 #### UF-P01: Accesso al Quiz tramite QR Code
@@ -468,6 +532,105 @@ Questa sezione descrive in dettaglio i percorsi utente (user flow) per ogni tipo
 7. Il sistema mostra il feedback al partecipante
 
 **Postcondizione:** Il feedback è generato, salvato e mostrato
+
+---
+
+#### UF-S03: Pipeline Elaborazione PDF
+
+**Attore:** Sistema automatico
+**Trigger:** Il Creator carica un PDF nello Step 4 alternativo del wizard
+**Obiettivo:** Estrarre, normalizzare e strutturare il contenuto del PDF per la generazione di domande quiz
+
+**FASE 1 — ESTRAZIONE (Ingestion)**
+
+1. Il sistema riceve il file PDF caricato dal Creator
+2. Validazione file: formato PDF, dimensione ≤ 50 MB, pagine ≤ 500
+3. Estrazione testo grezzo tramite libreria di parsing (PyMuPDF / pdfplumber)
+4. Se il PDF è scansionato (nessun testo estratto) → attivazione OCR (Tesseract)
+5. Estrazione metadati: titolo, autore, numero pagine, data creazione
+6. Rilevamento automatico della lingua del documento
+7. Salvataggio testo grezzo nel database con riferimento al quiz
+
+**FASE 2 — NORMALIZZAZIONE (Cleaning)**
+
+1. Rimozione elementi non significativi:
+   - Header e footer ripetitivi
+   - Numeri di pagina
+   - Note a piè di pagina (preservate come metadati)
+   - Watermark e artefatti OCR
+2. Gestione layout complessi:
+   - Riordino testo da layout multi-colonna
+   - Ricomposizione paragrafi spezzati tra pagine
+3. Normalizzazione formattazione:
+   - Encoding unificato (UTF-8)
+   - Caratteri speciali e simboli medici
+   - Normalizzazione spazi e a capo
+4. Identificazione e separazione elementi speciali:
+   - Tabelle → conversione in formato strutturato
+   - Figure/immagini → estrazione didascalie
+   - Formule → preservazione come testo
+   - Riferimenti bibliografici → separazione
+
+**FASE 3 — STRUTTURAZIONE (Chunking Semantico)**
+
+1. Identificazione gerarchia del documento:
+   - Capitoli, sezioni, sottosezioni (basata su font size, grassetti, numerazione)
+   - Costruzione albero dei contenuti (Table of Contents automatica)
+2. Chunking semantico: suddivisione in blocchi tematici coerenti
+   - Dimensione target: 500-1500 token per chunk
+   - Rispetto dei confini semantici (non spezzare concetti)
+   - Overlap minimo tra chunk adiacenti per contesto
+3. Estrazione concetti chiave per ogni chunk:
+   - Termini medici rilevanti
+   - Definizioni esplicite
+   - Relazioni causa-effetto
+   - Procedure e protocolli
+4. Tagging tematico automatico:
+   - Categoria (es. "anatomia", "farmacologia", "chirurgia", "diagnostica")
+   - Livello di complessità stimato del contenuto
+   - Rilevanza per la generazione di domande (alta/media/bassa)
+
+**FASE 4 — INDICIZZAZIONE (Embedding & Knowledge Base)**
+
+1. Generazione vector embeddings per ogni chunk tramite modello AI
+2. Salvataggio in vector store (es. Pinecone, pgvector, ChromaDB)
+3. Costruzione knowledge base strutturata:
+   - Indice per topic/argomento
+   - Mappa delle relazioni tra concetti (prerequisiti, correlazioni)
+   - Grafo dei contenuti navigabile
+4. Calcolo metriche per il Creator:
+   - Numero argomenti identificati
+   - Distribuzione complessità contenuti
+   - Copertura tematica del documento
+5. Salvataggio documento processato per riutilizzo futuro (cache)
+
+**FASE 5 — GENERAZIONE DOMANDE (Question Generation)**
+
+1. Ricezione configurazione dal Creator:
+   - Numero domande, tipo, distribuzione difficoltà, prompt libero
+2. Selezione chunk rilevanti:
+   - Se il Creator ha scritto un prompt libero → ricerca semantica nei chunk (similarity search sugli embeddings)
+   - Se nessun prompt → distribuzione uniforme su tutti gli argomenti del documento
+   - Bilanciamento: nessun argomento rappresentato più del 40% delle domande
+3. Generazione domande differenziate per difficoltà:
+   - **Facile:** definizioni, concetti base, fatti espliciti nel testo, riconoscimento diretto
+   - **Media:** relazioni causa-effetto, confronti tra approcci, applicazione di concetti
+   - **Difficile:** ragionamento clinico, casi complessi, eccezioni alle regole, integrazione di più concetti
+4. Per ogni domanda generata, l'AI produce:
+   - Testo della domanda (chiaro, non ambiguo)
+   - Risposta corretta con spiegazione
+   - Distrattori plausibili ma verificabilmente errati
+   - Riferimento al capitolo/sezione del PDF sorgente
+   - Feedback educativo pre-generato per risposta errata
+5. Validazione qualità automatica:
+   - Nessuna ambiguità nel testo della domanda
+   - Una sola risposta corretta verificabile
+   - Distrattori plausibili ma distinti dalla risposta corretta
+   - Nessuna duplicazione o sovrapposizione tra domande
+   - Copertura equilibrata degli argomenti richiesti
+6. Output: set di domande pronte per la revisione del Creator
+
+**Postcondizione:** Il PDF è stato elaborato e le domande sono generate, pronte per la revisione umana
 
 ---
 
@@ -874,6 +1037,44 @@ Dove:
 | - tempo_risposta |
 | - feedback_ai    |
 +------------------+
+
++------------------+
+|  DOCUMENTO_PDF   |
++------------------+
+| - id             |
+| - quiz_id (FK)   |
+| - nome_file      |
+| - dimensione_mb  |
+| - num_pagine     |
+| - lingua         |
+| - stato (caricato|
+|   /analisi/pronto|
+|   /errore)       |
+| - testo_estratto |
+| - struttura_json |
+| - argomenti[]    |
+| - num_chunks     |
+| - embeddings_ref |
+| - data_caricam.  |
+| - data_elaboraz. |
++------------------+
+        |
+        | genera
+        v
++------------------+
+| DOMANDA_GENERATA |
++------------------+
+| - id             |
+| - documento_id   |
+| - domanda_id (FK)|
+| - chunk_ref      |
+| - capitolo_pdf   |
+| - stato (generata|
+|   /approvata/    |
+|   rigenerata)    |
+| - versione       |
+| - prompt_config  |
++------------------+
 ```
 
 ---
@@ -908,6 +1109,218 @@ Dove:
 
 ### AI
 - `POST /api/ai/feedback` - Genera feedback AI
+
+### PDF Quiz Generation
+- `POST /api/quiz/:id/pdf/upload` - Carica PDF per analisi
+- `GET /api/quiz/:id/pdf/status` - Stato elaborazione PDF (polling)
+- `GET /api/quiz/:id/pdf/summary` - Riepilogo contenuti analizzati
+- `POST /api/quiz/:id/pdf/generate` - Genera domande (con config: num, tipo, difficoltà, prompt)
+- `GET /api/quiz/:id/pdf/questions` - Lista domande generate
+- `PUT /api/quiz/:id/pdf/questions/:qid/approve` - Approva singola domanda
+- `POST /api/quiz/:id/pdf/questions/:qid/regenerate` - Rigenera singola domanda
+- `POST /api/quiz/:id/pdf/questions/approve-all` - Approva tutte le domande
+
+---
+
+## 16. Pipeline Elaborazione PDF - Schema Architetturale
+
+### 16.1 Overview
+
+La generazione di quiz da PDF è un processo in 5 fasi che trasforma un documento medico non strutturato in un set di domande quiz validate e pronte per l'uso. Il processo combina tecniche di NLP, embedding vettoriali e generazione AI per garantire domande di qualità.
+
+### 16.2 Diagramma Pipeline Completo
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    CREATOR CARICA PDF                                │
+│                  (trattato, linee guida,                             │
+│                   protocollo medico)                                 │
+└────────────────────────┬────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  FASE 1: ESTRAZIONE                                                 │
+│  ┌─────────────┐   ┌──────────────┐   ┌─────────────────────────┐  │
+│  │ Validazione │──▶│  Parser PDF  │──▶│  Estrazione Metadati    │  │
+│  │ File        │   │ (PyMuPDF /   │   │  (titolo, autore, pp.)  │  │
+│  │ (tipo, dim) │   │  pdfplumber) │   └─────────────────────────┘  │
+│  └─────────────┘   └──────┬───────┘                                 │
+│                           │                                         │
+│                    Testo presente?                                   │
+│                    ┌──NO──┴──SI──┐                                   │
+│                    ▼             ▼                                   │
+│              ┌──────────┐  ┌──────────┐                             │
+│              │   OCR    │  │  Testo   │                             │
+│              │Tesseract │  │  Grezzo  │                             │
+│              └────┬─────┘  └────┬─────┘                             │
+│                   └──────┬──────┘                                   │
+│                          ▼                                          │
+│                   Rilevamento Lingua                                │
+└────────────────────────┬────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  FASE 2: NORMALIZZAZIONE                                            │
+│  ┌───────────────────┐  ┌───────────────────┐  ┌────────────────┐  │
+│  │ Pulizia Testo     │  │ Gestione Layout   │  │ Separazione    │  │
+│  │ - Header/Footer   │  │ - Multi-colonna   │  │ - Tabelle      │  │
+│  │ - Numeri pagina   │  │ - Paragrafi       │  │ - Figure       │  │
+│  │ - Watermark       │  │   spezzati        │  │ - Formule      │  │
+│  │ - Artefatti OCR   │  │ - Encoding UTF-8  │  │ - Bibliografia │  │
+│  └───────────────────┘  └───────────────────┘  └────────────────┘  │
+│                                                                     │
+│                    Output: Testo Pulito + Elementi Separati         │
+└────────────────────────┬────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  FASE 3: STRUTTURAZIONE (Chunking Semantico)                        │
+│                                                                     │
+│  Documento                  Chunks Tematici                         │
+│  ┌──────────────┐          ┌─────────────────────────┐              │
+│  │ Cap. 1       │    ───▶  │ Chunk 1 [anatomia]      │              │
+│  │   Sez. 1.1   │          │   500-1500 token        │              │
+│  │   Sez. 1.2   │          │   concetti: [A, B, C]   │              │
+│  │ Cap. 2       │    ───▶  │ Chunk 2 [farmacologia]  │              │
+│  │   Sez. 2.1   │          │   500-1500 token        │              │
+│  │   Sez. 2.2   │          │   concetti: [D, E, F]   │              │
+│  │ Cap. 3       │    ───▶  │ Chunk 3 [procedure]     │              │
+│  │   ...        │          │   ...                   │              │
+│  └──────────────┘          └─────────────────────────┘              │
+│                                                                     │
+│  Per ogni chunk: tag tematico + complessità + concetti chiave       │
+└────────────────────────┬────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  FASE 4: INDICIZZAZIONE (Embedding & Knowledge Base)                │
+│                                                                     │
+│  ┌──────────┐     ┌──────────────┐     ┌───────────────────────┐   │
+│  │ Chunks   │────▶│  AI Embedding│────▶│  Vector Store         │   │
+│  │ Tematici │     │  Model       │     │  (pgvector/Pinecone/  │   │
+│  └──────────┘     └──────────────┘     │   ChromaDB)           │   │
+│                                        └───────────────────────┘   │
+│                                                                     │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │                    Knowledge Base                              │  │
+│  │  ┌─────────────┐  ┌──────────────┐  ┌─────────────────────┐  │  │
+│  │  │ Indice per  │  │ Mappa        │  │ Metriche per        │  │  │
+│  │  │ argomento   │  │ relazioni    │  │ il Creator          │  │  │
+│  │  │ e topic     │  │ tra concetti │  │ (argomenti, cover.) │  │  │
+│  │  └─────────────┘  └──────────────┘  └─────────────────────┘  │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                     │
+│  ✓ Sistema conferma: "Documento pronto per generazione domande"     │
+└────────────────────────┬────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  CONFIGURAZIONE CREATOR (Menu a Tendina)                            │
+│                                                                     │
+│  ┌──────────────────────────────────────────────────────────┐       │
+│  │  Numero Domande*: [▼ 10]   Tipo: [▼ Risposta Multipla]  │       │
+│  │  Difficoltà:  [▼ Automatica AI]                          │       │
+│  │  Opzioni Risposta: [▼ 4]                                 │       │
+│  │  ┌────────────────────────────────────────────────────┐  │       │
+│  │  │ Prompt: "Concentrati sulla farmacologia e sulle    │  │       │
+│  │  │ interazioni farmacologiche del capitolo 3..."      │  │       │
+│  │  └────────────────────────────────────────────────────┘  │       │
+│  │                              [GENERA DOMANDE]            │       │
+│  └──────────────────────────────────────────────────────────┘       │
+│  * = obbligatorio                                                   │
+└────────────────────────┬────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  FASE 5: GENERAZIONE DOMANDE                                        │
+│                                                                     │
+│  Config Creator + Prompt                                            │
+│       │                                                             │
+│       ▼                                                             │
+│  ┌──────────────────┐     ┌──────────────────┐                     │
+│  │ Similarity Search│────▶│ Selezione Chunk  │                     │
+│  │ (prompt → embed) │     │ Rilevanti        │                     │
+│  └──────────────────┘     └────────┬─────────┘                     │
+│                                    │                                │
+│                                    ▼                                │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │              Generazione per Difficoltà                       │   │
+│  │                                                              │   │
+│  │  FACILE          MEDIA              DIFFICILE                │   │
+│  │  ┌───────────┐   ┌───────────────┐   ┌────────────────────┐ │   │
+│  │  │Definizioni│   │Causa-effetto  │   │Ragionamento clinico│ │   │
+│  │  │Fatti      │   │Confronti      │   │Casi complessi      │ │   │
+│  │  │Concetti   │   │Applicazioni   │   │Eccezioni           │ │   │
+│  │  │base       │   │di concetti    │   │Multi-concetto      │ │   │
+│  │  └───────────┘   └───────────────┘   └────────────────────┘ │   │
+│  └──────────────────────────────────────────────────────────────┘   │
+│                                    │                                │
+│                                    ▼                                │
+│  ┌──────────────────────────────────────────────────────────────┐   │
+│  │              Validazione Qualità                              │   │
+│  │  ✓ Nessuna ambiguità    ✓ Risposta unica verificabile       │   │
+│  │  ✓ Distrattori plausibili   ✓ No duplicati                  │   │
+│  │  ✓ Copertura bilanciata     ✓ Feedback pre-generato         │   │
+│  └──────────────────────────────────────────────────────────────┘   │
+└────────────────────────┬────────────────────────────────────────────┘
+                         │
+                         ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│  REVISIONE CREATOR (Domanda per Domanda)                            │
+│                                                                     │
+│  ┌──────────────────────────────────────────────────────────┐       │
+│  │  Domanda 3 di 10                    Approvate: 2/10      │       │
+│  │  ┌────────────────────────────────────────────────────┐  │       │
+│  │  │ [MEDIA] Quale interazione farmacologica tra...     │  │       │
+│  │  │                                                    │  │       │
+│  │  │ A) Opzione 1                                       │  │       │
+│  │  │ B) Opzione 2  ← CORRETTA                          │  │       │
+│  │  │ C) Opzione 3                                       │  │       │
+│  │  │ D) Opzione 4                                       │  │       │
+│  │  │                                                    │  │       │
+│  │  │ Rif: Cap. 3 - Farmacologia, pag. 47               │  │       │
+│  │  └────────────────────────────────────────────────────┘  │       │
+│  │                                                          │       │
+│  │     [↻ RIGENERA]              [✓ APPROVA]                │       │
+│  │                                                          │       │
+│  │     [← Prec.]  [Succ. →]     [✓✓ APPROVA TUTTE]         │       │
+│  └──────────────────────────────────────────────────────────┘       │
+│                                                                     │
+│  Tutte approvate? ──YES──▶ [PROSEGUI] → Step 5 → QR Code           │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### 16.3 Tecnologie Consigliate
+
+| Fase | Tecnologia | Alternativa |
+|------|-----------|-------------|
+| Parsing PDF | PyMuPDF (fitz) | pdfplumber |
+| OCR | Tesseract OCR | Google Vision API |
+| Embedding | OpenAI text-embedding-3-small | Cohere embed |
+| Vector Store | pgvector (PostgreSQL) | ChromaDB, Pinecone |
+| Generazione Domande | GPT-4 Mini | GPT-4 Turbo (per qualità superiore) |
+| Chunking | LangChain RecursiveCharacterTextSplitter | Custom |
+
+### 16.4 Considerazioni sui Costi
+
+| Operazione | Costo Stimato (per PDF 100 pagine) |
+|-----------|-----------------------------------|
+| Estrazione testo | Trascurabile (locale) |
+| OCR (se necessario) | ~$0.05 (Google Vision) o gratuito (Tesseract) |
+| Embedding (50 chunk) | ~$0.001 (OpenAI) |
+| Generazione 10 domande | ~$0.02-0.05 (GPT-4 Mini) |
+| Rigenerazione singola | ~$0.005 |
+| **Totale per quiz** | **~$0.08-0.15** |
+
+### 16.5 Gestione Errori
+
+| Scenario | Gestione |
+|----------|----------|
+| PDF corrotto / non leggibile | Messaggio errore + richiesta nuovo upload |
+| PDF scansionato con OCR scadente | Warning + suggerimento caricare versione digitale |
+| Contenuto insufficiente per N domande | Suggerimento ridurre numero domande |
+| Timeout generazione | Retry automatico (max 3), poi errore con salvataggio parziale |
+| Domanda rigenerata troppo simile | Cambio chunk sorgente + nuovo tentativo |
 
 ---
 
