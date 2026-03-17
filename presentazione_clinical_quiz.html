@@ -103,8 +103,8 @@
                     <div onclick="goToSlide(10)" style="background: rgba(255,152,0,0.15); border: 2px solid #FF9800; border-radius: 16px; padding: 28px 20px; cursor: pointer; transition: all 0.3s;">
                         <div style="font-size: 36px; margin-bottom: 10px;">🎯</div>
                         <div style="font-size: 18px; font-weight: 700; color: #FFA726; margin-bottom: 6px;">Flusso Creator</div>
-                        <div style="font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5;">Wizard 5 step, import domande, QR code e monitoraggio</div>
-                        <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.3);">8 schermate</div>
+                        <div style="font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5;">Congressi, quiz manuali, quiz da PDF/AI, QR code e monitoraggio</div>
+                        <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.3);">14 schermate + pipeline</div>
                     </div>
                     <!-- Partecipante -->
                     <div onclick="goToSlide(19)" style="background: rgba(76,175,80,0.15); border: 2px solid #4CAF50; border-radius: 16px; padding: 28px 20px; cursor: pointer; transition: all 0.3s;">
@@ -114,14 +114,7 @@
                         <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.3);">7 schermate</div>
                     </div>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 600px; margin: 0 auto;">
-                    <!-- Quiz da PDF -->
-                    <div onclick="goToSlide(27)" style="background: rgba(156,39,176,0.15); border: 2px solid #9C27B0; border-radius: 16px; padding: 24px 20px; cursor: pointer; transition: all 0.3s;">
-                        <div style="font-size: 30px; margin-bottom: 8px;">🏛️</div>
-                        <div style="font-size: 16px; font-weight: 700; color: #CE93D8; margin-bottom: 6px;">Congressi & Quiz AI</div>
-                        <div style="font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5;">Congresso → sessioni → presentazioni → questionario</div>
-                        <div style="margin-top: 8px; font-size: 11px; color: rgba(255,255,255,0.3);">6 schermate + pipeline</div>
-                    </div>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 300px; margin: 0 auto;">
                     <!-- Overview -->
                     <div onclick="goToSlide(2)" style="background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 24px 20px; cursor: pointer; transition: all 0.3s;">
                         <div style="font-size: 30px; margin-bottom: 8px;">🗺️</div>
@@ -357,12 +350,12 @@
         <div class="slide intro-slide" data-slide="10">
             <div class="intro-icon">🎯</div>
             <h1 class="slide-title">Flusso Creator</h1>
-            <p class="slide-subtitle">Creazione quiz, personalizzazione e monitoraggio eventi</p>
+            <p class="slide-subtitle">Gestione congressi, creazione quiz manuali e da PDF con AI, pubblicazione e monitoraggio</p>
             <div class="flow-steps">
                 <div class="flow-step"><span class="step-num">1</span> Dashboard</div>
-                <div class="flow-step"><span class="step-num">2</span> Wizard 5 Step</div>
-                <div class="flow-step"><span class="step-num">3</span> QR Code</div>
-                <div class="flow-step"><span class="step-num">4</span> Dettaglio Quiz</div>
+                <div class="flow-step"><span class="step-num">2</span> Quiz Manuale</div>
+                <div class="flow-step"><span class="step-num">3</span> Congressi & AI</div>
+                <div class="flow-step"><span class="step-num">4</span> Pubblicazione</div>
             </div>
         </div>
 
@@ -377,19 +370,18 @@
             <p class="slide-subtitle">Flusso Creator • Step 1 di 8</p>
             <div class="slide-content">
                 <div class="slide-description">
-                    <p>La Dashboard Creator è la <span class="highlight creator">home personale e unica schermata principale</span> dell'organizzatore eventi. Contiene tutto il necessario: statistiche, lista quiz e accesso alla creazione.</p>
-                    <p>Le tre card metriche mostrano: quiz attualmente attivi, totale cumulativo di partecipanti a tutti gli eventi, e la media delle risposte esatte (indicatore di qualità/difficoltà dei quiz).</p>
-                    <p>La lista "I Miei Quiz" è un contenitore scrollabile che mostra tutti i quiz ordinati per data. Per ogni quiz è visibile: titolo, stato (Attivo/Bozza/Concluso), data evento e luogo - le stesse informazioni inserite nello Step 1.</p>
-                    <p>Il pulsante prominente "+ Nuovo Quiz" avvia il wizard di creazione guidato in 5 step. Cliccando "Apri" su un quiz esistente si accede alla pagina di dettaglio quiz.</p>
+                    <p>La Dashboard Creator è la <span class="highlight creator">home personale</span> dell'organizzatore eventi. Contiene due aree principali: <strong>I Miei Congressi</strong> (gestione congressi con quiz generati da AI) e <strong>I Miei Quiz</strong> (quiz creati manualmente).</p>
+                    <p>La sezione <strong>"I Miei Congressi"</strong> mostra tutti i congressi creati dal Creator, con stato di avanzamento per ciascuno (bozza, in corso, completato). Cliccando su un congresso si accede alla lista delle sue sessioni.</p>
+                    <p>La sezione <strong>"I Miei Quiz"</strong> mostra i quiz singoli creati con il wizard manuale. Per ogni quiz: titolo, stato, data evento.</p>
+                    <p>Il Creator puo' creare <strong>congressi illimitati</strong> e quiz illimitati. Le metriche in alto mostrano i dati aggregati di entrambe le modalita'.</p>
                     <div class="feature-box">
-                        <h4>Funzionalità Dashboard</h4>
+                        <h4>Funzionalita' Dashboard</h4>
                         <ul>
-                            <li>Interfaccia semplificata: tutto in una schermata</li>
-                            <li>Metriche: Quiz Attivi, Partecipanti, Media Risposte Esatte</li>
-                            <li>Lista quiz scrollabile con tutti i dettagli</li>
-                            <li>Indicatore scroll per navigare la lista</li>
-                            <li>Accesso rapido a creazione nuovo quiz</li>
-                            <li>Link diretto a dettaglio ogni quiz</li>
+                            <li><strong>I Miei Congressi:</strong> lista congressi con stato e progresso sessioni</li>
+                            <li><strong>I Miei Quiz:</strong> lista quiz manuali con stato</li>
+                            <li>Metriche aggregate: Quiz Attivi, Partecipanti, Media Esatte</li>
+                            <li>Azione: "+ Nuovo Congresso" o "+ Nuovo Quiz"</li>
+                            <li>Congressi e quiz illimitati per Creator</li>
                         </ul>
                     </div>
                 </div>
@@ -886,10 +878,11 @@
         <!-- SEZIONE: GENERAZIONE QUIZ DA PDF -->
         <!-- ================================= -->
 
-        <!-- SLIDE 26: Intro Congressi & Quiz -->
-        <div class="slide intro-slide" data-slide="27">
+        <!-- SLIDE 26: Intro Creator — Congressi & Quiz AI -->
+        <div class="slide intro-slide" data-slide="27" style="border-top: 3px solid #FF9800;">
+            <div class="slide-badge creator" style="position: absolute; top: 20px; left: 30px;">Creator</div>
             <div class="intro-icon">🏛️</div>
-            <h1 class="slide-title">Congressi & Quiz da Sessione</h1>
+            <h1 class="slide-title">Creator: Congressi & Quiz AI</h1>
             <p class="slide-subtitle">Il Creator gestisce congressi con N sessioni — per ogni sessione carica i PDF dei relatori e l'AI genera il questionario</p>
             <div class="flow-steps">
                 <div class="flow-step"><span class="step-num">1</span> Crea Congresso</div>
@@ -900,9 +893,9 @@
                 Congresso → N sessioni → per ogni sessione: upload presentazioni → configura → revisiona → pubblica
             </p>
             <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
-                <div style="background: rgba(255,255,255,0.06); padding: 8px 16px; border-radius: 10px; font-size: 12px; color: rgba(255,255,255,0.5);">Congressi illimitati</div>
-                <div style="background: rgba(255,255,255,0.06); padding: 8px 16px; border-radius: 10px; font-size: 12px; color: rgba(255,255,255,0.5);">N sessioni per congresso</div>
-                <div style="background: rgba(255,255,255,0.06); padding: 8px 16px; border-radius: 10px; font-size: 12px; color: rgba(255,255,255,0.5);">1 questionario per sessione</div>
+                <div style="background: rgba(255,152,0,0.1); border: 1px solid rgba(255,152,0,0.3); padding: 8px 16px; border-radius: 10px; font-size: 12px; color: rgba(255,255,255,0.5);">Congressi illimitati</div>
+                <div style="background: rgba(255,152,0,0.1); border: 1px solid rgba(255,152,0,0.3); padding: 8px 16px; border-radius: 10px; font-size: 12px; color: rgba(255,255,255,0.5);">N sessioni per congresso</div>
+                <div style="background: rgba(255,152,0,0.1); border: 1px solid rgba(255,152,0,0.3); padding: 8px 16px; border-radius: 10px; font-size: 12px; color: rgba(255,255,255,0.5);">1 questionario per sessione</div>
             </div>
         </div>
 
@@ -914,7 +907,7 @@
             </div>
             <div class="thumb-strip" id="thumbs-pdf-1"></div>
             <h1 class="slide-title">I Miei Congressi</h1>
-            <p class="slide-subtitle">Congressi & Quiz da Sessione • Dashboard</p>
+            <p class="slide-subtitle">Flusso Creator • Gestione Congressi</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Il Creator accede alla propria <span class="highlight creator">dashboard congressi</span> dove puo' creare e gestire un numero illimitato di congressi.</p>
@@ -1001,7 +994,7 @@
             </div>
             <div class="thumb-strip" id="thumbs-pdf-2"></div>
             <h1 class="slide-title">Sessioni del Congresso</h1>
-            <p class="slide-subtitle">Congressi & Quiz da Sessione • Dettaglio Congresso</p>
+            <p class="slide-subtitle">Flusso Creator • Dettaglio Congresso</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Entrando in un congresso, il Creator vede la <span class="highlight creator">lista delle sessioni</span> previste dal programma scientifico.</p>
@@ -1108,7 +1101,7 @@
             </div>
             <div class="thumb-strip" id="thumbs-pdf-3"></div>
             <h1 class="slide-title">Upload Presentazioni Sessione</h1>
-            <p class="slide-subtitle">Per ogni Sessione • Step 1 di 3</p>
+            <p class="slide-subtitle">Flusso Creator • Per ogni Sessione — Step 1 di 3</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Il Creator seleziona una <span class="highlight creator">sessione del congresso</span> e carica le presentazioni PDF di tutti i relatori. Ogni sessione puo' avere N relatori (es. 5), ciascuno con la propria presentazione.</p>
@@ -1214,7 +1207,7 @@
             </div>
             <div class="thumb-strip" id="thumbs-pdf-4"></div>
             <h1 class="slide-title">Configurazione Quiz</h1>
-            <p class="slide-subtitle">Per ogni Sessione • Step 2 di 3</p>
+            <p class="slide-subtitle">Flusso Creator • Per ogni Sessione — Step 2 di 3</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Dopo l'analisi di tutte le presentazioni, il Creator <span class="highlight creator">configura il questionario unico della sessione</span>. Il campo chiave e' la <strong>distribuzione domande per lezione</strong>.</p>
@@ -1316,7 +1309,7 @@
             </div>
             <div class="thumb-strip" id="thumbs-pdf-5"></div>
             <h1 class="slide-title">Revisione Domande</h1>
-            <p class="slide-subtitle">Per ogni Sessione • Step 3 di 3</p>
+            <p class="slide-subtitle">Flusso Creator • Per ogni Sessione — Step 3 di 3</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Le domande generate da tutte le presentazioni sono mostrate come <span class="highlight creator">lista di card espandibili</span>, ordinate per <strong>difficolta' crescente</strong> (facili → medie → difficili).</p>
@@ -1578,11 +1571,13 @@
             <p class="slide-subtitle">Clinical Quiz: 31 schermate, 5 flowchart, 1 piattaforma completa</p>
             <div class="flow-steps">
                 <div class="flow-step"><span class="step-num">5</span> Schermate Admin</div>
-                <div class="flow-step"><span class="step-num">8</span> Schermate Creator</div>
+                <div class="flow-step"><span class="step-num">14</span> Schermate Creator</div>
                 <div class="flow-step"><span class="step-num">7</span> Schermate Mobile</div>
-                <div class="flow-step"><span class="step-num">6</span> Congressi & Quiz + Pipeline</div>
                 <div class="flow-step"><span class="step-num">5</span> Flowchart</div>
             </div>
+            <p style="margin-top: 20px; color: rgba(255,255,255,0.4); font-size: 13px;">
+                Creator include: quiz manuali (8) + congressi & quiz AI (6 + pipeline)
+            </p>
         </div>
 
     </div>
