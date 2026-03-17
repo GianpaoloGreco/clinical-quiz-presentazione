@@ -118,8 +118,8 @@
                     <!-- Quiz da PDF -->
                     <div onclick="goToSlide(27)" style="background: rgba(156,39,176,0.15); border: 2px solid #9C27B0; border-radius: 16px; padding: 24px 20px; cursor: pointer; transition: all 0.3s;">
                         <div style="font-size: 30px; margin-bottom: 8px;">📄</div>
-                        <div style="font-size: 16px; font-weight: 700; color: #CE93D8; margin-bottom: 6px;">Quiz da PDF + AI</div>
-                        <div style="font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5;">Upload PDF, generazione e revisione domande</div>
+                        <div style="font-size: 16px; font-weight: 700; color: #CE93D8; margin-bottom: 6px;">Quiz da Sessione + AI</div>
+                        <div style="font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5;">N presentazioni per sessione → 1 questionario misto</div>
                         <div style="margin-top: 8px; font-size: 11px; color: rgba(255,255,255,0.3);">4 schermate + pipeline</div>
                     </div>
                     <!-- Overview -->
@@ -889,15 +889,15 @@
         <!-- SLIDE 26: Intro PDF Quiz Generation -->
         <div class="slide intro-slide" data-slide="27">
             <div class="intro-icon">📄</div>
-            <h1 class="slide-title">Generazione Quiz da PDF</h1>
-            <p class="slide-subtitle">L'AI analizza documenti medici e genera domande quiz automaticamente</p>
+            <h1 class="slide-title">Generazione Quiz da Sessione</h1>
+            <p class="slide-subtitle">Il Creator carica le presentazioni dei relatori di una sessione — l'AI genera un questionario unico con domande miste</p>
             <div class="flow-steps">
-                <div class="flow-step"><span class="step-num">1</span> Upload & Analisi</div>
+                <div class="flow-step"><span class="step-num">1</span> Upload Presentazioni</div>
                 <div class="flow-step"><span class="step-num">2</span> Configurazione</div>
                 <div class="flow-step"><span class="step-num">3</span> Revisione</div>
             </div>
             <p style="margin-top: 30px; color: rgba(255,255,255,0.5); font-size: 16px;">
-                Carica un trattato medico, configura i parametri, rivedi e approva le domande generate
+                Sessione → N presentazioni dei relatori → 1 questionario ordinato per difficolta'
             </p>
         </div>
 
@@ -908,57 +908,98 @@
                 <span class="slide-number">27 / 31</span>
             </div>
             <div class="thumb-strip" id="thumbs-pdf-1"></div>
-            <h1 class="slide-title">Upload PDF & Analisi AI</h1>
-            <p class="slide-subtitle">Generazione Quiz da PDF • Step 1 di 3</p>
+            <h1 class="slide-title">Upload Presentazioni Sessione</h1>
+            <p class="slide-subtitle">Generazione Quiz da Sessione • Step 1 di 3</p>
             <div class="slide-content">
                 <div class="slide-description">
-                    <p>Il Creator carica un <span class="highlight creator">documento PDF digitale</span> (testo selezionabile, no scansioni). Il sistema accetta trattati medici, linee guida cliniche, protocolli operativi, materiale ECM.</p>
-                    <p>Dopo il caricamento, l'<strong>AI avvia automaticamente l'analisi</strong>: estrazione testo strutturato, normalizzazione contenuti, chunking semantico e indicizzazione. Una barra di avanzamento mostra lo stato.</p>
-                    <p>Se l'analisi ha <strong>successo</strong>: riepilogo con pagine analizzate, lingua, capitoli e argomenti identificati. Il Creator verifica e prosegue.</p>
-                    <p>Se l'analisi rileva <strong>problemi</strong>: il sistema segnala l'errore specifico con descrizione chiara, permettendo al Creator di caricare un file corretto.</p>
+                    <p>Il Creator seleziona una <span class="highlight creator">sessione del congresso</span> e carica le presentazioni PDF di tutti i relatori. Ogni sessione puo' avere N relatori (es. 5), ciascuno con la propria presentazione.</p>
+                    <p>I file vengono caricati uno alla volta o in blocco. Per ogni presentazione, il Creator indica il <strong>nome del relatore</strong> e il <strong>titolo della lezione</strong>. Il sistema analizza ogni PDF individualmente.</p>
+                    <p>Una <strong>lista con stato di avanzamento</strong> mostra lo stato di ciascuna presentazione: in coda, in analisi, completata, errore. Quando tutte le presentazioni sono state analizzate, il Creator prosegue.</p>
+                    <p>Se un file ha <strong>problemi</strong>: il sistema segnala l'errore specifico sulla riga corrispondente, permettendo di sostituire solo quel file senza ripetere le altre analisi.</p>
                     <div class="feature-box">
                         <h4>Vincoli & Validazione</h4>
                         <ul>
                             <li>Solo PDF digitali con testo selezionabile (no raster/scansioni)</li>
-                            <li>Max 50 MB, max 500 pagine</li>
-                            <li>Errori segnalati: PDF corrotto, protetto da password, scansionato, contenuto non interpretabile, file troppo grande</li>
+                            <li>Max 50 MB per file, max 500 pagine per file</li>
+                            <li>Ogni presentazione associata a relatore + titolo lezione</li>
+                            <li>Analisi indipendente per ogni file (errore singolo non blocca gli altri)</li>
+                            <li>Tutte le presentazioni devono essere analizzate per proseguire</li>
                         </ul>
                     </div>
                 </div>
                 <div class="slide-image">
-                    <div style="width: 520px; background: #fff; border-radius: 12px; padding: 24px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
-                        <div style="background: #FF9800; color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-bottom: 16px;">
-                            Step 1 di 3 — Upload & Analisi PDF
+                    <div style="width: 540px; background: #fff; border-radius: 12px; padding: 20px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                        <div style="background: #FF9800; color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-bottom: 12px;">
+                            Step 1 di 3 — Upload Presentazioni Sessione
+                        </div>
+                        <!-- Session header -->
+                        <div style="background: #F3E5F5; border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 10px; color: #7B1FA2; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Sessione</div>
+                                <div style="font-size: 14px; font-weight: 600; color: #333;">Sessione 1 — Cardiologia Avanzata</div>
+                            </div>
+                            <div style="font-size: 10px; color: #999;">Congresso ECM 2026</div>
                         </div>
                         <!-- Upload area -->
-                        <div style="border: 2px dashed #ccc; border-radius: 10px; padding: 24px; text-align: center; margin-bottom: 14px; background: #f9f9f9;">
-                            <div style="font-size: 32px; margin-bottom: 6px;">📄</div>
-                            <div style="font-size: 14px; font-weight: 600; color: #333;">Trascina qui il PDF</div>
-                            <div style="font-size: 11px; color: #999; margin-top: 4px;">oppure clicca per selezionare</div>
-                            <div style="font-size: 10px; color: #bbb; margin-top: 8px;">Max 50 MB • Solo PDF digitali (testo selezionabile)</div>
+                        <div style="border: 2px dashed #ccc; border-radius: 8px; padding: 14px; text-align: center; margin-bottom: 12px; background: #f9f9f9;">
+                            <div style="font-size: 24px; margin-bottom: 4px;">📄+</div>
+                            <div style="font-size: 12px; font-weight: 600; color: #333;">Aggiungi presentazioni</div>
+                            <div style="font-size: 10px; color: #bbb; margin-top: 4px;">Trascina o seleziona PDF • Max 50 MB ciascuno</div>
                         </div>
-                        <!-- Progress -->
-                        <div style="background: #f0f0f0; border-radius: 8px; padding: 12px; margin-bottom: 10px;">
-                            <div style="font-size: 11px; color: #666; margin-bottom: 5px;">Analisi in corso...</div>
-                            <div style="background: #e0e0e0; height: 6px; border-radius: 3px; overflow: hidden;">
-                                <div style="background: linear-gradient(90deg, #FF9800, #FFC107); width: 75%; height: 100%; border-radius: 3px;"></div>
+                        <!-- File list -->
+                        <div style="font-size: 10px; font-weight: 600; color: #666; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Presentazioni caricate (5)</div>
+                        <!-- File 1: Done -->
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #4CAF50; border-radius: 6px; margin-bottom: 4px; background: #f9fff9;">
+                            <span style="color: #4CAF50; font-weight: 700; font-size: 11px;">✓</span>
+                            <div style="flex: 1;">
+                                <div style="font-size: 11px; font-weight: 600;">Lez. 1 — Dr. Rossi</div>
+                                <div style="font-size: 9px; color: #999;">Scompenso cardiaco acuto • 42 pag. • 3 capitoli</div>
                             </div>
-                            <div style="font-size: 10px; color: #999; margin-top: 4px;">Fase 3 di 4: Strutturazione semantica...</div>
+                            <span style="font-size: 9px; color: #4CAF50; font-weight: 600;">Analizzato</span>
                         </div>
-                        <!-- Success state -->
-                        <div style="background: #E8F5E9; border-radius: 8px; padding: 10px 12px; border-left: 3px solid #4CAF50; margin-bottom: 8px;">
-                            <div style="font-size: 11px; font-weight: 600; color: #2E7D32; margin-bottom: 4px;">✓ Documento analizzato con successo</div>
-                            <div style="font-size: 10px; color: #555; line-height: 1.5;">
-                                <strong>142 pag.</strong> • Italiano • <strong>8 capitoli</strong> • 23 sezioni<br>
-                                Argomenti: Cardiologia, Farmacologia, Procedure
+                        <!-- File 2: Done -->
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #4CAF50; border-radius: 6px; margin-bottom: 4px; background: #f9fff9;">
+                            <span style="color: #4CAF50; font-weight: 700; font-size: 11px;">✓</span>
+                            <div style="flex: 1;">
+                                <div style="font-size: 11px; font-weight: 600;">Lez. 2 — Dr.ssa Bianchi</div>
+                                <div style="font-size: 9px; color: #999;">Farmacologia cardiologica • 28 pag. • 2 capitoli</div>
                             </div>
+                            <span style="font-size: 9px; color: #4CAF50; font-weight: 600;">Analizzato</span>
                         </div>
-                        <!-- Error state -->
-                        <div style="background: #FFEBEE; border-radius: 8px; padding: 10px 12px; border-left: 3px solid #F44336;">
-                            <div style="font-size: 11px; font-weight: 600; color: #C62828; margin-bottom: 4px;">✗ Errore nell'analisi</div>
-                            <div style="font-size: 10px; color: #555; line-height: 1.5;">
-                                <strong>PDF scansionato rilevato</strong> — Il documento non contiene testo selezionabile. Carica una versione digitale del PDF.<br>
-                                <span style="color: #999; font-style: italic;">Altri errori possibili: PDF corrotto, protetto da password, contenuto non interpretabile</span>
+                        <!-- File 3: Done -->
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #4CAF50; border-radius: 6px; margin-bottom: 4px; background: #f9fff9;">
+                            <span style="color: #4CAF50; font-weight: 700; font-size: 11px;">✓</span>
+                            <div style="flex: 1;">
+                                <div style="font-size: 11px; font-weight: 600;">Lez. 3 — Dr. Verdi</div>
+                                <div style="font-size: 9px; color: #999;">Imaging diagnostico • 35 pag. • 4 capitoli</div>
+                            </div>
+                            <span style="font-size: 9px; color: #4CAF50; font-weight: 600;">Analizzato</span>
+                        </div>
+                        <!-- File 4: Analyzing -->
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #FF9800; border-radius: 6px; margin-bottom: 4px; background: #FFFDE7;">
+                            <span style="color: #FF9800; font-weight: 700; font-size: 11px;">●</span>
+                            <div style="flex: 1;">
+                                <div style="font-size: 11px; font-weight: 600;">Lez. 4 — Dr.ssa Neri</div>
+                                <div style="font-size: 9px; color: #999;">Procedure interventistiche</div>
+                            </div>
+                            <span style="font-size: 9px; color: #FF9800; font-weight: 600;">Analisi...</span>
+                        </div>
+                        <!-- File 5: Error -->
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid #F44336; border-radius: 6px; margin-bottom: 10px; background: #FFF5F5;">
+                            <span style="color: #F44336; font-weight: 700; font-size: 11px;">✗</span>
+                            <div style="flex: 1;">
+                                <div style="font-size: 11px; font-weight: 600;">Lez. 5 — Dr. Gialli</div>
+                                <div style="font-size: 9px; color: #C62828;">PDF scansionato — Carica versione digitale</div>
+                            </div>
+                            <span style="font-size: 9px; color: #1976D2; font-weight: 600; cursor: pointer; text-decoration: underline;">Sostituisci</span>
+                        </div>
+                        <!-- Summary -->
+                        <div style="background: #E3F2FD; border-radius: 6px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="font-size: 10px; color: #1565C0;">
+                                <strong>3 di 5</strong> analizzate • 1 in corso • 1 errore
+                            </div>
+                            <div style="padding: 5px 12px; background: #e0e0e0; border-radius: 6px; font-size: 10px; color: #999; font-weight: 600;">
+                                PROSEGUI →
                             </div>
                         </div>
                     </div>
@@ -974,76 +1015,94 @@
             </div>
             <div class="thumb-strip" id="thumbs-pdf-2"></div>
             <h1 class="slide-title">Configurazione Quiz</h1>
-            <p class="slide-subtitle">Generazione Quiz da PDF • Step 2 di 3</p>
+            <p class="slide-subtitle">Generazione Quiz da Sessione • Step 2 di 3</p>
             <div class="slide-content">
                 <div class="slide-description">
-                    <p>Dopo l'analisi, il Creator <span class="highlight creator">configura il quiz tramite menu a tendina</span>. Alcuni campi sono obbligatori, altri opzionali: se non compilati, l'AI decide autonomamente.</p>
-                    <p><strong>Numero domande</strong> e' l'unico campo obbligatorio. Il Creator seleziona quante domande generare (5, 10, 15, 20, 25, 30).</p>
-                    <p>I campi opzionali permettono di raffinare: <strong>tipo domanda</strong> (multipla, vero/falso, mix), <strong>distribuzione difficolta'</strong> (manuale o automatica AI), <strong>numero opzioni</strong> (3, 4, 5, o random per difficolta').</p>
-                    <p>Il <strong>prompt libero</strong> guida l'estrazione: argomenti da priorizzare, capitoli specifici, stile delle domande.</p>
+                    <p>Dopo l'analisi di tutte le presentazioni, il Creator <span class="highlight creator">configura il questionario unico della sessione</span>. Il campo chiave e' la <strong>distribuzione domande per lezione</strong>.</p>
+                    <p>Il Creator indica quante domande estrarre da ciascuna presentazione (es. 8 dalla Lez. 1, 3 dalla Lez. 2, ecc.). Il <strong>totale si calcola automaticamente</strong> sommando le singole righe.</p>
+                    <p>Le domande nel questionario finale sono <strong>ordinate per difficolta'</strong> (facili → medie → difficili), non raggruppate per lezione. La lezione di provenienza resta come etichetta informativa.</p>
+                    <p>I campi opzionali permettono di raffinare: tipo domanda, distribuzione difficolta', opzioni risposta, prompt libero.</p>
                     <div class="feature-box">
                         <h4>Campi Configurazione</h4>
                         <ul>
-                            <li><strong>Numero domande*:</strong> 5-30 (OBBLIGATORIO)</li>
+                            <li><strong>Distribuzione per lezione*:</strong> N domande per ciascuna presentazione (OBBLIGATORIO)</li>
+                            <li><strong>Totale:</strong> calcolato automaticamente dalla somma</li>
                             <li><strong>Tipo domanda:</strong> Multipla / Vero-Falso / Mix</li>
                             <li><strong>Difficolta':</strong> Automatica / Manuale (N per livello)</li>
                             <li><strong>Opzioni risposta:</strong> 3, 4, 5, Random per difficolta'</li>
                             <li><strong>Prompt libero:</strong> indicazioni all'AI</li>
-                            <li>Campi non compilati → AI decide in autonomia</li>
+                            <li><strong>Ordinamento finale:</strong> per difficolta' crescente</li>
                         </ul>
                     </div>
                 </div>
                 <div class="slide-image">
-                    <div style="width: 520px; background: #fff; border-radius: 12px; padding: 24px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
-                        <div style="background: #FF9800; color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-bottom: 16px;">
-                            Step 2 di 3 — Configurazione Quiz
+                    <div style="width: 520px; background: #fff; border-radius: 12px; padding: 20px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                        <div style="background: #FF9800; color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-bottom: 14px;">
+                            Step 2 di 3 — Configurazione Quiz Sessione
                         </div>
+                        <!-- Distribution per lesson -->
                         <div style="margin-bottom: 14px;">
-                            <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 4px;">Numero Domande *</div>
-                            <div style="border: 2px solid #FF9800; border-radius: 6px; padding: 8px 12px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; background: #FFF8E1;">
-                                <span>10</span><span style="color: #999;">▼</span>
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 14px;">
-                            <div style="font-size: 11px; font-weight: 600; color: #666; margin-bottom: 4px;">Tipo Domanda <span style="color:#bbb;">(opzionale)</span></div>
-                            <div style="border: 1px solid #ddd; border-radius: 6px; padding: 8px 12px; font-size: 13px; display: flex; justify-content: space-between;">
-                                <span>Risposta Multipla</span><span style="color: #999;">▼</span>
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 14px;">
-                            <div style="font-size: 11px; font-weight: 600; color: #666; margin-bottom: 4px;">Distribuzione Difficolta' <span style="color:#bbb;">(opzionale)</span></div>
-                            <div style="border: 1px solid #ddd; border-radius: 6px; padding: 8px 12px; font-size: 13px; display: flex; justify-content: space-between;">
-                                <span>Manuale</span><span style="color: #999;">▼</span>
-                            </div>
-                            <div style="display: flex; gap: 8px; margin-top: 8px;">
-                                <div style="flex:1; text-align: center;">
-                                    <div style="font-size: 9px; color: #4CAF50; font-weight: 600;">FACILI</div>
-                                    <div style="border: 1px solid #ddd; border-radius: 4px; padding: 6px; font-size: 13px; text-align: center;">3</div>
+                            <div style="font-size: 11px; font-weight: 600; color: #333; margin-bottom: 6px;">Distribuzione Domande per Lezione *</div>
+                            <div style="border: 2px solid #FF9800; border-radius: 8px; padding: 10px; background: #FFF8E1;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                    <div style="font-size: 10px; color: #555; flex: 1;">Lez. 1 — Dr. Rossi</div>
+                                    <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px 10px; font-size: 12px; text-align: center; width: 44px; background: #fff; font-weight: 600;">8</div>
                                 </div>
-                                <div style="flex:1; text-align: center;">
-                                    <div style="font-size: 9px; color: #FF9800; font-weight: 600;">MEDIE</div>
-                                    <div style="border: 1px solid #ddd; border-radius: 4px; padding: 6px; font-size: 13px; text-align: center;">4</div>
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                    <div style="font-size: 10px; color: #555; flex: 1;">Lez. 2 — Dr.ssa Bianchi</div>
+                                    <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px 10px; font-size: 12px; text-align: center; width: 44px; background: #fff; font-weight: 600;">3</div>
                                 </div>
-                                <div style="flex:1; text-align: center;">
-                                    <div style="font-size: 9px; color: #F44336; font-weight: 600;">DIFFICILI</div>
-                                    <div style="border: 1px solid #ddd; border-radius: 4px; padding: 6px; font-size: 13px; text-align: center;">3</div>
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                    <div style="font-size: 10px; color: #555; flex: 1;">Lez. 3 — Dr. Verdi</div>
+                                    <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px 10px; font-size: 12px; text-align: center; width: 44px; background: #fff; font-weight: 600;">5</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                    <div style="font-size: 10px; color: #555; flex: 1;">Lez. 4 — Dr.ssa Neri</div>
+                                    <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px 10px; font-size: 12px; text-align: center; width: 44px; background: #fff; font-weight: 600;">3</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                    <div style="font-size: 10px; color: #555; flex: 1;">Lez. 5 — Dr. Gialli</div>
+                                    <div style="border: 1px solid #ddd; border-radius: 4px; padding: 4px 10px; font-size: 12px; text-align: center; width: 44px; background: #fff; font-weight: 600;">1</div>
+                                </div>
+                                <div style="border-top: 1px solid #e0c080; padding-top: 6px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="font-size: 11px; font-weight: 700; color: #E65100;">TOTALE DOMANDE</div>
+                                    <div style="font-size: 16px; font-weight: 700; color: #E65100;">20</div>
                                 </div>
                             </div>
                         </div>
-                        <div style="margin-bottom: 14px;">
-                            <div style="font-size: 11px; font-weight: 600; color: #666; margin-bottom: 4px;">Opzioni Risposta <span style="color:#bbb;">(opzionale)</span></div>
-                            <div style="border: 1px solid #ddd; border-radius: 6px; padding: 8px 12px; font-size: 13px; display: flex; justify-content: space-between;">
-                                <span>Random per difficolta'</span><span style="color: #999;">▼</span>
+                        <!-- Other config fields compact -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+                            <div>
+                                <div style="font-size: 10px; font-weight: 600; color: #666; margin-bottom: 3px;">Tipo Domanda <span style="color:#bbb;">(opz.)</span></div>
+                                <div style="border: 1px solid #ddd; border-radius: 5px; padding: 6px 10px; font-size: 11px; display: flex; justify-content: space-between;">
+                                    <span>Mix</span><span style="color: #999;">▼</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="font-size: 10px; font-weight: 600; color: #666; margin-bottom: 3px;">Opzioni Risposta <span style="color:#bbb;">(opz.)</span></div>
+                                <div style="border: 1px solid #ddd; border-radius: 5px; padding: 6px 10px; font-size: 11px; display: flex; justify-content: space-between;">
+                                    <span>4</span><span style="color: #999;">▼</span>
+                                </div>
                             </div>
                         </div>
-                        <div style="margin-bottom: 16px;">
-                            <div style="font-size: 11px; font-weight: 600; color: #666; margin-bottom: 4px;">Prompt Libero <span style="color:#bbb;">(opzionale)</span></div>
-                            <div style="border: 1px solid #ddd; border-radius: 6px; padding: 10px 12px; font-size: 12px; color: #555; min-height: 50px; background: #fafafa; line-height: 1.5;">
-                                Concentrati sulla farmacologia del capitolo 3, interazioni farmacologiche e controindicazioni...
+                        <div style="margin-bottom: 10px;">
+                            <div style="font-size: 10px; font-weight: 600; color: #666; margin-bottom: 3px;">Difficolta' <span style="color:#bbb;">(opz.)</span></div>
+                            <div style="border: 1px solid #ddd; border-radius: 5px; padding: 6px 10px; font-size: 11px; display: flex; justify-content: space-between;">
+                                <span>Automatica (AI decide)</span><span style="color: #999;">▼</span>
                             </div>
                         </div>
-                        <div style="background: #FF9800; color: #fff; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600; font-size: 14px;">
-                            GENERA DOMANDE
+                        <div style="margin-bottom: 12px;">
+                            <div style="font-size: 10px; font-weight: 600; color: #666; margin-bottom: 3px;">Prompt Libero <span style="color:#bbb;">(opz.)</span></div>
+                            <div style="border: 1px solid #ddd; border-radius: 5px; padding: 8px 10px; font-size: 10px; color: #555; min-height: 36px; background: #fafafa; line-height: 1.4;">
+                                Focus su interazioni farmacologiche e protocolli d'emergenza...
+                            </div>
+                        </div>
+                        <!-- Info box -->
+                        <div style="background: #E3F2FD; border-radius: 6px; padding: 6px 10px; font-size: 9px; color: #1565C0; margin-bottom: 10px; line-height: 1.5;">
+                            Le domande saranno ordinate per <strong>difficolta' crescente</strong> nel questionario finale (facili → medie → difficili)
+                        </div>
+                        <div style="background: #FF9800; color: #fff; padding: 10px; border-radius: 8px; text-align: center; font-weight: 600; font-size: 13px;">
+                            GENERA 20 DOMANDE
                         </div>
                     </div>
                 </div>
@@ -1058,110 +1117,122 @@
             </div>
             <div class="thumb-strip" id="thumbs-pdf-3"></div>
             <h1 class="slide-title">Revisione Domande</h1>
-            <p class="slide-subtitle">Generazione Quiz da PDF • Step 3 di 3</p>
+            <p class="slide-subtitle">Generazione Quiz da Sessione • Step 3 di 3</p>
             <div class="slide-content">
                 <div class="slide-description">
-                    <p>Le domande generate vengono mostrate come <span class="highlight creator">lista di card espandibili</span>. Ogni riga mostra titolo, difficolta' e stato. Cliccando si espande per vedere risposte e dettagli.</p>
-                    <p>Per ogni domanda, il Creator puo' <strong>leggere le risposte</strong>, verificare la difficolta', il tipo e il riferimento al PDF. Poi sceglie: <strong>"Approva"</strong> o <strong>"Rigenera"</strong> — per singola riga.</p>
-                    <p>Il pulsante <strong>"Approva Tutte"</strong> valida in blocco. <strong>Tutte devono essere approvate</strong> per proseguire alla pubblicazione con QR Code.</p>
+                    <p>Le domande generate da tutte le presentazioni sono mostrate come <span class="highlight creator">lista di card espandibili</span>, ordinate per <strong>difficolta' crescente</strong> (facili → medie → difficili).</p>
+                    <p>Ogni riga mostra titolo, difficolta', <strong>lezione di provenienza</strong> e stato. Cliccando si espande per vedere risposte, riferimento alla presentazione del relatore, e dettagli.</p>
+                    <p>Per ogni domanda: <strong>"Approva"</strong> o <strong>"Rigenera"</strong> singolarmente. Il pulsante <strong>"Approva Tutte"</strong> valida in blocco. Tutte devono essere approvate per proseguire alla pubblicazione.</p>
                     <div class="feature-box">
                         <h4>Funzionalita' Revisione</h4>
                         <ul>
+                            <li>Domande ordinate per difficolta' (facili → medie → difficili)</li>
+                            <li>Tag lezione di provenienza su ogni domanda</li>
                             <li>Lista card espandibili (click per dettagli)</li>
-                            <li>Ogni riga: titolo + difficolta' + stato + azioni</li>
-                            <li>Espanso: testo completo, risposte, corretta evidenziata, rif. PDF</li>
+                            <li>Espanso: testo, risposte, corretta evidenziata, rif. lezione/relatore</li>
                             <li>Approva / Rigenera per singola domanda</li>
                             <li>"Approva Tutte" per validazione in blocco</li>
-                            <li>Contatore "Approvate: X / N"</li>
                             <li>Tutte approvate → Prosegui → Pubblicazione</li>
                         </ul>
                     </div>
                 </div>
                 <div class="slide-image">
                     <div style="width: 540px; background: #fff; border-radius: 12px; padding: 20px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                             <div style="font-size: 14px; font-weight: 600;">Step 3 di 3 — Revisione</div>
-                            <div style="background: #E3F2FD; color: #1976D2; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">Approvate: 3 / 10</div>
+                            <div style="background: #E3F2FD; color: #1976D2; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">Approvate: 3 / 20</div>
                         </div>
-                        <!-- Row 1: Approved, collapsed -->
-                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; background: #f9fff9;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span style="color: #4CAF50; font-weight: 700; font-size: 12px;">✓</span>
-                                <span style="font-size: 12px; color: #666; min-width: 14px;">1.</span>
-                                <span style="font-size: 12px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Definizione di scompenso cardiaco acuto</span>
-                                <span style="background: #E8F5E9; color: #2E7D32; padding: 2px 6px; border-radius: 8px; font-size: 9px; font-weight: 600;">FACILE</span>
+                        <!-- Difficulty section header -->
+                        <div style="font-size: 9px; font-weight: 700; color: #4CAF50; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; padding-left: 4px;">Facili (8)</div>
+                        <!-- Row 1: Approved, collapsed — FACILE, Lez 1 -->
+                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 8px 10px; margin-bottom: 4px; background: #f9fff9;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #4CAF50; font-weight: 700; font-size: 11px;">✓</span>
+                                <span style="font-size: 11px; color: #666; min-width: 14px;">1.</span>
+                                <span style="font-size: 11px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Definizione di scompenso cardiaco acuto</span>
+                                <span style="background: #F3E5F5; color: #7B1FA2; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">Lez.1</span>
+                                <span style="background: #E8F5E9; color: #2E7D32; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">FACILE</span>
                             </div>
                         </div>
-                        <!-- Row 2: Approved, collapsed -->
-                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; background: #f9fff9;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span style="color: #4CAF50; font-weight: 700; font-size: 12px;">✓</span>
-                                <span style="font-size: 12px; color: #666; min-width: 14px;">2.</span>
-                                <span style="font-size: 12px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Classificazione NYHA delle cardiopatie</span>
-                                <span style="background: #E8F5E9; color: #2E7D32; padding: 2px 6px; border-radius: 8px; font-size: 9px; font-weight: 600;">FACILE</span>
+                        <!-- Row 2: Approved, collapsed — FACILE, Lez 3 -->
+                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 8px 10px; margin-bottom: 4px; background: #f9fff9;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #4CAF50; font-weight: 700; font-size: 11px;">✓</span>
+                                <span style="font-size: 11px; color: #666; min-width: 14px;">2.</span>
+                                <span style="font-size: 11px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Classificazione NYHA delle cardiopatie</span>
+                                <span style="background: #F3E5F5; color: #7B1FA2; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">Lez.3</span>
+                                <span style="background: #E8F5E9; color: #2E7D32; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">FACILE</span>
                             </div>
                         </div>
-                        <!-- Row 3: Approved, collapsed -->
-                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; background: #f9fff9;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span style="color: #4CAF50; font-weight: 700; font-size: 12px;">✓</span>
-                                <span style="font-size: 12px; color: #666; min-width: 14px;">3.</span>
-                                <span style="font-size: 12px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Indicazioni per terapia con ACE-inibitori</span>
-                                <span style="background: #FFF3E0; color: #E65100; padding: 2px 6px; border-radius: 8px; font-size: 9px; font-weight: 600;">MEDIA</span>
+                        <!-- Difficulty section header -->
+                        <div style="font-size: 9px; font-weight: 700; color: #FF9800; text-transform: uppercase; letter-spacing: 1px; margin: 6px 0 4px; padding-left: 4px;">Medie (7)</div>
+                        <!-- Row 3: Approved, collapsed — MEDIA, Lez 2 -->
+                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 8px 10px; margin-bottom: 4px; background: #f9fff9;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #4CAF50; font-weight: 700; font-size: 11px;">✓</span>
+                                <span style="font-size: 11px; color: #666; min-width: 14px;">9.</span>
+                                <span style="font-size: 11px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Indicazioni terapia ACE-inibitori</span>
+                                <span style="background: #F3E5F5; color: #7B1FA2; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">Lez.2</span>
+                                <span style="background: #FFF3E0; color: #E65100; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">MEDIA</span>
                             </div>
                         </div>
-                        <!-- Row 4: EXPANDED — pending review -->
-                        <div style="border: 2px solid #FF9800; border-radius: 8px; padding: 12px; margin-bottom: 6px; background: #FFFDE7;">
-                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                                <span style="color: #FF9800; font-weight: 700; font-size: 12px;">●</span>
-                                <span style="font-size: 12px; color: #666; min-width: 14px;">4.</span>
-                                <span style="font-size: 12px; flex: 1; font-weight: 600;">Interazione warfarin-amiodarone</span>
-                                <span style="background: #FFF3E0; color: #E65100; padding: 2px 6px; border-radius: 8px; font-size: 9px; font-weight: 600;">MEDIA</span>
-                                <span style="font-size: 9px; color: #999;">4 opzioni</span>
+                        <!-- Row 4: EXPANDED — MEDIA, Lez 2 -->
+                        <div style="border: 2px solid #FF9800; border-radius: 8px; padding: 10px; margin-bottom: 4px; background: #FFFDE7;">
+                            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+                                <span style="color: #FF9800; font-weight: 700; font-size: 11px;">●</span>
+                                <span style="font-size: 11px; color: #666; min-width: 14px;">10.</span>
+                                <span style="font-size: 11px; flex: 1; font-weight: 600;">Interazione warfarin-amiodarone</span>
+                                <span style="background: #F3E5F5; color: #7B1FA2; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">Lez.2</span>
+                                <span style="background: #FFF3E0; color: #E65100; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">MEDIA</span>
                             </div>
                             <!-- Expanded content -->
                             <div style="background: #fff; border-radius: 6px; padding: 10px; margin-bottom: 8px; border: 1px solid #eee;">
                                 <div style="font-size: 11px; line-height: 1.5; margin-bottom: 8px; color: #333;">
                                     Quale interazione farmacologica tra warfarin e amiodarone richiede un aggiustamento posologico immediato?
                                 </div>
-                                <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 6px;">
-                                    <div style="padding: 5px 8px; border: 1px solid #eee; border-radius: 4px; font-size: 10px;">A) Riduzione dell'effetto anticoagulante</div>
-                                    <div style="padding: 5px 8px; border: 1px solid #4CAF50; border-radius: 4px; font-size: 10px; background: #E8F5E9;">B) Potenziamento dell'effetto anticoagulante ✓</div>
-                                    <div style="padding: 5px 8px; border: 1px solid #eee; border-radius: 4px; font-size: 10px;">C) Nessuna interazione significativa</div>
-                                    <div style="padding: 5px 8px; border: 1px solid #eee; border-radius: 4px; font-size: 10px;">D) Aumento della clearance renale</div>
+                                <div style="display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px;">
+                                    <div style="padding: 4px 8px; border: 1px solid #eee; border-radius: 4px; font-size: 10px;">A) Riduzione dell'effetto anticoagulante</div>
+                                    <div style="padding: 4px 8px; border: 1px solid #4CAF50; border-radius: 4px; font-size: 10px; background: #E8F5E9;">B) Potenziamento dell'effetto anticoagulante ✓</div>
+                                    <div style="padding: 4px 8px; border: 1px solid #eee; border-radius: 4px; font-size: 10px;">C) Nessuna interazione significativa</div>
+                                    <div style="padding: 4px 8px; border: 1px solid #eee; border-radius: 4px; font-size: 10px;">D) Aumento della clearance renale</div>
                                 </div>
-                                <div style="font-size: 9px; color: #999;">Rif: Cap. 3 — Farmacologia, Sez. 3.4, pag. 47</div>
+                                <div style="font-size: 9px; color: #999;">Rif: Lez. 2 — Dr.ssa Bianchi, Farmacologia cardiologica, Slide 12</div>
                             </div>
                             <!-- Per-row actions -->
                             <div style="display: flex; gap: 8px;">
-                                <div style="flex: 1; padding: 6px; border: 1px solid #F44336; border-radius: 6px; text-align: center; font-size: 11px; font-weight: 600; color: #F44336;">↻ Rigenera</div>
-                                <div style="flex: 1; padding: 6px; background: #4CAF50; border-radius: 6px; text-align: center; font-size: 11px; font-weight: 600; color: #fff;">✓ Approva</div>
+                                <div style="flex: 1; padding: 5px; border: 1px solid #F44336; border-radius: 6px; text-align: center; font-size: 10px; font-weight: 600; color: #F44336;">↻ Rigenera</div>
+                                <div style="flex: 1; padding: 5px; background: #4CAF50; border-radius: 6px; text-align: center; font-size: 10px; font-weight: 600; color: #fff;">✓ Approva</div>
                             </div>
                         </div>
-                        <!-- Row 5: Pending, collapsed -->
-                        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; margin-bottom: 6px;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span style="color: #ccc; font-weight: 700; font-size: 12px;">○</span>
-                                <span style="font-size: 12px; color: #666; min-width: 14px;">5.</span>
-                                <span style="font-size: 12px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #999;">Diagnosi differenziale dell'edema polmonare</span>
-                                <span style="background: #FFEBEE; color: #C62828; padding: 2px 6px; border-radius: 8px; font-size: 9px; font-weight: 600;">DIFFICILE</span>
+                        <!-- Difficulty section header -->
+                        <div style="font-size: 9px; font-weight: 700; color: #F44336; text-transform: uppercase; letter-spacing: 1px; margin: 6px 0 4px; padding-left: 4px;">Difficili (5)</div>
+                        <!-- Row 5: Pending, collapsed — DIFFICILE, Lez 4 -->
+                        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; margin-bottom: 4px;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #ccc; font-weight: 700; font-size: 11px;">○</span>
+                                <span style="font-size: 11px; color: #666; min-width: 14px;">16.</span>
+                                <span style="font-size: 11px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #999;">Diagnosi differenziale edema polmonare</span>
+                                <span style="background: #F3E5F5; color: #7B1FA2; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">Lez.4</span>
+                                <span style="background: #FFEBEE; color: #C62828; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">DIFF.</span>
                             </div>
                         </div>
-                        <!-- Row 6: Pending, collapsed -->
-                        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span style="color: #ccc; font-weight: 700; font-size: 12px;">○</span>
-                                <span style="font-size: 12px; color: #666; min-width: 14px;">6.</span>
-                                <span style="font-size: 12px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #999;">Protocollo di gestione dello shock cardiogeno...</span>
-                                <span style="background: #FFEBEE; color: #C62828; padding: 2px 6px; border-radius: 8px; font-size: 9px; font-weight: 600;">DIFFICILE</span>
+                        <!-- Row 6: Pending, collapsed — DIFFICILE, Lez 1 -->
+                        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 8px 10px; margin-bottom: 8px;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="color: #ccc; font-weight: 700; font-size: 11px;">○</span>
+                                <span style="font-size: 11px; color: #666; min-width: 14px;">17.</span>
+                                <span style="font-size: 11px; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #999;">Protocollo gestione shock cardiogeno</span>
+                                <span style="background: #F3E5F5; color: #7B1FA2; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">Lez.1</span>
+                                <span style="background: #FFEBEE; color: #C62828; padding: 1px 5px; border-radius: 6px; font-size: 8px; font-weight: 600;">DIFF.</span>
                             </div>
                         </div>
                         <!-- Bottom actions -->
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 10px;">
-                            <div style="padding: 7px 14px; background: #1976D2; border-radius: 6px; font-size: 11px; color: #fff; font-weight: 600;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 8px;">
+                            <div style="padding: 6px 12px; background: #1976D2; border-radius: 6px; font-size: 10px; color: #fff; font-weight: 600;">
                                 ✓✓ APPROVA TUTTE
                             </div>
-                            <div style="padding: 7px 14px; background: #e0e0e0; border-radius: 6px; font-size: 11px; color: #999; font-weight: 600;">
+                            <div style="font-size: 9px; color: #999;">20 domande da 5 lezioni</div>
+                            <div style="padding: 6px 12px; background: #e0e0e0; border-radius: 6px; font-size: 10px; color: #999; font-weight: 600;">
                                 PROSEGUI →
                             </div>
                         </div>
@@ -1176,92 +1247,92 @@
                 <span class="slide-badge overview">Sistema</span>
                 <span class="slide-number">30 / 31</span>
             </div>
-            <h1 class="slide-title" style="text-align: center; margin-bottom: 5px;">Pipeline Elaborazione PDF</h1>
-            <p class="slide-subtitle" style="text-align: center; margin-bottom: 12px;">Come il sistema trasforma un documento medico in domande quiz validate</p>
+            <h1 class="slide-title" style="text-align: center; margin-bottom: 5px;">Pipeline Elaborazione Multi-Documento</h1>
+            <p class="slide-subtitle" style="text-align: center; margin-bottom: 12px;">Come il sistema trasforma N presentazioni di una sessione in un questionario unico ordinato per difficolta'</p>
             <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 30px; gap: 12px;">
                 <!-- Row 1: Input + Processing -->
                 <div style="display: flex; gap: 14px; align-items: stretch;">
-                    <!-- Card 1: Validazione & Upload -->
+                    <!-- Card 1: Upload Multi-Documento -->
                     <div style="flex: 1; background: rgba(255,255,255,0.07); border-radius: 12px; padding: 18px; border-left: 4px solid #42A5F5;">
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                             <div style="font-size: 20px;">📥</div>
                             <div>
                                 <div style="font-size: 10px; font-weight: 700; color: #42A5F5; letter-spacing: 1px;">FASE 1</div>
-                                <div style="font-size: 14px; font-weight: 600;">Validazione & Upload</div>
+                                <div style="font-size: 14px; font-weight: 600;">Upload & Validazione</div>
                             </div>
                         </div>
                         <div style="font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 10px;">
-                            Il Creator carica un PDF digitale. Il sistema verifica: formato valido, testo selezionabile (no raster), dimensione e numero pagine nei limiti. Se il file e' protetto da password, corrotto, o non contiene testo estraibile, viene restituito un errore specifico.
+                            Il Creator seleziona una sessione del congresso e carica le presentazioni PDF di tutti i relatori (es. 5 file per 5 relatori). Ogni file viene validato individualmente: formato, testo selezionabile, dimensione. Un errore su un file non blocca gli altri.
                         </div>
                         <div style="background: rgba(255,193,7,0.15); border-radius: 6px; padding: 8px 10px; font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                            <strong style="color: #FFC107;">Assunzione:</strong> I PDF caricati sono documenti digitali con testo selezionabile. Non si gestiscono scansioni o immagini raster. Il sistema rifiuta esplicitamente i PDF senza layer di testo.
+                            <strong style="color: #FFC107;">Assunzione:</strong> Ogni presentazione e' un PDF digitale con testo selezionabile. Il Creator associa manualmente ogni file al relatore e titolo della lezione. Non si gestiscono scansioni.
                         </div>
                     </div>
-                    <!-- Card 2: Estrazione Testo -->
+                    <!-- Card 2: Estrazione per Documento -->
                     <div style="flex: 1; background: rgba(255,255,255,0.07); border-radius: 12px; padding: 18px; border-left: 4px solid #FFA726;">
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                             <div style="font-size: 20px;">📑</div>
                             <div>
                                 <div style="font-size: 10px; font-weight: 700; color: #FFA726; letter-spacing: 1px;">FASE 2</div>
-                                <div style="font-size: 14px; font-weight: 600;">Estrazione Strutturata</div>
+                                <div style="font-size: 14px; font-weight: 600;">Estrazione per Documento</div>
                             </div>
                         </div>
                         <div style="font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 10px;">
-                            Parsing del PDF tramite libreria dedicata. Il sistema estrae: testo completo con formattazione, metadati (titolo, autore, lingua), gerarchia del documento (capitoli, sezioni, sottosezioni), tabelle e didascalie figure. Rimozione header/footer ripetitivi e numeri pagina.
+                            Ogni presentazione viene analizzata individualmente: estrazione testo, metadati, struttura (slide/capitoli), tabelle e figure. Ogni documento mantiene il proprio contesto (relatore, titolo lezione) come metadato persistente attraverso tutta la pipeline.
                         </div>
                         <div style="background: rgba(255,193,7,0.15); border-radius: 6px; padding: 8px 10px; font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                            <strong style="color: #FFC107;">Assunzione:</strong> La struttura del PDF (heading, paragrafi, liste) e' riconoscibile dal parser. PDF con layout complessi (multi-colonna, inserti) vengono normalizzati al meglio possibile.
+                            <strong style="color: #FFC107;">Assunzione:</strong> La struttura delle presentazioni (heading, paragrafi, liste) e' riconoscibile dal parser. L'analisi e' parallelizzabile: N documenti processati contemporaneamente.
                         </div>
                     </div>
-                    <!-- Card 3: Normalizzazione -->
+                    <!-- Card 3: Normalizzazione & Merge -->
                     <div style="flex: 1; background: rgba(255,255,255,0.07); border-radius: 12px; padding: 18px; border-left: 4px solid #66BB6A;">
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                            <div style="font-size: 20px;">🧹</div>
+                            <div style="font-size: 20px;">🔗</div>
                             <div>
                                 <div style="font-size: 10px; font-weight: 700; color: #66BB6A; letter-spacing: 1px;">FASE 3</div>
-                                <div style="font-size: 14px; font-weight: 600;">Normalizzazione</div>
+                                <div style="font-size: 14px; font-weight: 600;">Normalizzazione & Merge</div>
                             </div>
                         </div>
                         <div style="font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 10px;">
-                            Pulizia e standardizzazione del contenuto estratto. Unificazione encoding (UTF-8), ricomposizione paragrafi spezzati tra pagine, gestione layout multi-colonna, separazione di tabelle/figure/formule in elementi strutturati. Output: testo pulito + mappa dei contenuti.
+                            Pulizia e standardizzazione del contenuto di ogni presentazione. Poi merge in un unico corpus della sessione, mantenendo la separazione logica tra lezioni. Ogni blocco di testo conserva il riferimento al relatore e alla lezione di origine.
                         </div>
                         <div style="background: rgba(255,193,7,0.15); border-radius: 6px; padding: 8px 10px; font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                            <strong style="color: #FFC107;">Assunzione:</strong> Il contenuto normalizzato mantiene il significato semantico originale. Tabelle e formule vengono preservate come testo strutturato, non come immagini.
+                            <strong style="color: #FFC107;">Assunzione:</strong> Il merge non altera il contesto delle singole lezioni. Ogni chunk risultante e' sempre riconducibile alla presentazione e al relatore di origine.
                         </div>
                     </div>
                 </div>
                 <!-- Row 2: Intelligence + Output -->
                 <div style="display: flex; gap: 14px; align-items: stretch;">
-                    <!-- Card 4: Chunking Semantico -->
+                    <!-- Card 4: Indicizzazione Cross-Documento -->
                     <div style="flex: 1; background: rgba(255,255,255,0.07); border-radius: 12px; padding: 18px; border-left: 4px solid #AB47BC;">
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                             <div style="font-size: 20px;">🧩</div>
                             <div>
                                 <div style="font-size: 10px; font-weight: 700; color: #AB47BC; letter-spacing: 1px;">FASE 4</div>
-                                <div style="font-size: 14px; font-weight: 600;">Chunking & Indicizzazione</div>
+                                <div style="font-size: 14px; font-weight: 600;">Indicizzazione Cross-Documento</div>
                             </div>
                         </div>
                         <div style="font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 10px;">
-                            Suddivisione in blocchi semantici coerenti (500-1500 token), rispettando confini di capitolo/sezione. Per ogni chunk: tagging tematico automatico (es. "farmacologia", "procedure"), estrazione concetti chiave, generazione vector embedding. Salvataggio in vector store per ricerca semantica.
+                            Chunking semantico del corpus unificato. Ogni chunk viene taggato con: lezione di origine, relatore, tema. Vector embedding per ricerca semantica cross-documento. Il sistema identifica anche sovrapposizioni tematiche tra lezioni diverse della stessa sessione.
                         </div>
                         <div style="background: rgba(255,193,7,0.15); border-radius: 6px; padding: 8px 10px; font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                            <strong style="color: #FFC107;">Assunzione:</strong> Il chunking rispetta i confini semantici: un concetto non viene spezzato tra chunk diversi. Il documento processato viene salvato per riutilizzo futuro.
+                            <strong style="color: #FFC107;">Assunzione:</strong> L'indicizzazione preserva la tracciabilita' della lezione di origine per ogni chunk. I documenti processati sono riutilizzabili per future sessioni.
                         </div>
                     </div>
-                    <!-- Card 5: Generazione Domande -->
+                    <!-- Card 5: Generazione Distribuita -->
                     <div style="flex: 1; background: rgba(255,255,255,0.07); border-radius: 12px; padding: 18px; border-left: 4px solid #EF5350;">
                         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                             <div style="font-size: 20px;">🤖</div>
                             <div>
                                 <div style="font-size: 10px; font-weight: 700; color: #EF5350; letter-spacing: 1px;">FASE 5</div>
-                                <div style="font-size: 14px; font-weight: 600;">Generazione Domande AI</div>
+                                <div style="font-size: 14px; font-weight: 600;">Generazione Distribuita AI</div>
                             </div>
                         </div>
                         <div style="font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 10px;">
-                            L'AI riceve configurazione Creator + prompt libero. Seleziona chunk rilevanti tramite similarity search sugli embedding. Genera domande differenziate: <strong>Facili</strong> (definizioni, fatti), <strong>Medie</strong> (causa-effetto, confronti), <strong>Difficili</strong> (ragionamento clinico, eccezioni). Per ogni domanda: risposta corretta, distrattori plausibili, feedback educativo.
+                            L'AI genera domande rispettando la distribuzione per lezione impostata dal Creator (es. 8 da Lez.1, 3 da Lez.2, ecc.). Per ogni lezione seleziona i chunk piu' rilevanti. Genera domande <strong>Facili</strong>, <strong>Medie</strong>, <strong>Difficili</strong>. Il questionario finale e' ordinato per difficolta' crescente.
                         </div>
                         <div style="background: rgba(255,193,7,0.15); border-radius: 6px; padding: 8px 10px; font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                            <strong style="color: #FFC107;">Assunzione:</strong> Le domande generate sono coerenti col contenuto del PDF. La validazione automatica esclude ambiguita' e duplicati. Il Creator ha sempre l'ultima parola tramite revisione.
+                            <strong style="color: #FFC107;">Assunzione:</strong> La distribuzione per lezione e' rispettata. Domande di lezioni diverse sono mescolate ma ordinate per difficolta'. Il Creator ha l'ultima parola tramite revisione.
                         </div>
                     </div>
                     <!-- Card 6: Output & Review -->
@@ -1274,10 +1345,10 @@
                             </div>
                         </div>
                         <div style="font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 10px;">
-                            Validazione automatica di qualita': nessuna ambiguita', una sola risposta corretta verificabile, distrattori distinti, nessuna duplicazione, copertura bilanciata degli argomenti. Le domande passano poi alla <strong>revisione umana obbligatoria</strong> del Creator (approva/rigenera per singola domanda).
+                            Validazione automatica: nessuna ambiguita', nessuna duplicazione cross-lezione, copertura bilanciata. Ogni domanda mostra la lezione e il relatore di provenienza. Il Creator revisiona con approva/rigenera per singola domanda. <strong>Revisione umana obbligatoria</strong>.
                         </div>
                         <div style="background: rgba(255,193,7,0.15); border-radius: 6px; padding: 8px 10px; font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                            <strong style="color: #FFC107;">Assunzione:</strong> La revisione umana e' obbligatoria — nessuna domanda viene pubblicata senza approvazione esplicita del Creator. La rigenerazione produce domande diverse dalla precedente.
+                            <strong style="color: #FFC107;">Assunzione:</strong> Nessuna domanda pubblicata senza approvazione Creator. La rigenerazione produce domande diverse, sempre dalla stessa lezione di origine. Il questionario finale e' 1 per sessione.
                         </div>
                     </div>
                 </div>
@@ -1286,16 +1357,16 @@
             <div style="text-align: center; padding: 10px; margin: 0 60px;">
                 <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
                     <div style="background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 20px; font-size: 10px;">
-                        <span style="color: #42A5F5;">●</span> Solo PDF digitali (no scansioni)
+                        <span style="color: #42A5F5;">●</span> 1 sessione = N presentazioni = 1 questionario
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 20px; font-size: 10px;">
-                        <span style="color: #FFA726;">●</span> Max 50 MB / 500 pagine
+                        <span style="color: #FFA726;">●</span> Domande ordinate per difficolta'
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 20px; font-size: 10px;">
                         <span style="color: #EF5350;">●</span> Revisione umana obbligatoria
                     </div>
                     <div style="background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 20px; font-size: 10px;">
-                        <span style="color: #66BB6A;">●</span> Documento riutilizzabile
+                        <span style="color: #66BB6A;">●</span> Tracciabilita' lezione per ogni domanda
                     </div>
                 </div>
             </div>
@@ -1310,7 +1381,7 @@
                 <div class="flow-step"><span class="step-num">5</span> Schermate Admin</div>
                 <div class="flow-step"><span class="step-num">8</span> Schermate Creator</div>
                 <div class="flow-step"><span class="step-num">7</span> Schermate Mobile</div>
-                <div class="flow-step"><span class="step-num">4</span> Quiz da PDF + Pipeline</div>
+                <div class="flow-step"><span class="step-num">4</span> Quiz da Sessione + Pipeline</div>
                 <div class="flow-step"><span class="step-num">5</span> Flowchart</div>
             </div>
         </div>
