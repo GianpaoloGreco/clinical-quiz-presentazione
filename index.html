@@ -104,7 +104,7 @@
                         <div style="font-size: 36px; margin-bottom: 10px;">🎯</div>
                         <div style="font-size: 18px; font-weight: 700; color: #FFA726; margin-bottom: 6px;">Flusso Creator</div>
                         <div style="font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5;">Congressi, quiz manuali, quiz da PDF/AI, QR code e monitoraggio</div>
-                        <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.3);">14 schermate + pipeline</div>
+                        <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.3);">12 schermate + pipeline</div>
                     </div>
                     <!-- Partecipante -->
                     <div onclick="goToSlide(19)" style="background: rgba(76,175,80,0.15); border: 2px solid #4CAF50; border-radius: 16px; padding: 28px 20px; cursor: pointer; transition: all 0.3s;">
@@ -366,59 +366,165 @@
                 <span class="slide-number">10 / 26</span>
             </div>
             <div class="thumb-strip" id="thumbs-creator-1"></div>
-            <h1 class="slide-title">Dashboard Creator</h1>
-            <p class="slide-subtitle">Flusso Creator • Step 1 di 8</p>
+            <h1 class="slide-title">I Miei Congressi</h1>
+            <p class="slide-subtitle">Flusso Creator • Dashboard</p>
             <div class="slide-content">
                 <div class="slide-description">
-                    <p>La Dashboard Creator è la <span class="highlight creator">home personale</span> dell'organizzatore eventi. Contiene due aree principali: <strong>I Miei Congressi</strong> (gestione congressi con quiz generati da AI) e <strong>I Miei Quiz</strong> (quiz creati manualmente).</p>
-                    <p>La sezione <strong>"I Miei Congressi"</strong> mostra tutti i congressi creati dal Creator, con stato di avanzamento per ciascuno (bozza, in corso, completato). Cliccando su un congresso si accede alla lista delle sue sessioni.</p>
-                    <p>La sezione <strong>"I Miei Quiz"</strong> mostra i quiz singoli creati con il wizard manuale. Per ogni quiz: titolo, stato, data evento.</p>
-                    <p>Il Creator puo' creare <strong>congressi illimitati</strong> e quiz illimitati. Le metriche in alto mostrano i dati aggregati di entrambe le modalita'.</p>
+                    <p>La Dashboard Creator mostra <span class="highlight creator">tutti i congressi</span> creati dall'organizzatore. Ogni congresso rappresenta un evento ECM reale con le sue sessioni.</p>
+                    <p>Per ogni congresso e' visibile: nome, date, luogo, <strong>numero di sessioni</strong>, e <strong>stato di avanzamento</strong> (quanti questionari sono pronti su quanti totali).</p>
+                    <p>Il Creator crea un nuovo congresso indicando nome, date e programma scientifico. Poi entra nel congresso per gestire le sessioni e creare i questionari.</p>
+                    <p>La struttura e' sempre: <strong>Congresso → Sessioni → Questionario per sessione</strong>. Per ogni sessione il Creator sceglie se creare le domande manualmente o tramite AI da PDF.</p>
                     <div class="feature-box">
-                        <h4>Funzionalita' Dashboard</h4>
+                        <h4>Dashboard Congressi</h4>
                         <ul>
-                            <li><strong>I Miei Congressi:</strong> lista congressi con stato e progresso sessioni</li>
-                            <li><strong>I Miei Quiz:</strong> lista quiz manuali con stato</li>
+                            <li>Congressi illimitati per Creator</li>
+                            <li>Per ogni congresso: nome, date, N sessioni, progresso</li>
+                            <li>Stati: Bozza, In Corso, Completato</li>
                             <li>Metriche aggregate: Quiz Attivi, Partecipanti, Media Esatte</li>
-                            <li>Azione: "+ Nuovo Congresso" o "+ Nuovo Quiz"</li>
-                            <li>Congressi e quiz illimitati per Creator</li>
+                            <li>Azione: "+ Nuovo Congresso" o entra in esistente</li>
                         </ul>
                     </div>
                 </div>
                 <div class="slide-image">
-                    <img src="figma_wireframes/wireframe_creator_dashboard.svg" alt="Creator Dashboard">
+                    <div style="width: 520px; background: #fff; border-radius: 12px; padding: 20px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <div style="font-size: 16px; font-weight: 700; color: #333;">I Miei Congressi</div>
+                            <div style="background: #FF9800; color: #fff; padding: 7px 14px; border-radius: 8px; font-size: 11px; font-weight: 600;">+ NUOVO CONGRESSO</div>
+                        </div>
+                        <div style="border: 2px solid #FF9800; border-radius: 10px; padding: 14px; margin-bottom: 10px; background: #FAFAFA; cursor: pointer;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                <div>
+                                    <div style="font-size: 14px; font-weight: 700; color: #333;">Congresso Cardiologia 2026</div>
+                                    <div style="font-size: 11px; color: #999; margin-top: 2px;">15-17 Maggio 2026 • Roma</div>
+                                </div>
+                                <div style="background: #FFF3E0; color: #E65100; padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">IN CORSO</div>
+                            </div>
+                            <div style="display: flex; gap: 16px; align-items: center;">
+                                <div style="font-size: 10px; color: #666;"><strong style="color: #FF9800;">5</strong> sessioni</div>
+                                <div style="flex: 1; background: #e0e0e0; height: 5px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: linear-gradient(90deg, #FF9800, #FFC107); width: 40%; height: 100%;"></div>
+                                </div>
+                                <div style="font-size: 10px; color: #666;"><strong>2/5</strong> quiz pronti</div>
+                            </div>
+                        </div>
+                        <div style="border: 1px solid #4CAF50; border-radius: 10px; padding: 14px; margin-bottom: 10px; background: #f9fff9;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                <div>
+                                    <div style="font-size: 14px; font-weight: 700; color: #333;">Simposio Neurologia ECM</div>
+                                    <div style="font-size: 11px; color: #999; margin-top: 2px;">10-11 Marzo 2026 • Milano</div>
+                                </div>
+                                <div style="background: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">COMPLETATO</div>
+                            </div>
+                            <div style="display: flex; gap: 16px; align-items: center;">
+                                <div style="font-size: 10px; color: #666;"><strong style="color: #4CAF50;">3</strong> sessioni</div>
+                                <div style="flex: 1; background: #e0e0e0; height: 5px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: #4CAF50; width: 100%; height: 100%;"></div>
+                                </div>
+                                <div style="font-size: 10px; color: #666;"><strong>3/3</strong> quiz pronti</div>
+                            </div>
+                        </div>
+                        <div style="border: 1px dashed #ddd; border-radius: 10px; padding: 14px; background: #fafafa;">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                <div>
+                                    <div style="font-size: 14px; font-weight: 700; color: #333;">Workshop Oncologia</div>
+                                    <div style="font-size: 11px; color: #999; margin-top: 2px;">22 Giugno 2026 • Napoli</div>
+                                </div>
+                                <div style="background: #f0f0f0; color: #999; padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">BOZZA</div>
+                            </div>
+                            <div style="display: flex; gap: 16px; align-items: center;">
+                                <div style="font-size: 10px; color: #666;"><strong>4</strong> sessioni</div>
+                                <div style="flex: 1; background: #e0e0e0; height: 5px; border-radius: 3px; overflow: hidden;"></div>
+                                <div style="font-size: 10px; color: #999;"><strong>0/4</strong> quiz pronti</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 11-15: Wizard Steps -->
+        <!-- SLIDE 11: Sessioni del Congresso + Scelta Modalità -->
         <div class="slide" data-slide="12" data-flow="creator" data-step="2">
             <div class="slide-header">
                 <span class="slide-badge creator">Creator</span>
-                <span class="slide-number">11 / 26</span>
+                <span class="slide-number"></span>
             </div>
             <div class="thumb-strip" id="thumbs-creator-2"></div>
-            <h1 class="slide-title">Wizard - Step 1: Info Base</h1>
-            <p class="slide-subtitle">Flusso Creator • Step 2 di 8</p>
+            <h1 class="slide-title">Sessioni & Scelta Modalita'</h1>
+            <p class="slide-subtitle">Flusso Creator • Dettaglio Congresso</p>
             <div class="slide-content">
                 <div class="slide-description">
-                    <p>Primo step del wizard di creazione. Il Creator inserisce le <span class="highlight creator">informazioni fondamentali</span> che identificano l'evento e il quiz associato.</p>
-                    <p>Il progress indicator orizzontale mostra chiaramente i 5 step del wizard con numeri e label. Lo step attuale è evidenziato in blu, quelli completati mostrano un check, quelli futuri sono grigi.</p>
-                    <p>Il Titolo Quiz è il nome che verrà mostrato ai partecipanti nell'header mobile e nei report. Deve essere descrittivo e identificare chiaramente l'evento (es. "Congresso Nazionale Cardiologia 2024").</p>
-                    <p>La Descrizione appare nella schermata di registrazione e può contenere istruzioni specifiche per i partecipanti. Data e Luogo sono opzionali ma utili per i report.</p>
+                    <p>Entrando in un congresso, il Creator vede la <span class="highlight creator">lista delle sessioni</span>. Per ogni sessione e' visibile lo stato del questionario e la modalita' scelta.</p>
+                    <p>Per ogni sessione il Creator sceglie <strong>come creare le domande</strong>:</p>
+                    <p><strong>Modalita' Manuale:</strong> il Creator importa le domande da Google Form o le crea direttamente. Utile quando le domande sono gia' pronte.</p>
+                    <p><strong>Modalita' AI da PDF:</strong> il Creator carica le presentazioni PDF dei relatori e l'AI genera automaticamente le domande. Il Creator revisiona e approva.</p>
+                    <p>Le impostazioni del quiz (grafica, privacy, classifica) si configurano dopo aver creato le domande, indipendentemente dalla modalita' scelta.</p>
                     <div class="feature-box">
-                        <h4>Campi Step 1</h4>
+                        <h4>Gestione Sessioni</h4>
                         <ul>
-                            <li>Titolo Quiz: obbligatorio, max 100 caratteri</li>
-                            <li>Descrizione: obbligatoria, rich text supportato</li>
-                            <li>Data Evento: opzionale, date picker</li>
-                            <li>Luogo: opzionale, testo libero</li>
-                            <li>Navigazione: Annulla (torna a dashboard), Avanti</li>
+                            <li>Lista sessioni con stato questionario per ciascuna</li>
+                            <li>Due modalita': <strong>Manuale</strong> o <strong>AI da PDF</strong></li>
+                            <li>Modalita' selezionabile per ogni sessione</li>
+                            <li>Sessioni aggiungibili/rimovibili dal Creator</li>
+                            <li>Configurazione quiz condivisa tra le due modalita'</li>
                         </ul>
                     </div>
                 </div>
                 <div class="slide-image">
-                    <img src="figma_wireframes/wireframe_wizard_step1.svg" alt="Wizard Step 1">
+                    <div style="width: 520px; background: #fff; border-radius: 12px; padding: 20px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                        <div style="margin-bottom: 12px;">
+                            <div style="font-size: 10px; color: #FF9800; font-weight: 600;">← Torna ai congressi</div>
+                            <div style="font-size: 16px; font-weight: 700; color: #333; margin-top: 4px;">Congresso Cardiologia 2026</div>
+                            <div style="font-size: 11px; color: #999;">15-17 Maggio 2026 • Roma • 5 sessioni</div>
+                        </div>
+                        <!-- Session 1: AI mode, completed -->
+                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; background: #f9fff9;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 12px; font-weight: 600;">Sessione 1 — Scompenso Cardiaco</div>
+                                    <div style="font-size: 10px; color: #999; margin-top: 2px;">5 relatori • 20 domande • <span style="color: #9C27B0; font-weight: 600;">AI da PDF</span></div>
+                                </div>
+                                <span style="background: #E8F5E9; color: #2E7D32; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">PRONTO</span>
+                            </div>
+                        </div>
+                        <!-- Session 2: Manual mode, completed -->
+                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; background: #f9fff9;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 12px; font-weight: 600;">Sessione 2 — Farmacologia</div>
+                                    <div style="font-size: 10px; color: #999; margin-top: 2px;">15 domande • <span style="color: #1976D2; font-weight: 600;">Manuale</span></div>
+                                </div>
+                                <span style="background: #E8F5E9; color: #2E7D32; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">PRONTO</span>
+                            </div>
+                        </div>
+                        <!-- Session 3: AI mode, in progress -->
+                        <div style="border: 2px solid #FF9800; border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; background: #FFFDE7;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 12px; font-weight: 600;">Sessione 3 — Imaging</div>
+                                    <div style="font-size: 10px; color: #999; margin-top: 2px;">3 relatori • Revisione in corso • <span style="color: #9C27B0; font-weight: 600;">AI da PDF</span></div>
+                                </div>
+                                <span style="background: #FFF3E0; color: #E65100; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">REVISIONE</span>
+                            </div>
+                        </div>
+                        <!-- Session 4: Not started, choosing mode -->
+                        <div style="border: 1px dashed #ddd; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 12px; font-weight: 600; color: #999;">Sessione 4 — Procedure</div>
+                                    <div style="font-size: 10px; color: #ccc; margin-top: 2px;">Nessun questionario</div>
+                                </div>
+                                <span style="background: #f5f5f5; color: #bbb; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">DA FARE</span>
+                            </div>
+                        </div>
+                        <!-- Mode choice buttons -->
+                        <div style="background: #F5F5F5; border-radius: 8px; padding: 10px; text-align: center;">
+                            <div style="font-size: 10px; color: #666; margin-bottom: 8px; font-weight: 600;">Crea questionario per la sessione selezionata:</div>
+                            <div style="display: flex; gap: 8px;">
+                                <div style="flex: 1; padding: 10px; background: #1976D2; color: #fff; border-radius: 8px; font-size: 11px; font-weight: 600;">📝 Manuale</div>
+                                <div style="flex: 1; padding: 10px; background: #9C27B0; color: #fff; border-radius: 8px; font-size: 11px; font-weight: 600;">🤖 AI da PDF</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -429,8 +535,8 @@
                 <span class="slide-number">12 / 26</span>
             </div>
             <div class="thumb-strip" id="thumbs-creator-3"></div>
-            <h1 class="slide-title">Wizard - Step 2: Grafica</h1>
-            <p class="slide-subtitle">Flusso Creator • Step 3 di 8</p>
+            <h1 class="slide-title">Configurazione Sessione: Grafica</h1>
+            <p class="slide-subtitle">Flusso Creator • Configurazione condivisa</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Secondo step per la <span class="highlight creator">personalizzazione grafica</span>. Il Creator può brandizzare l'esperienza quiz con l'identità visiva del proprio evento o organizzazione.</p>
@@ -461,8 +567,8 @@
                 <span class="slide-number">13 / 26</span>
             </div>
             <div class="thumb-strip" id="thumbs-creator-4"></div>
-            <h1 class="slide-title">Wizard - Step 3: Privacy</h1>
-            <p class="slide-subtitle">Flusso Creator • Step 4 di 8</p>
+            <h1 class="slide-title">Configurazione Sessione: Privacy</h1>
+            <p class="slide-subtitle">Flusso Creator • Configurazione condivisa</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Terzo step per la <span class="highlight creator">configurazione privacy e GDPR</span>. Il Creator decide quali dati personali richiedere ai partecipanti in base alle necessità dell'evento.</p>
@@ -493,8 +599,8 @@
                 <span class="slide-number">14 / 26</span>
             </div>
             <div class="thumb-strip" id="thumbs-creator-5"></div>
-            <h1 class="slide-title">Wizard - Step 4: Import Domande</h1>
-            <p class="slide-subtitle">Flusso Creator • Step 5 di 8</p>
+            <h1 class="slide-title">Modalita' Manuale: Import Domande</h1>
+            <p class="slide-subtitle">Flusso Creator • Domande per sessione</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Quarto step per l'<span class="highlight creator">importazione domande da Google Form</span>. Questa integrazione permette ai Creator di preparare le domande in un ambiente familiare e flessibile.</p>
@@ -526,8 +632,8 @@
                 <span class="slide-number">15 / 26</span>
             </div>
             <div class="thumb-strip" id="thumbs-creator-6"></div>
-            <h1 class="slide-title">Wizard - Step 5: Classifica</h1>
-            <p class="slide-subtitle">Flusso Creator • Step 6 di 8</p>
+            <h1 class="slide-title">Configurazione Sessione: Classifica</h1>
+            <p class="slide-subtitle">Flusso Creator • Configurazione condivisa</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Ultimo step del wizard per la <span class="highlight creator">configurazione della classifica</span>. Le impostazioni sono organizzate in sezioni con checkbox per una selezione chiara e immediata.</p>
@@ -562,7 +668,7 @@
             </div>
             <div class="thumb-strip" id="thumbs-creator-7"></div>
             <h1 class="slide-title">QR Code & Codice Stanza</h1>
-            <p class="slide-subtitle">Flusso Creator • Step 7 di 8</p>
+            <p class="slide-subtitle">Flusso Creator • Pubblicazione</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Dopo la pubblicazione, il sistema genera automaticamente gli <span class="highlight creator">strumenti di accesso</span> per i partecipanti. Questa schermata conferma il successo e fornisce tutto il necessario per condividere il quiz.</p>
@@ -594,7 +700,7 @@
             </div>
             <div class="thumb-strip" id="thumbs-creator-8"></div>
             <h1 class="slide-title">Dettaglio Quiz</h1>
-            <p class="slide-subtitle">Flusso Creator • Step 8 di 8</p>
+            <p class="slide-subtitle">Flusso Creator • Monitoraggio</p>
             <div class="slide-content">
                 <div class="slide-description">
                     <p>Pagina di <span class="highlight creator">dettaglio e monitoraggio in tempo reale</span>. Il Creator visualizza tutte le statistiche live durante lo svolgimento dell'evento e può gestire il quiz.</p>
@@ -882,8 +988,8 @@
         <div class="slide intro-slide" data-slide="27" style="border-top: 3px solid #FF9800;">
             <div class="slide-badge creator" style="position: absolute; top: 20px; left: 30px;">Creator</div>
             <div class="intro-icon">🏛️</div>
-            <h1 class="slide-title">Creator: Congressi & Quiz AI</h1>
-            <p class="slide-subtitle">Il Creator gestisce congressi con N sessioni — per ogni sessione carica i PDF dei relatori e l'AI genera il questionario</p>
+            <h1 class="slide-title">Creator: Modalita' AI da PDF</h1>
+            <p class="slide-subtitle">Alternativa alla modalita' manuale — l'AI genera le domande dalle presentazioni dei relatori</p>
             <div class="flow-steps">
                 <div class="flow-step"><span class="step-num">1</span> Crea Congresso</div>
                 <div class="flow-step"><span class="step-num">2</span> Gestisci Sessioni</div>
@@ -899,207 +1005,13 @@
             </div>
         </div>
 
-        <!-- SLIDE 27: Dashboard Congressi -->
+        <!-- SLIDE 28: Upload Presentazioni Sessione (Modalità AI) -->
         <div class="slide" data-slide="28" data-flow="pdf" data-step="1">
             <div class="slide-header">
                 <span class="slide-badge creator">Creator</span>
                 <span class="slide-number"></span>
             </div>
             <div class="thumb-strip" id="thumbs-pdf-1"></div>
-            <h1 class="slide-title">I Miei Congressi</h1>
-            <p class="slide-subtitle">Flusso Creator • Gestione Congressi</p>
-            <div class="slide-content">
-                <div class="slide-description">
-                    <p>Il Creator accede alla propria <span class="highlight creator">dashboard congressi</span> dove puo' creare e gestire un numero illimitato di congressi.</p>
-                    <p>Ogni congresso rappresenta un <strong>evento ECM reale</strong> (es. "Congresso Cardiologia 2026"). Il Creator lo crea indicando nome, date e programma scientifico.</p>
-                    <p>La lista mostra lo <strong>stato di avanzamento</strong> di ogni congresso: quante sessioni sono state configurate, quanti questionari sono pronti, quanti mancano.</p>
-                    <p>Da qui il Creator puo' <strong>creare un nuovo congresso</strong> o entrare in uno esistente per gestirne le sessioni.</p>
-                    <div class="feature-box">
-                        <h4>Dashboard Congressi</h4>
-                        <ul>
-                            <li>Congressi illimitati per Creator</li>
-                            <li>Per ogni congresso: nome, date, N sessioni, stato</li>
-                            <li>Stato aggregato: sessioni completate / totali</li>
-                            <li>Azione: crea nuovo congresso o entra in esistente</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="slide-image">
-                    <div style="width: 520px; background: #fff; border-radius: 12px; padding: 20px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                            <div style="font-size: 16px; font-weight: 700; color: #333;">I Miei Congressi</div>
-                            <div style="background: #9C27B0; color: #fff; padding: 7px 14px; border-radius: 8px; font-size: 11px; font-weight: 600;">+ NUOVO CONGRESSO</div>
-                        </div>
-                        <!-- Congress 1: Active, in progress -->
-                        <div style="border: 2px solid #9C27B0; border-radius: 10px; padding: 14px; margin-bottom: 10px; background: #FAFAFA; cursor: pointer;">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                <div>
-                                    <div style="font-size: 14px; font-weight: 700; color: #333;">Congresso Cardiologia 2026</div>
-                                    <div style="font-size: 11px; color: #999; margin-top: 2px;">15-17 Maggio 2026 • Roma</div>
-                                </div>
-                                <div style="background: #FFF3E0; color: #E65100; padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">IN CORSO</div>
-                            </div>
-                            <div style="display: flex; gap: 16px; align-items: center;">
-                                <div style="font-size: 10px; color: #666;"><strong style="color: #9C27B0;">5</strong> sessioni</div>
-                                <div style="flex: 1; background: #e0e0e0; height: 5px; border-radius: 3px; overflow: hidden;">
-                                    <div style="background: linear-gradient(90deg, #9C27B0, #CE93D8); width: 40%; height: 100%;"></div>
-                                </div>
-                                <div style="font-size: 10px; color: #666;"><strong>2/5</strong> quiz pronti</div>
-                            </div>
-                        </div>
-                        <!-- Congress 2: Completed -->
-                        <div style="border: 1px solid #4CAF50; border-radius: 10px; padding: 14px; margin-bottom: 10px; background: #f9fff9;">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                <div>
-                                    <div style="font-size: 14px; font-weight: 700; color: #333;">Simposio Neurologia ECM</div>
-                                    <div style="font-size: 11px; color: #999; margin-top: 2px;">10-11 Marzo 2026 • Milano</div>
-                                </div>
-                                <div style="background: #E8F5E9; color: #2E7D32; padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">COMPLETATO</div>
-                            </div>
-                            <div style="display: flex; gap: 16px; align-items: center;">
-                                <div style="font-size: 10px; color: #666;"><strong style="color: #4CAF50;">3</strong> sessioni</div>
-                                <div style="flex: 1; background: #e0e0e0; height: 5px; border-radius: 3px; overflow: hidden;">
-                                    <div style="background: #4CAF50; width: 100%; height: 100%;"></div>
-                                </div>
-                                <div style="font-size: 10px; color: #666;"><strong>3/3</strong> quiz pronti</div>
-                            </div>
-                        </div>
-                        <!-- Congress 3: Draft -->
-                        <div style="border: 1px solid #ddd; border-radius: 10px; padding: 14px; background: #fafafa;">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-                                <div>
-                                    <div style="font-size: 14px; font-weight: 700; color: #333;">Workshop Oncologia</div>
-                                    <div style="font-size: 11px; color: #999; margin-top: 2px;">22 Giugno 2026 • Napoli</div>
-                                </div>
-                                <div style="background: #f0f0f0; color: #999; padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">BOZZA</div>
-                            </div>
-                            <div style="display: flex; gap: 16px; align-items: center;">
-                                <div style="font-size: 10px; color: #666;"><strong>4</strong> sessioni</div>
-                                <div style="flex: 1; background: #e0e0e0; height: 5px; border-radius: 3px; overflow: hidden;">
-                                    <div style="background: #ccc; width: 0%; height: 100%;"></div>
-                                </div>
-                                <div style="font-size: 10px; color: #999;"><strong>0/4</strong> quiz pronti</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 28: Dettaglio Congresso / Lista Sessioni -->
-        <div class="slide" data-slide="29" data-flow="pdf" data-step="2">
-            <div class="slide-header">
-                <span class="slide-badge creator">Creator</span>
-                <span class="slide-number"></span>
-            </div>
-            <div class="thumb-strip" id="thumbs-pdf-2"></div>
-            <h1 class="slide-title">Sessioni del Congresso</h1>
-            <p class="slide-subtitle">Flusso Creator • Dettaglio Congresso</p>
-            <div class="slide-content">
-                <div class="slide-description">
-                    <p>Entrando in un congresso, il Creator vede la <span class="highlight creator">lista delle sessioni</span> previste dal programma scientifico.</p>
-                    <p>Per ogni sessione e' visibile lo <strong>stato del questionario</strong>: da fare, in corso (upload/configurazione/revisione), completato. Il Creator seleziona una sessione per avviare o continuare il flusso.</p>
-                    <p>Il flusso per ogni sessione e' sempre lo stesso: <strong>upload presentazioni → configura quiz → revisiona domande</strong>. Una volta completate tutte le sessioni, il congresso e' pronto.</p>
-                    <p>Il Creator puo' <strong>aggiungere o rimuovere sessioni</strong> in qualsiasi momento, e tornare su sessioni gia' completate per modifiche.</p>
-                    <div class="feature-box">
-                        <h4>Gestione Sessioni</h4>
-                        <ul>
-                            <li>Lista sessioni con stato questionario per ciascuna</li>
-                            <li>Per ogni sessione: titolo, N relatori, stato quiz</li>
-                            <li>Azione: entra in sessione per upload/configura/revisiona</li>
-                            <li>Sessioni aggiungibili/rimovibili dal Creator</li>
-                            <li>Flusso ripetibile per ogni sessione del congresso</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="slide-image">
-                    <div style="width: 520px; background: #fff; border-radius: 12px; padding: 20px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
-                        <div style="margin-bottom: 14px;">
-                            <div style="font-size: 10px; color: #9C27B0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">← Torna ai congressi</div>
-                            <div style="font-size: 16px; font-weight: 700; color: #333; margin-top: 4px;">Congresso Cardiologia 2026</div>
-                            <div style="font-size: 11px; color: #999;">15-17 Maggio 2026 • Roma • 5 sessioni</div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <div style="font-size: 12px; font-weight: 600; color: #666;">Sessioni</div>
-                            <div style="background: #9C27B0; color: #fff; padding: 5px 10px; border-radius: 6px; font-size: 10px; font-weight: 600;">+ AGGIUNGI SESSIONE</div>
-                        </div>
-                        <!-- Session 1: Completed -->
-                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 12px; margin-bottom: 6px; background: #f9fff9; cursor: pointer;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <div style="font-size: 12px; font-weight: 600;">Sessione 1 — Scompenso Cardiaco</div>
-                                    <div style="font-size: 10px; color: #999; margin-top: 2px;">5 relatori • 20 domande generate</div>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 6px;">
-                                    <span style="background: #E8F5E9; color: #2E7D32; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">QUIZ PRONTO</span>
-                                    <span style="color: #ccc;">→</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Session 2: Completed -->
-                        <div style="border: 1px solid #4CAF50; border-radius: 8px; padding: 12px; margin-bottom: 6px; background: #f9fff9; cursor: pointer;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <div style="font-size: 12px; font-weight: 600;">Sessione 2 — Farmacologia</div>
-                                    <div style="font-size: 10px; color: #999; margin-top: 2px;">4 relatori • 15 domande generate</div>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 6px;">
-                                    <span style="background: #E8F5E9; color: #2E7D32; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">QUIZ PRONTO</span>
-                                    <span style="color: #ccc;">→</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Session 3: In progress - review -->
-                        <div style="border: 2px solid #FF9800; border-radius: 8px; padding: 12px; margin-bottom: 6px; background: #FFFDE7; cursor: pointer;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <div style="font-size: 12px; font-weight: 600;">Sessione 3 — Imaging Diagnostico</div>
-                                    <div style="font-size: 10px; color: #999; margin-top: 2px;">3 relatori • Revisione in corso</div>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 6px;">
-                                    <span style="background: #FFF3E0; color: #E65100; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">REVISIONE</span>
-                                    <span style="color: #FF9800;">→</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Session 4: Upload done, needs config -->
-                        <div style="border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 6px; cursor: pointer;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <div style="font-size: 12px; font-weight: 600;">Sessione 4 — Procedure Interventistiche</div>
-                                    <div style="font-size: 10px; color: #999; margin-top: 2px;">5 relatori • PDF caricati, da configurare</div>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 6px;">
-                                    <span style="background: #E3F2FD; color: #1565C0; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">CONFIGURA</span>
-                                    <span style="color: #ccc;">→</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Session 5: Not started -->
-                        <div style="border: 1px dashed #ddd; border-radius: 8px; padding: 12px; cursor: pointer;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <div style="font-size: 12px; font-weight: 600; color: #999;">Sessione 5 — Riabilitazione</div>
-                                    <div style="font-size: 10px; color: #ccc; margin-top: 2px;">0 relatori • Nessun PDF caricato</div>
-                                </div>
-                                <div style="display: flex; align-items: center; gap: 6px;">
-                                    <span style="background: #f5f5f5; color: #bbb; padding: 2px 8px; border-radius: 6px; font-size: 9px; font-weight: 600;">DA FARE</span>
-                                    <span style="color: #ccc;">→</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 29: Upload Presentazioni Sessione -->
-        <div class="slide" data-slide="30" data-flow="pdf" data-step="3">
-            <div class="slide-header">
-                <span class="slide-badge creator">Creator</span>
-                <span class="slide-number"></span>
-            </div>
-            <div class="thumb-strip" id="thumbs-pdf-3"></div>
             <h1 class="slide-title">Upload Presentazioni Sessione</h1>
             <p class="slide-subtitle">Flusso Creator • Per ogni Sessione — Step 1 di 3</p>
             <div class="slide-content">
@@ -1199,13 +1111,13 @@
             </div>
         </div>
 
-        <!-- SLIDE 30: Configurazione Quiz (Menu a Tendina) -->
-        <div class="slide" data-slide="31" data-flow="pdf" data-step="4">
+        <!-- SLIDE 29: Configurazione Quiz (Menu a Tendina) -->
+        <div class="slide" data-slide="29" data-flow="pdf" data-step="2">
             <div class="slide-header">
                 <span class="slide-badge creator">Creator</span>
                 <span class="slide-number"></span>
             </div>
-            <div class="thumb-strip" id="thumbs-pdf-4"></div>
+            <div class="thumb-strip" id="thumbs-pdf-2"></div>
             <h1 class="slide-title">Configurazione Quiz</h1>
             <p class="slide-subtitle">Flusso Creator • Per ogni Sessione — Step 2 di 3</p>
             <div class="slide-content">
@@ -1301,13 +1213,13 @@
             </div>
         </div>
 
-        <!-- SLIDE 31: Revisione Domande (Accordion) -->
-        <div class="slide" data-slide="32" data-flow="pdf" data-step="5">
+        <!-- SLIDE 30: Revisione Domande (Accordion) -->
+        <div class="slide" data-slide="30" data-flow="pdf" data-step="3">
             <div class="slide-header">
                 <span class="slide-badge creator">Creator</span>
                 <span class="slide-number"></span>
             </div>
-            <div class="thumb-strip" id="thumbs-pdf-5"></div>
+            <div class="thumb-strip" id="thumbs-pdf-3"></div>
             <h1 class="slide-title">Revisione Domande</h1>
             <p class="slide-subtitle">Flusso Creator • Per ogni Sessione — Step 3 di 3</p>
             <div class="slide-content">
@@ -1433,8 +1345,8 @@
             </div>
         </div>
 
-        <!-- SLIDE 32: Pipeline Elaborazione Multi-Documento -->
-        <div class="slide" data-slide="33" data-flow="pdf" data-step="6">
+        <!-- SLIDE 31: Pipeline Elaborazione Multi-Documento -->
+        <div class="slide" data-slide="31" data-flow="pdf" data-step="4">
             <div class="slide-header">
                 <span class="slide-badge overview">Sistema</span>
                 <span class="slide-number"></span>
@@ -1564,19 +1476,19 @@
             </div>
         </div>
 
-        <!-- SLIDE 33: Conclusione -->
-        <div class="slide intro-slide" data-slide="34">
+        <!-- SLIDE 32: Conclusione -->
+        <div class="slide intro-slide" data-slide="32">
             <div class="intro-icon">✅</div>
             <h1 class="slide-title">Riepilogo</h1>
-            <p class="slide-subtitle">Clinical Quiz: 31 schermate, 5 flowchart, 1 piattaforma completa</p>
+            <p class="slide-subtitle">Clinical Quiz: 29 schermate, 5 flowchart, 1 piattaforma completa</p>
             <div class="flow-steps">
                 <div class="flow-step"><span class="step-num">5</span> Schermate Admin</div>
-                <div class="flow-step"><span class="step-num">14</span> Schermate Creator</div>
+                <div class="flow-step"><span class="step-num">12</span> Schermate Creator</div>
                 <div class="flow-step"><span class="step-num">7</span> Schermate Mobile</div>
                 <div class="flow-step"><span class="step-num">5</span> Flowchart</div>
             </div>
             <p style="margin-top: 20px; color: rgba(255,255,255,0.4); font-size: 13px;">
-                Creator include: quiz manuali (8) + congressi & quiz AI (6 + pipeline)
+                Creator include: quiz manuali (8) + quiz AI da PDF (3 + pipeline)
             </p>
         </div>
 
@@ -1590,7 +1502,7 @@
 
     <script>
         let currentSlide = 1;
-        const totalSlides = 34;
+        const totalSlides = 32;
 
         // Thumbnail configurations
         const flowThumbs = {
@@ -1621,12 +1533,10 @@
                 { slide: 26, img: 'wireframe_mobile_leaderboard.svg', label: 'Classifica' }
             ],
             pdf: [
-                { slide: 28, label: 'Congressi', inline: true },
-                { slide: 29, label: 'Sessioni', inline: true },
-                { slide: 30, label: 'Upload', inline: true },
-                { slide: 31, label: 'Configurazione', inline: true },
-                { slide: 32, label: 'Revisione', inline: true },
-                { slide: 33, label: 'Pipeline', inline: true }
+                { slide: 28, label: 'Upload', inline: true },
+                { slide: 29, label: 'Configurazione', inline: true },
+                { slide: 30, label: 'Revisione', inline: true },
+                { slide: 31, label: 'Pipeline', inline: true }
             ]
         };
 
