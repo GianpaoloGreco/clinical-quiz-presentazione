@@ -19,6 +19,7 @@
         .slide-badge.creator { background: #FF9800; }
         .slide-badge.mobile { background: #4CAF50; }
         .slide-badge.overview { background: #9C27B0; }
+        .slide-badge.insight { background: #00BCD4; }
         .slide-number { color: rgba(255,255,255,0.4); font-size: 13px; }
 
         /* Thumbnail Strip */
@@ -52,6 +53,7 @@
         .highlight.admin { color: #42A5F5; }
         .highlight.creator { color: #FFA726; }
         .highlight.mobile { color: #66BB6A; }
+        .highlight.insight { color: #00BCD4; }
 
         /* Intro slides */
         .intro-slide { justify-content: center; align-items: center; text-align: center; }
@@ -114,13 +116,20 @@
                         <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.3);">7 schermate</div>
                     </div>
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 300px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 620px; margin: 0 auto;">
                     <!-- Overview -->
                     <div onclick="goToSlide(2)" style="background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 24px 20px; cursor: pointer; transition: all 0.3s;">
                         <div style="font-size: 30px; margin-bottom: 8px;">🗺️</div>
                         <div style="font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.8); margin-bottom: 6px;">Overview & Flowchart</div>
                         <div style="font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5;">Panoramica sistema e diagrammi di flusso</div>
                         <div style="margin-top: 8px; font-size: 11px; color: rgba(255,255,255,0.3);">2 schermate + 5 flowchart</div>
+                    </div>
+                    <!-- Fix & Refinment -->
+                    <div onclick="goToSlide(32)" style="background: rgba(0,188,212,0.1); border: 2px solid #00BCD4; border-radius: 16px; padding: 24px 20px; cursor: pointer; transition: all 0.3s;">
+                        <div style="font-size: 30px; margin-bottom: 8px;">🔧</div>
+                        <div style="font-size: 16px; font-weight: 700; color: #26C6DA; margin-bottom: 6px;">Fix & Refinment 1.0</div>
+                        <div style="font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5;">Bug fix, AI Intelligence Engine, report e valore</div>
+                        <div style="margin-top: 8px; font-size: 11px; color: rgba(255,255,255,0.3);">4 schermate</div>
                     </div>
                 </div>
             </div>
@@ -1476,19 +1485,333 @@
             </div>
         </div>
 
-        <!-- SLIDE 32: Conclusione -->
-        <div class="slide intro-slide" data-slide="32">
+        <!-- SLIDE 32: Intro Fix & Refinment 1.0 -->
+        <div class="slide intro-slide" data-slide="32" style="border-top: 3px solid #00BCD4;">
+            <div class="intro-icon">🔧</div>
+            <h1 class="slide-title">Fix & Refinment 1.0</h1>
+            <p class="slide-subtitle">Bug fix tecnici, AI Clinical Intelligence Engine e reportistica strategica</p>
+            <div class="flow-steps">
+                <div class="flow-step"><span class="step-num">1</span> Bug Fix</div>
+                <div class="flow-step"><span class="step-num">2</span> AI Intelligence</div>
+                <div class="flow-step"><span class="step-num">3</span> Report Insight</div>
+                <div class="flow-step"><span class="step-num">4</span> Valore MedTech</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 33: Bug Fix Tecnici -->
+        <div class="slide" data-slide="33" data-flow="fix" data-step="1">
+            <div class="slide-header">
+                <span class="slide-badge insight">Fix & Refinment</span>
+                <span class="slide-number"></span>
+            </div>
+            <div class="thumb-strip" id="thumbs-fix-1"></div>
+            <h1 class="slide-title">Bug Fix Tecnici</h1>
+            <p class="slide-subtitle">Fix & Refinment 1.0 • Interventi prioritari</p>
+            <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 20px; align-content: start;">
+                <!-- Bug 1 -->
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; border-left: 4px solid #F44336;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                        <span style="background: #F44336; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700;">CRITICO</span>
+                        <span style="font-size: 13px; font-weight: 600;">Registrazione solo Google</span>
+                    </div>
+                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">La registrazione con email/password non funziona. Solo il login tramite Google Account va a buon fine. La registrazione standard deve essere ripristinata.</p>
+                </div>
+                <!-- Bug 2 -->
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; border-left: 4px solid #F44336;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                        <span style="background: #F44336; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700;">CRITICO</span>
+                        <span style="font-size: 13px; font-weight: 600;">QR Code quiz AI mancante</span>
+                    </div>
+                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">Il quiz creato manualmente genera il QR code correttamente. Il quiz generato da AI/PDF non produce il QR code. Il flusso deve essere allineato.</p>
+                </div>
+                <!-- Bug 3 -->
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; border-left: 4px solid #FF9800;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                        <span style="background: #FF9800; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700;">ALTO</span>
+                        <span style="font-size: 13px; font-weight: 600;">Upload PDF: errori frequenti</span>
+                    </div>
+                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">Su N documenti caricati, solo 1 va a buon fine. Gli altri vanno in errore senza motivazione. Servono alert con dettaglio errore specifico per ogni file.</p>
+                </div>
+                <!-- Bug 4 -->
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; border-left: 4px solid #2196F3;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                        <span style="background: #2196F3; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700;">MEDIO</span>
+                        <span style="font-size: 13px; font-weight: 600;">Brand Kit non uniforme</span>
+                    </div>
+                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">Il brand kit del cliente deve essere applicato su tutta la piattaforma: lato Creator e lato Partecipante. Verificare copertura completa su ogni schermata.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 34: AI Clinical Intelligence Engine -->
+        <div class="slide" data-slide="34" data-flow="fix" data-step="2">
+            <div class="slide-header">
+                <span class="slide-badge insight">Fix & Refinment</span>
+                <span class="slide-number"></span>
+            </div>
+            <div class="thumb-strip" id="thumbs-fix-2"></div>
+            <h1 class="slide-title">AI Clinical Intelligence Engine</h1>
+            <p class="slide-subtitle">Fix & Refinment 1.0 • Evoluzione generazione domande</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>L'AI non genera domande generiche di conoscenza. Ogni domanda e' un <span class="highlight insight">proxy di una decisione clinica reale</span>, progettata per estrarre insight di valore strategico per aziende MedTech/Pharma.</p>
+                    <p>Il motore AI analizza i PDF e identifica <strong>decision point clinici</strong>: scelte terapeutiche, gestione complicanze, timing decisionale, alternative cliniche. Le domande vengono costruite attorno a questi punti.</p>
+                    <p>Differenza chiave rispetto al polling tradizionale: non si misura solo "cosa rispondono", ma <strong>come decidono</strong>: tempo di risposta, coerenza, distribuzione delle scelte, variabilita' tra clinici.</p>
+                    <div class="feature-box">
+                        <h4>13 Categorie di Insight</h4>
+                        <ul>
+                            <li><strong>Clinical Decision:</strong> pratica clinica reale vs attesa</li>
+                            <li><strong>Variability:</strong> dove la pratica non e' standardizzata</li>
+                            <li><strong>Guideline Adherence:</strong> allineamento alle best practice</li>
+                            <li><strong>Decision Confidence:</strong> sicurezza vs incertezza dei clinici</li>
+                            <li><strong>Behavior Clustering:</strong> tipologie di clinici (conservativi, innovatori, indecisi)</li>
+                            <li><strong>Educational Gap:</strong> dove serve formazione</li>
+                            <li><strong>Treatment Pathway:</strong> percorso decisionale reale</li>
+                            <li>+ 6 categorie: consistency, technology adoption, barrier, trend, segmentation, business</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <div style="width: 520px; background: #fff; border-radius: 12px; padding: 20px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                        <div style="background: #00BCD4; color: #fff; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-bottom: 14px; text-align: center;">
+                            CS Intelligence Engine
+                        </div>
+                        <!-- Step 1: Input -->
+                        <div style="background: #E3F2FD; border-radius: 8px; padding: 10px 14px; margin-bottom: 6px;">
+                            <div style="font-size: 10px; font-weight: 700; color: #1565C0; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Input: Contenuto Scientifico</div>
+                            <div style="display: flex; gap: 6px;">
+                                <div style="background: #fff; border-radius: 4px; padding: 4px 8px; font-size: 9px; border: 1px solid #BBDEFB;">PDF Relazioni</div>
+                                <div style="background: #fff; border-radius: 4px; padding: 4px 8px; font-size: 9px; border: 1px solid #BBDEFB;">Casi Clinici</div>
+                                <div style="background: #fff; border-radius: 4px; padding: 4px 8px; font-size: 9px; border: 1px solid #BBDEFB;">Slide Congressuali</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; font-size: 16px; color: #ccc; margin: 2px 0;">▼</div>
+                        <!-- Step 2: AI Processing -->
+                        <div style="background: #E0F7FA; border-radius: 8px; padding: 10px 14px; margin-bottom: 6px; border: 2px solid #00BCD4;">
+                            <div style="font-size: 10px; font-weight: 700; color: #00838F; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">AI: Estrazione Decision Point</div>
+                            <div style="font-size: 10px; color: #555; line-height: 1.5;">Concetti chiave → Decision point clinici → Domande contestuali su decisioni reali</div>
+                        </div>
+                        <div style="text-align: center; font-size: 16px; color: #ccc; margin: 2px 0;">▼</div>
+                        <!-- Step 3: Output -->
+                        <div style="background: #FFF3E0; border-radius: 8px; padding: 10px 14px; margin-bottom: 6px;">
+                            <div style="font-size: 10px; font-weight: 700; color: #E65100; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Output: Domande Strategiche</div>
+                            <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                                <div style="background: #fff; border-radius: 4px; padding: 3px 6px; font-size: 8px; border: 1px solid #FFE0B2;">Scelta terapeutica</div>
+                                <div style="background: #fff; border-radius: 4px; padding: 3px 6px; font-size: 8px; border: 1px solid #FFE0B2;">Gestione complicanza</div>
+                                <div style="background: #fff; border-radius: 4px; padding: 3px 6px; font-size: 8px; border: 1px solid #FFE0B2;">Timing decisionale</div>
+                                <div style="background: #fff; border-radius: 4px; padding: 3px 6px; font-size: 8px; border: 1px solid #FFE0B2;">Alternative cliniche</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; font-size: 16px; color: #ccc; margin: 2px 0;">▼</div>
+                        <!-- Step 4: Data Collection -->
+                        <div style="background: #E8F5E9; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px;">
+                            <div style="font-size: 10px; font-weight: 700; color: #2E7D32; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Raccolta: Non solo "cosa" ma "come"</div>
+                            <div style="display: flex; gap: 6px;">
+                                <div style="background: #fff; border-radius: 4px; padding: 4px 8px; font-size: 9px; border: 1px solid #C8E6C9; text-align: center; flex: 1;">Scelta fatta</div>
+                                <div style="background: #fff; border-radius: 4px; padding: 4px 8px; font-size: 9px; border: 1px solid #C8E6C9; text-align: center; flex: 1;">Tempo risposta</div>
+                                <div style="background: #fff; border-radius: 4px; padding: 4px 8px; font-size: 9px; border: 1px solid #C8E6C9; text-align: center; flex: 1;">Coerenza</div>
+                                <div style="background: #fff; border-radius: 4px; padding: 4px 8px; font-size: 9px; border: 1px solid #C8E6C9; text-align: center; flex: 1;">Distribuzione</div>
+                            </div>
+                        </div>
+                        <!-- Difference callout -->
+                        <div style="background: #FCE4EC; border-radius: 6px; padding: 8px 10px; display: flex; gap: 10px; align-items: center;">
+                            <div style="flex: 1; text-align: center;">
+                                <div style="font-size: 8px; font-weight: 700; color: #C62828; text-transform: uppercase;">Polling</div>
+                                <div style="font-size: 9px; color: #666;">dato = risposta</div>
+                            </div>
+                            <div style="font-size: 14px; color: #999;">vs</div>
+                            <div style="flex: 1; text-align: center;">
+                                <div style="font-size: 8px; font-weight: 700; color: #00838F; text-transform: uppercase;">Clinical Scenario</div>
+                                <div style="font-size: 9px; color: #666;">risposta + contesto + comportamento</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 35: Report Clinical Insight -->
+        <div class="slide" data-slide="35" data-flow="fix" data-step="3">
+            <div class="slide-header">
+                <span class="slide-badge insight">Fix & Refinment</span>
+                <span class="slide-number"></span>
+            </div>
+            <div class="thumb-strip" id="thumbs-fix-3"></div>
+            <h1 class="slide-title">Report Clinical Insight</h1>
+            <p class="slide-subtitle">Fix & Refinment 1.0 • Reportistica strategica</p>
+            <div class="slide-content">
+                <div class="slide-description">
+                    <p>I report non mostrano solo "% risposte corrette". Mostrano <span class="highlight insight">insight strategici</span> derivati dal comportamento decisionale dei clinici durante i quiz.</p>
+                    <p>Il dataset si struttura su <strong>3 livelli</strong>: base (distribuzione risposte), avanzato (pattern decisionali, cluster comportamentali, variabilita'), strategico (gap formativi, aree di incertezza, bias decisionali).</p>
+                    <p>Con l'accumulo nel tempo (Evento 1 → N), il sistema costruisce un <strong>asset proprietario</strong>: benchmark, trend, evoluzione decisionale. Questo e' il vero valore differenziante.</p>
+                    <div class="feature-box">
+                        <h4>KPI Dashboard</h4>
+                        <ul>
+                            <li><strong>Decisioni prevalenti:</strong> scelta A vs B vs C, livello di consenso</li>
+                            <li><strong>Variabilita' clinica:</strong> dispersione risposte, non uniformita'</li>
+                            <li><strong>Gap formativi:</strong> errori frequenti, aree di incertezza</li>
+                            <li><strong>Cluster comportamentali:</strong> conservativi, innovatori, indecisi</li>
+                            <li><strong>Aderenza linee guida:</strong> distanza pratica reale / best practice</li>
+                            <li><strong>Trend temporali:</strong> evoluzione comportamento tra eventi</li>
+                            <li><strong>Confidenza decisionale:</strong> tempo medio, variazione tra gruppi</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="slide-image">
+                    <div style="width: 540px; background: #fff; border-radius: 12px; padding: 18px; color: #333; font-family: 'Segoe UI', sans-serif; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <div style="font-size: 14px; font-weight: 700;">Clinical Insight Dashboard</div>
+                            <div style="display: flex; gap: 6px;">
+                                <div style="background: #E0F7FA; color: #00838F; padding: 3px 8px; border-radius: 10px; font-size: 9px; font-weight: 600;">Congresso ECM 2026</div>
+                                <div style="background: #F3E5F5; color: #7B1FA2; padding: 3px 8px; border-radius: 10px; font-size: 9px; font-weight: 600;">Sessione 1</div>
+                            </div>
+                        </div>
+                        <!-- KPI cards -->
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 10px;">
+                            <div style="background: #E3F2FD; border-radius: 6px; padding: 8px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 700; color: #1565C0;">78%</div>
+                                <div style="font-size: 8px; color: #666;">Consenso medio</div>
+                            </div>
+                            <div style="background: #FFF3E0; border-radius: 6px; padding: 8px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 700; color: #E65100;">12s</div>
+                                <div style="font-size: 8px; color: #666;">Tempo medio</div>
+                            </div>
+                            <div style="background: #E8F5E9; border-radius: 6px; padding: 8px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 700; color: #2E7D32;">3</div>
+                                <div style="font-size: 8px; color: #666;">Cluster trovati</div>
+                            </div>
+                            <div style="background: #FCE4EC; border-radius: 6px; padding: 8px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 700; color: #C62828;">5</div>
+                                <div style="font-size: 8px; color: #666;">Gap formativi</div>
+                            </div>
+                        </div>
+                        <!-- Chart: Decision Distribution -->
+                        <div style="margin-bottom: 10px;">
+                            <div style="font-size: 9px; font-weight: 700; color: #333; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;">Distribuzione Decisioni - Q3: Gestione Complicanza</div>
+                            <div style="display: flex; gap: 3px; align-items: flex-end; height: 50px; padding: 4px; background: #f9f9f9; border-radius: 6px;">
+                                <div style="flex: 1; background: #1565C0; border-radius: 3px 3px 0 0; height: 85%; position: relative;"><div style="position: absolute; top: -14px; width: 100%; text-align: center; font-size: 8px; font-weight: 600; color: #1565C0;">42%</div></div>
+                                <div style="flex: 1; background: #42A5F5; border-radius: 3px 3px 0 0; height: 55%; position: relative;"><div style="position: absolute; top: -14px; width: 100%; text-align: center; font-size: 8px; font-weight: 600; color: #42A5F5;">28%</div></div>
+                                <div style="flex: 1; background: #90CAF9; border-radius: 3px 3px 0 0; height: 35%; position: relative;"><div style="position: absolute; top: -14px; width: 100%; text-align: center; font-size: 8px; font-weight: 600; color: #64B5F6;">18%</div></div>
+                                <div style="flex: 1; background: #BBDEFB; border-radius: 3px 3px 0 0; height: 20%; position: relative;"><div style="position: absolute; top: -14px; width: 100%; text-align: center; font-size: 8px; font-weight: 600; color: #90CAF9;">12%</div></div>
+                            </div>
+                            <div style="display: flex; gap: 3px; margin-top: 2px;">
+                                <div style="flex: 1; text-align: center; font-size: 7px; color: #999;">Opz. A</div>
+                                <div style="flex: 1; text-align: center; font-size: 7px; color: #999;">Opz. B</div>
+                                <div style="flex: 1; text-align: center; font-size: 7px; color: #999;">Opz. C</div>
+                                <div style="flex: 1; text-align: center; font-size: 7px; color: #999;">Opz. D</div>
+                            </div>
+                        </div>
+                        <!-- Cluster + Guideline -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+                            <div style="border: 1px solid #eee; border-radius: 6px; padding: 8px;">
+                                <div style="font-size: 9px; font-weight: 700; color: #333; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Cluster Comportamentali</div>
+                                <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 3px;">
+                                    <div style="width: 8px; height: 8px; border-radius: 50%; background: #4CAF50;"></div>
+                                    <div style="font-size: 9px; flex: 1;">Conservativi</div>
+                                    <div style="font-size: 9px; font-weight: 600; color: #4CAF50;">45%</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 3px;">
+                                    <div style="width: 8px; height: 8px; border-radius: 50%; background: #FF9800;"></div>
+                                    <div style="font-size: 9px; flex: 1;">Innovatori</div>
+                                    <div style="font-size: 9px; font-weight: 600; color: #FF9800;">35%</div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 4px;">
+                                    <div style="width: 8px; height: 8px; border-radius: 50%; background: #F44336;"></div>
+                                    <div style="font-size: 9px; flex: 1;">Indecisi</div>
+                                    <div style="font-size: 9px; font-weight: 600; color: #F44336;">20%</div>
+                                </div>
+                            </div>
+                            <div style="border: 1px solid #eee; border-radius: 6px; padding: 8px;">
+                                <div style="font-size: 9px; font-weight: 700; color: #333; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Aderenza Linee Guida</div>
+                                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                                    <div style="flex: 1; height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 72%; height: 100%; background: #4CAF50; border-radius: 3px;"></div>
+                                    </div>
+                                    <div style="font-size: 10px; font-weight: 600; color: #4CAF50;">72%</div>
+                                </div>
+                                <div style="font-size: 8px; color: #999; line-height: 1.4;">Gap: gestione complicanze post-operatorie e timing intervento</div>
+                            </div>
+                        </div>
+                        <!-- Accumulation -->
+                        <div style="background: #E0F7FA; border-radius: 6px; padding: 8px 10px; display: flex; align-items: center; gap: 10px;">
+                            <div style="font-size: 16px;">📈</div>
+                            <div>
+                                <div style="font-size: 9px; font-weight: 700; color: #00838F;">Accumulo nel tempo</div>
+                                <div style="font-size: 8px; color: #666;">Evento 1 → dati | Evento 10 → benchmark + trend + evoluzione decisionale</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 36: Valore per MedTech -->
+        <div class="slide" data-slide="36" data-flow="fix" data-step="4">
+            <div class="slide-header">
+                <span class="slide-badge insight">Fix & Refinment</span>
+                <span class="slide-number"></span>
+            </div>
+            <div class="thumb-strip" id="thumbs-fix-4"></div>
+            <h1 class="slide-title">Valore per MedTech / Pharma</h1>
+            <p class="slide-subtitle">Fix & Refinment 1.0 • 8 leve economiche</p>
+            <div style="flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 0 10px; align-content: start;">
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; border-top: 3px solid #4CAF50;">
+                    <div style="font-size: 22px; margin-bottom: 6px;">📈</div>
+                    <div style="font-size: 12px; font-weight: 700; margin-bottom: 6px;">Incremento Ricavi</div>
+                    <p style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Miglior conversione, targeting preciso, aumento adozione tecnologia, upselling/cross-selling</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; border-top: 3px solid #F44336;">
+                    <div style="font-size: 22px; margin-bottom: 6px;">💰</div>
+                    <div style="font-size: 12px; font-weight: 700; margin-bottom: 6px;">Riduzione Costi Mktg</div>
+                    <p style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">-30%/-60% costi ricerca. Insight durante eventi gia' finanziati, numeri piu' grandi</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; border-top: 3px solid #2196F3;">
+                    <div style="font-size: 22px; margin-bottom: 6px;">🎯</div>
+                    <div style="font-size: 12px; font-weight: 700; margin-bottom: 6px;">Go-to-Market</div>
+                    <p style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Quando, dove e come intervenire. Riduzione errori strategici, efficacia campagne</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; border-top: 3px solid #FF9800;">
+                    <div style="font-size: 22px; margin-bottom: 6px;">🛡️</div>
+                    <div style="font-size: 12px; font-weight: 700; margin-bottom: 6px;">Riduzione Rischio</div>
+                    <p style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Decisioni basate su evidenze comportamentali, non percezione. Meno investimenti sbagliati</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; border-top: 3px solid #9C27B0;">
+                    <div style="font-size: 22px; margin-bottom: 6px;">⚡</div>
+                    <div style="font-size: 12px; font-weight: 700; margin-bottom: 6px;">Time-to-Market</div>
+                    <p style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Feedback immediato dai clinici, validazione rapida strategie, lanci piu' veloci</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; border-top: 3px solid #00BCD4;">
+                    <div style="font-size: 22px; margin-bottom: 6px;">🎓</div>
+                    <div style="font-size: 12px; font-weight: 700; margin-bottom: 6px;">Medical Education</div>
+                    <p style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Programmi mirati sui gap reali, non generici. Maggiore efficacia, meno spreco budget</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; border-top: 3px solid #FF5722;">
+                    <div style="font-size: 22px; margin-bottom: 6px;">📊</div>
+                    <div style="font-size: 12px; font-weight: 700; margin-bottom: 6px;">Costo per Insight</div>
+                    <p style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Advisory board: 20K / 10 persone. Clinical Scenario: 10K / 500 medici + dati strutturati</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; border-top: 3px solid #607D8B;">
+                    <div style="font-size: 22px; margin-bottom: 6px;">🏗️</div>
+                    <div style="font-size: 12px; font-weight: 700; margin-bottom: 6px;">Asset Proprietario</div>
+                    <p style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Database, benchmark, knowledge base nel tempo. Vantaggio competitivo sostenibile</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 37: Conclusione -->
+        <div class="slide intro-slide" data-slide="37">
             <div class="intro-icon">✅</div>
             <h1 class="slide-title">Riepilogo</h1>
-            <p class="slide-subtitle">Clinical Quiz: 29 schermate, 5 flowchart, 1 piattaforma completa</p>
+            <p class="slide-subtitle">Clinical Quiz: 33 schermate, 5 flowchart, 1 piattaforma completa</p>
             <div class="flow-steps">
                 <div class="flow-step"><span class="step-num">5</span> Schermate Admin</div>
                 <div class="flow-step"><span class="step-num">12</span> Schermate Creator</div>
                 <div class="flow-step"><span class="step-num">7</span> Schermate Mobile</div>
+                <div class="flow-step"><span class="step-num">4</span> Fix & Refinment</div>
                 <div class="flow-step"><span class="step-num">5</span> Flowchart</div>
             </div>
             <p style="margin-top: 20px; color: rgba(255,255,255,0.4); font-size: 13px;">
-                Creator include: quiz manuali (8) + quiz AI da PDF (3 + pipeline)
+                Creator: quiz manuali (8) + quiz AI da PDF (3 + pipeline) | Fix: bug fix + AI Intelligence + report + valore
             </p>
         </div>
 
@@ -1502,7 +1825,7 @@
 
     <script>
         let currentSlide = 1;
-        const totalSlides = 32;
+        const totalSlides = 37;
 
         // Thumbnail configurations
         const flowThumbs = {
@@ -1537,6 +1860,12 @@
                 { slide: 29, label: 'Configurazione', inline: true },
                 { slide: 30, label: 'Revisione', inline: true },
                 { slide: 31, label: 'Pipeline', inline: true }
+            ],
+            fix: [
+                { slide: 33, label: 'Bug Fix', inline: true },
+                { slide: 34, label: 'AI Intelligence', inline: true },
+                { slide: 35, label: 'Report Insight', inline: true },
+                { slide: 36, label: 'Valore MedTech', inline: true }
             ]
         };
 
