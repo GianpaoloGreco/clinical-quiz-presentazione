@@ -1508,40 +1508,71 @@
             <div class="thumb-strip" id="thumbs-fix-1"></div>
             <h1 class="slide-title">Bug Fix Tecnici</h1>
             <p class="slide-subtitle">Fix & Refinment 1.0 • Interventi prioritari</p>
-            <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 20px; align-content: start;">
-                <!-- Bug 1 -->
-                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; border-left: 4px solid #F44336;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                        <span style="background: #F44336; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700;">CRITICO</span>
-                        <span style="font-size: 13px; font-weight: 600;">Registrazione solo Google</span>
+            <div class="slide-content">
+                <div class="slide-description" style="flex: 0 0 55%;">
+                    <!-- Bug 1: CRITICO -->
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 10px; background: rgba(244,67,54,0.08); border-radius: 8px; border-left: 3px solid #F44336;">
+                        <span style="background: #F44336; color: #fff; padding: 2px 6px; border-radius: 8px; font-size: 8px; font-weight: 700; white-space: nowrap; margin-top: 2px;">CRITICO</span>
+                        <div>
+                            <div style="font-size: 12px; font-weight: 600; margin-bottom: 3px;">Registrazione solo Google</div>
+                            <div style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Registrazione email/password non funziona. Solo login Google va. Ripristinare registrazione standard.</div>
+                        </div>
                     </div>
-                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">La registrazione con email/password non funziona. Solo il login tramite Google Account va a buon fine. La registrazione standard deve essere ripristinata.</p>
+                    <!-- Bug 2: CRITICO -->
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 10px; background: rgba(244,67,54,0.08); border-radius: 8px; border-left: 3px solid #F44336;">
+                        <span style="background: #F44336; color: #fff; padding: 2px 6px; border-radius: 8px; font-size: 8px; font-weight: 700; white-space: nowrap; margin-top: 2px;">CRITICO</span>
+                        <div>
+                            <div style="font-size: 12px; font-weight: 600; margin-bottom: 3px;">QR Code quiz AI mancante</div>
+                            <div style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Quiz manuale genera QR, quiz AI no. Il popup QR si apre vuoto (vedi screenshot). Allineare il flusso AI a quello manuale.</div>
+                        </div>
+                    </div>
+                    <!-- Bug 3: ALTO -->
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 10px; background: rgba(255,152,0,0.08); border-radius: 8px; border-left: 3px solid #FF9800;">
+                        <span style="background: #FF9800; color: #fff; padding: 2px 6px; border-radius: 8px; font-size: 8px; font-weight: 700; white-space: nowrap; margin-top: 2px;">ALTO</span>
+                        <div>
+                            <div style="font-size: 12px; font-weight: 600; margin-bottom: 3px;">Upload PDF: errori frequenti</div>
+                            <div style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Su N doc caricati, solo 1 va. Gli altri in errore senza motivazione. Servono alert con dettaglio errore per file.</div>
+                            <div style="font-size: 10px; color: #FF9800; margin-top: 4px; font-weight: 600;">Azione: SVP manda mail con 10+ PDF a Pietro per test.</div>
+                        </div>
+                    </div>
+                    <!-- Bug 4: ALTO -->
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 10px; background: rgba(255,152,0,0.08); border-radius: 8px; border-left: 3px solid #FF9800;">
+                        <span style="background: #FF9800; color: #fff; padding: 2px 6px; border-radius: 8px; font-size: 8px; font-weight: 700; white-space: nowrap; margin-top: 2px;">ALTO</span>
+                        <div>
+                            <div style="font-size: 12px; font-weight: 600; margin-bottom: 3px;">Report Excel non scaricabile</div>
+                            <div style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">"Esporta Excel" mostra alert "in sviluppo". Il report deve essere funzionante e scaricabile dalla lista quiz senza entrare nel dettaglio.</div>
+                        </div>
+                    </div>
+                    <!-- Bug 5: MEDIO -->
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 10px; background: rgba(33,150,243,0.08); border-radius: 8px; border-left: 3px solid #2196F3;">
+                        <span style="background: #2196F3; color: #fff; padding: 2px 6px; border-radius: 8px; font-size: 8px; font-weight: 700; white-space: nowrap; margin-top: 2px;">MEDIO</span>
+                        <div>
+                            <div style="font-size: 12px; font-weight: 600; margin-bottom: 3px;">Brand Kit non uniforme</div>
+                            <div style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Applicare brand kit su tutta la piattaforma (Creator + Partecipante). Riferimento: <a href="https://www.surgicalvideoproduction.com" target="_blank" style="color: #42A5F5; text-decoration: underline;">surgicalvideoproduction.com</a></div>
+                        </div>
+                    </div>
+                    <!-- Bug 6: MINOR -->
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid #78909C;">
+                        <span style="background: #78909C; color: #fff; padding: 2px 6px; border-radius: 8px; font-size: 8px; font-weight: 700; white-space: nowrap; margin-top: 2px;">MINOR</span>
+                        <div>
+                            <div style="font-size: 12px; font-weight: 600; margin-bottom: 3px;">Redirect dopo pubblicazione quiz</div>
+                            <div style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Dopo "Pubblica", il Creator va nella lista quiz del congresso. Deve andare nella pagina di recap/dettaglio del singolo quiz appena pubblicato.</div>
+                        </div>
+                    </div>
+                    <!-- Bug 7: BASSO -->
+                    <div style="display: flex; align-items: flex-start; gap: 10px; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid #78909C;">
+                        <span style="background: #78909C; color: #fff; padding: 2px 6px; border-radius: 8px; font-size: 8px; font-weight: 700; white-space: nowrap; margin-top: 2px;">BASSO</span>
+                        <div>
+                            <div style="font-size: 12px; font-weight: 600; margin-bottom: 3px;">Mobile: risposta non centrata</div>
+                            <div style="font-size: 10px; color: rgba(255,255,255,0.6); line-height: 1.5;">Il popup "Risposta Corretta/Errata" su mobile non e' centrato nello schermo. Allineare il componente.</div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Bug 2 -->
-                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; border-left: 4px solid #F44336;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                        <span style="background: #F44336; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700;">CRITICO</span>
-                        <span style="font-size: 13px; font-weight: 600;">QR Code quiz AI mancante</span>
+                <div class="slide-image" style="flex: 0 0 40%;">
+                    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+                        <img src="bug_qr_empty.png" alt="Bug: QR Code vuoto" style="max-width: 100%; max-height: 340px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                        <div style="font-size: 10px; color: rgba(255,255,255,0.4); text-align: center;">Screenshot: popup QR code vuoto su quiz AI</div>
                     </div>
-                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">Il quiz creato manualmente genera il QR code correttamente. Il quiz generato da AI/PDF non produce il QR code. Il flusso deve essere allineato.</p>
-                </div>
-                <!-- Bug 3 -->
-                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; border-left: 4px solid #FF9800;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                        <span style="background: #FF9800; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700;">ALTO</span>
-                        <span style="font-size: 13px; font-weight: 600;">Upload PDF: errori frequenti</span>
-                    </div>
-                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">Su N documenti caricati, solo 1 va a buon fine. Gli altri vanno in errore senza motivazione. Servono alert con dettaglio errore specifico per ogni file.</p>
-                    <p style="font-size: 11px; color: #FF9800; margin-top: 8px; font-weight: 600;">Azione: SVP manda mail con almeno 10 PDF di esempio a Pietro per test.</p>
-                </div>
-                <!-- Bug 4 -->
-                <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px; border-left: 4px solid #2196F3;">
-                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                        <span style="background: #2196F3; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 700;">MEDIO</span>
-                        <span style="font-size: 13px; font-weight: 600;">Brand Kit non uniforme</span>
-                    </div>
-                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">Il brand kit del cliente deve essere applicato su tutta la piattaforma: lato Creator e lato Partecipante. Verificare copertura completa su ogni schermata.</p>
-                    <p style="font-size: 11px; color: #2196F3; margin-top: 8px; font-weight: 600;">Riferimento stile: surgicalvideoproduction.com</p>
                 </div>
             </div>
         </div>
@@ -1554,64 +1585,48 @@
             </div>
             <div class="thumb-strip" id="thumbs-fix-2"></div>
             <h1 class="slide-title">Problema & Obiettivo</h1>
-            <p class="slide-subtitle">Fix & Refinment 1.0 • Perche' questo refinement</p>
-            <div class="slide-content">
-                <div class="slide-description">
-                    <p><strong style="color: #F44336;">Il problema:</strong> oggi i quiz generati dall'AI producono <span class="highlight" style="color: #F44336;">domande nozionistiche generiche</span>. Testano la memoria del clinico ("Quale farmaco si usa per X?"), non il suo comportamento decisionale. Le risposte non hanno valore strategico per le aziende MedTech/Pharma committenti.</p>
-                    <p><strong style="color: #4CAF50;">La soluzione:</strong> trasformare il motore AI in un <span class="highlight insight">Clinical Intelligence Engine</span>. Le domande diventano proxy di decisioni cliniche reali. Le risposte generano dati di business intelligence: come decidono i clinici, dove esitano, dove divergono dalle linee guida.</p>
-                    <p><strong style="color: #FF9800;">L'impatto:</strong> il quiz non e' piu' solo engagement congressuale. Diventa uno strumento di <strong>osservazione del comportamento clinico in ambiente controllato</strong>. Ogni evento genera un dataset strategico vendibile.</p>
-                    <div class="feature-box">
-                        <h4>Da polling a intelligence</h4>
-                        <ul>
-                            <li><strong>PRIMA:</strong> PDF → domande generiche → % risposte corrette → report piatto</li>
-                            <li><strong>DOPO:</strong> PDF → catalogazione → master prompt → domande strategiche → dati comportamentali → business intelligence</li>
-                            <li><strong>Differenza chiave:</strong> non misuriamo "conoscenza" ma "processo decisionale"</li>
-                            <li><strong>Cosa cambia per il cliente:</strong> passa da "engagement" a "decision intelligence"</li>
-                        </ul>
-                    </div>
+            <p class="slide-subtitle">Fix & Refinment 1.0 / Cosa cambia e perche'</p>
+            <div class="slide-content" style="gap: 30px;">
+                <div class="slide-description" style="flex: 0 0 380px;">
+                    <p><strong style="color: #F44336;">PROBLEMA</strong><br>I quiz generati dall'AI producono domande nozionistiche ("Quale farmaco si usa per X?"). Testano la memoria, non il comportamento decisionale. Le risposte non servono alle aziende committenti.</p>
+                    <p><strong style="color: #4CAF50;">OBIETTIVO</strong><br>Riscrivere il processo di generazione domande perche' produca domande che funzionano come proxy di decisioni cliniche reali. Le risposte devono generare dati utili: come decidono i clinici, dove esitano, dove divergono dalle linee guida.</p>
+                    <p><strong style="color: #FF9800;">COSA SERVE</strong><br>1. Catalogazione strutturata del contenuto PDF (JSON)<br>2. Master Prompt che guida l'AI verso domande comportamentali<br>3. Report Excel con breakdown per domanda e cluster</p>
                 </div>
-                <div class="slide-image">
-                    <div style="width: 480px; display: flex; flex-direction: column; gap: 16px;">
+                <div class="slide-image" style="flex: 1;">
+                    <div style="width: 100%; max-width: 580px; display: flex; flex-direction: column; gap: 20px;">
                         <!-- PRIMA -->
-                        <div style="background: rgba(244,67,54,0.1); border: 2px solid #F44336; border-radius: 12px; padding: 18px;">
-                            <div style="font-size: 11px; font-weight: 700; color: #F44336; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">PRIMA: Quiz tradizionale</div>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <div style="background: rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 8px; font-size: 11px; text-align: center;">PDF</div>
-                                <div style="color: rgba(255,255,255,0.3);">→</div>
-                                <div style="background: rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 8px; font-size: 11px; text-align: center;">Domande<br>generiche</div>
-                                <div style="color: rgba(255,255,255,0.3);">→</div>
-                                <div style="background: rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 8px; font-size: 11px; text-align: center;">% corrette</div>
-                                <div style="color: rgba(255,255,255,0.3);">→</div>
-                                <div style="background: rgba(244,67,54,0.2); padding: 8px 12px; border-radius: 8px; font-size: 11px; text-align: center; color: #EF9A9A;">Report<br>piatto</div>
+                        <div style="background: rgba(244,67,54,0.1); border: 2px solid #F44336; border-radius: 12px; padding: 24px;">
+                            <div style="font-size: 13px; font-weight: 700; color: #F44336; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px;">Acquisto tradizionale (oggi)</div>
+                            <div style="display: flex; align-items: center; gap: 10px; justify-content: center;">
+                                <div style="background: rgba(255,255,255,0.1); padding: 14px 18px; border-radius: 10px; font-size: 13px; text-align: center; font-weight: 600;">PDF</div>
+                                <div style="color: rgba(255,255,255,0.4); font-size: 18px;">→</div>
+                                <div style="background: rgba(255,255,255,0.1); padding: 14px 18px; border-radius: 10px; font-size: 13px; text-align: center;">Domande<br>generiche</div>
+                                <div style="color: rgba(255,255,255,0.4); font-size: 18px;">→</div>
+                                <div style="background: rgba(255,255,255,0.1); padding: 14px 18px; border-radius: 10px; font-size: 13px; text-align: center;">% corrette</div>
+                                <div style="color: rgba(255,255,255,0.4); font-size: 18px;">→</div>
+                                <div style="background: rgba(244,67,54,0.2); padding: 14px 18px; border-radius: 10px; font-size: 13px; text-align: center; color: #EF9A9A; font-weight: 600;">Report<br>piatto</div>
                             </div>
                         </div>
                         <!-- DOPO -->
-                        <div style="background: rgba(0,188,212,0.1); border: 2px solid #00BCD4; border-radius: 12px; padding: 18px;">
-                            <div style="font-size: 11px; font-weight: 700; color: #00BCD4; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">DOPO: Clinical Intelligence Engine</div>
-                            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                                <div style="background: rgba(255,255,255,0.1); padding: 8px 10px; border-radius: 8px; font-size: 10px; text-align: center;">PDF</div>
-                                <div style="color: rgba(255,255,255,0.3);">→</div>
-                                <div style="background: rgba(255,255,255,0.1); padding: 8px 10px; border-radius: 8px; font-size: 10px; text-align: center;">Cataloga-<br>zione</div>
-                                <div style="color: rgba(255,255,255,0.3);">→</div>
-                                <div style="background: rgba(0,188,212,0.3); padding: 8px 10px; border-radius: 8px; font-size: 10px; text-align: center; border: 1px solid #00BCD4;">Master<br>Prompt</div>
-                                <div style="color: rgba(255,255,255,0.3);">→</div>
-                                <div style="background: rgba(255,255,255,0.1); padding: 8px 10px; border-radius: 8px; font-size: 10px; text-align: center;">Domande<br>strategiche</div>
-                                <div style="color: rgba(255,255,255,0.3);">→</div>
-                                <div style="background: rgba(255,255,255,0.1); padding: 8px 10px; border-radius: 8px; font-size: 10px; text-align: center;">Dati<br>comportam.</div>
-                                <div style="color: rgba(255,255,255,0.3);">→</div>
-                                <div style="background: rgba(0,188,212,0.3); padding: 8px 10px; border-radius: 8px; font-size: 10px; text-align: center; border: 1px solid #00BCD4;">Business<br>Intelligence</div>
+                        <div style="background: rgba(0,188,212,0.1); border: 2px solid #00BCD4; border-radius: 12px; padding: 24px;">
+                            <div style="font-size: 13px; font-weight: 700; color: #00BCD4; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px;">Clinical Quiz (dopo refinement)</div>
+                            <div style="display: flex; align-items: center; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                                <div style="background: rgba(255,255,255,0.1); padding: 14px 16px; border-radius: 10px; font-size: 12px; text-align: center; font-weight: 600;">PDF</div>
+                                <div style="color: rgba(255,255,255,0.4); font-size: 18px;">→</div>
+                                <div style="background: rgba(0,188,212,0.2); padding: 14px 16px; border-radius: 10px; font-size: 12px; text-align: center; border: 1px solid #00BCD4;">Cataloga-<br>zione JSON</div>
+                                <div style="color: rgba(255,255,255,0.4); font-size: 18px;">→</div>
+                                <div style="background: rgba(0,188,212,0.3); padding: 14px 16px; border-radius: 10px; font-size: 12px; text-align: center; border: 1px solid #00BCD4; font-weight: 600;">Master<br>Prompt</div>
+                                <div style="color: rgba(255,255,255,0.4); font-size: 18px;">→</div>
+                                <div style="background: rgba(255,255,255,0.1); padding: 14px 16px; border-radius: 10px; font-size: 12px; text-align: center;">Domande<br>strategiche</div>
+                                <div style="color: rgba(255,255,255,0.4); font-size: 18px;">→</div>
+                                <div style="background: rgba(255,255,255,0.1); padding: 14px 16px; border-radius: 10px; font-size: 12px; text-align: center;">Dati<br>comportam.</div>
+                                <div style="color: rgba(255,255,255,0.4); font-size: 18px;">→</div>
+                                <div style="background: rgba(0,188,212,0.3); padding: 14px 16px; border-radius: 10px; font-size: 12px; text-align: center; border: 1px solid #00BCD4; font-weight: 600;">Report<br>Excel BI</div>
                             </div>
                         </div>
-                        <!-- KPI differenza -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                            <div style="background: rgba(244,67,54,0.08); border-radius: 8px; padding: 12px; text-align: center;">
-                                <div style="font-size: 9px; font-weight: 700; color: #F44336; text-transform: uppercase; margin-bottom: 4px;">Polling classico</div>
-                                <div style="font-size: 11px; color: rgba(255,255,255,0.7);">dato = risposta</div>
-                            </div>
-                            <div style="background: rgba(0,188,212,0.08); border-radius: 8px; padding: 12px; text-align: center;">
-                                <div style="font-size: 9px; font-weight: 700; color: #00BCD4; text-transform: uppercase; margin-bottom: 4px;">Clinical Scenario</div>
-                                <div style="font-size: 11px; color: rgba(255,255,255,0.7);">risposta + contesto + comportamento + distribuzione</div>
-                            </div>
+                        <!-- Differenza -->
+                        <div style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 14px 18px; text-align: center;">
+                            <span style="font-size: 12px; color: rgba(255,255,255,0.6);">Non misuriamo "conoscenza" ma "processo decisionale"</span>
                         </div>
                     </div>
                 </div>
@@ -1625,59 +1640,62 @@
                 <span class="slide-number"></span>
             </div>
             <div class="thumb-strip" id="thumbs-fix-3"></div>
-            <h1 class="slide-title" style="text-align: center; margin-bottom: 5px;">Pipeline: Dal PDF alla Business Intelligence</h1>
-            <p class="slide-subtitle" style="text-align: center; margin-bottom: 12px;">Flusso tecnico completo del CS Intelligence Engine</p>
-            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 20px; gap: 10px;">
-                <!-- Row 1: Input + Catalogazione -->
-                <div style="display: flex; gap: 12px; align-items: stretch;">
-                    <div style="flex: 1; background: rgba(255,255,255,0.07); border-radius: 12px; padding: 16px; border-left: 4px solid #42A5F5;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <div style="background: #42A5F5; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">1</div>
-                            <div style="font-size: 13px; font-weight: 600;">Upload & Estrazione</div>
-                        </div>
-                        <div style="font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">Il Creator carica i PDF delle presentazioni. Il sistema estrae il testo, identifica la struttura (capitoli, sezioni, slide) e prepara il contenuto grezzo per la catalogazione.</div>
+            <h1 class="slide-title">Pipeline Overview</h1>
+            <p class="slide-subtitle">Fix & Refinment 1.0 / Flusso tecnico: dal PDF al report Excel</p>
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 30px; gap: 8px;">
+                <!-- Step 1 -->
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="flex: 0 0 220px; display: flex; align-items: center; gap: 10px;">
+                        <div style="background: #42A5F5; color: #fff; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">1</div>
+                        <div style="font-size: 14px; font-weight: 600;">Upload & Estrazione</div>
                     </div>
-                    <div style="flex: 1; background: rgba(255,255,255,0.07); border-radius: 12px; padding: 16px; border-left: 4px solid #FFA726;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <div style="background: #FFA726; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">2</div>
-                            <div style="font-size: 13px; font-weight: 600;">Catalogazione AI</div>
-                        </div>
-                        <div style="font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">L'AI analizza ogni presentazione ed estrae: <strong>concetti chiave</strong>, <strong>decision point clinici</strong> (momenti in cui il clinico deve scegliere), livelli di complessita' e relazioni tra argomenti.</div>
-                    </div>
+                    <div style="color: #42A5F5; font-size: 20px;">→</div>
+                    <div style="flex: 1; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 12px 16px; font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5;">Creator carica PDF. Il sistema estrae testo, identifica struttura (capitoli, sezioni, slide), prepara contenuto per catalogazione.</div>
                 </div>
-                <!-- Row 2: Master Prompt + Generazione -->
-                <div style="display: flex; gap: 12px; align-items: stretch;">
-                    <div style="flex: 1; background: rgba(0,188,212,0.1); border-radius: 12px; padding: 16px; border-left: 4px solid #00BCD4; border: 1px solid rgba(0,188,212,0.3);">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <div style="background: #00BCD4; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">3</div>
-                            <div style="font-size: 13px; font-weight: 600;">Master Prompt</div>
-                        </div>
-                        <div style="font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">Il contenuto catalogato viene passato al <strong>Master Prompt</strong>: un system prompt specializzato che istruisce l'AI a generare domande-proxy di decisioni cliniche, targettizzando le 13 categorie di insight strategico.</div>
+                <!-- Step 2 -->
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="flex: 0 0 220px; display: flex; align-items: center; gap: 10px;">
+                        <div style="background: #FFA726; color: #fff; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">2</div>
+                        <div style="font-size: 14px; font-weight: 600;">Catalogazione AI</div>
                     </div>
-                    <div style="flex: 1; background: rgba(255,255,255,0.07); border-radius: 12px; padding: 16px; border-left: 4px solid #AB47BC;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <div style="background: #AB47BC; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">4</div>
-                            <div style="font-size: 13px; font-weight: 600;">Generazione Domande</div>
-                        </div>
-                        <div style="font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">L'AI genera domande strutturate: ogni domanda ha un <strong>insight target</strong>, un <strong>tipo di decisione</strong> (terapeutica, timing, complicanza), un livello di difficolta' e un <strong>behavioral signal</strong> atteso dalla distribuzione risposte.</div>
-                    </div>
+                    <div style="color: #FFA726; font-size: 20px;">→</div>
+                    <div style="flex: 1; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 12px 16px; font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5;">AI analizza ogni PDF ed estrae: concetti chiave, decision point clinici, livelli complessita', relazioni tra argomenti. Output: JSON strutturato salvato in DB.</div>
                 </div>
-                <!-- Row 3: Quiz + Data Collection + BI -->
-                <div style="display: flex; gap: 12px; align-items: stretch;">
-                    <div style="flex: 1; background: rgba(255,255,255,0.07); border-radius: 12px; padding: 16px; border-left: 4px solid #66BB6A;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <div style="background: #66BB6A; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">5</div>
-                            <div style="font-size: 13px; font-weight: 600;">Quiz & Raccolta Dati</div>
-                        </div>
-                        <div style="font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">I clinici rispondono in tempo reale durante il congresso. Per ogni risposta si raccoglie: <strong>scelta</strong>, <strong>tempo di risposta</strong>, <strong>coerenza</strong> rispetto al contesto, <strong>posizione</strong> rispetto agli altri partecipanti.</div>
+                <!-- Step 3 -->
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="flex: 0 0 220px; display: flex; align-items: center; gap: 10px;">
+                        <div style="background: #00BCD4; color: #fff; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">3</div>
+                        <div style="font-size: 14px; font-weight: 600;">Master Prompt</div>
                     </div>
-                    <div style="flex: 1; background: rgba(0,188,212,0.1); border-radius: 12px; padding: 16px; border-left: 4px solid #00BCD4; border: 1px solid rgba(0,188,212,0.3);">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <div style="background: #00BCD4; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">6</div>
-                            <div style="font-size: 13px; font-weight: 600;">Business Intelligence</div>
-                        </div>
-                        <div style="font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">I dati vengono elaborati in <strong>3 livelli</strong>: base (distribuzione %), avanzato (cluster, pattern), strategico (gap, bias, trend). Con accumulo nel tempo: benchmark e evoluzione decisionale.</div>
+                    <div style="color: #00BCD4; font-size: 20px;">→</div>
+                    <div style="flex: 1; background: rgba(0,188,212,0.08); border-radius: 10px; padding: 12px 16px; font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5; border: 1px solid rgba(0,188,212,0.2);">Il JSON catalogato viene passato al Master Prompt (system prompt). Istruisce l'AI a generare domande-proxy di decisioni cliniche, targettizzando 13 categorie di insight. <strong style="color: #FF9800;">Editabile solo da SVP.</strong></div>
+                </div>
+                <!-- Step 4 -->
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="flex: 0 0 220px; display: flex; align-items: center; gap: 10px;">
+                        <div style="background: #AB47BC; color: #fff; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">4</div>
+                        <div style="font-size: 14px; font-weight: 600;">Generazione Domande</div>
                     </div>
+                    <div style="color: #AB47BC; font-size: 20px;">→</div>
+                    <div style="flex: 1; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 12px 16px; font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5;">AI genera domande strutturate. Ogni domanda ha: insight_target, tipo decisione (terapeutica/timing/complicanza), difficolta', behavioral_signal atteso dalla distribuzione risposte.</div>
+                </div>
+                <!-- Step 5 -->
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="flex: 0 0 220px; display: flex; align-items: center; gap: 10px;">
+                        <div style="background: #66BB6A; color: #fff; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">5</div>
+                        <div style="font-size: 14px; font-weight: 600;">Quiz & Raccolta Dati</div>
+                    </div>
+                    <div style="color: #66BB6A; font-size: 20px;">→</div>
+                    <div style="flex: 1; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 12px 16px; font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5;">Clinici rispondono in tempo reale al congresso. Per ogni risposta: scelta effettuata, tempo di risposta, posizione rispetto agli altri partecipanti.</div>
+                </div>
+                <!-- Step 6 -->
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="flex: 0 0 220px; display: flex; align-items: center; gap: 10px;">
+                        <div style="background: #00BCD4; color: #fff; min-width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700;">6</div>
+                        <div style="font-size: 14px; font-weight: 600;">Report Excel BI</div>
+                    </div>
+                    <div style="color: #00BCD4; font-size: 20px;">→</div>
+                    <div style="flex: 1; background: rgba(0,188,212,0.08); border-radius: 10px; padding: 12px 16px; font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5; border: 1px solid rgba(0,188,212,0.2);">Report Excel scaricabile dalla lista quiz. Contiene: distribuzione % per domanda, cluster comportamentali (conservativi/innovatori/indecisi), gap formativi. Dettaglio nella slide Report.</div>
                 </div>
             </div>
         </div>
@@ -1690,58 +1708,53 @@
             </div>
             <div class="thumb-strip" id="thumbs-fix-4"></div>
             <h1 class="slide-title">Catalogazione Contenuti</h1>
-            <p class="slide-subtitle">Fix & Refinment 1.0 • Step 2: come l'AI struttura il contenuto dei PDF</p>
-            <div class="slide-content">
-                <div class="slide-description">
-                    <p>Prima di generare domande, l'AI <span class="highlight insight">cataloga il contenuto</span> di ogni presentazione. Non si limita a "leggere il testo": identifica la struttura semantica, i concetti chiave e soprattutto i <strong>decision point clinici</strong>.</p>
-                    <p>Un decision point e' un momento in cui il clinico deve <strong>fare una scelta tra alternative</strong>: quale farmaco usare, quando intervenire, come gestire una complicanza. Sono questi i punti su cui si costruiscono le domande strategiche.</p>
-                    <p>La catalogazione e' <strong>per presentazione</strong>: ogni PDF del relatore viene analizzato separatamente, mantenendo la tracciabilita' della fonte. Il sistema cross-referenzia poi i decision point tra presentazioni diverse della stessa sessione.</p>
-                    <div class="feature-box">
-                        <h4>Struttura catalogazione</h4>
+            <p class="slide-subtitle">Fix & Refinment 1.0 / Step 2: il sistema genera un JSON strutturato per ogni PDF</p>
+            <div class="slide-content" style="gap: 24px;">
+                <div class="slide-description" style="flex: 0 0 340px;">
+                    <p>Prima di generare domande, l'AI cataloga il contenuto di ogni PDF. Estrae: struttura semantica, concetti chiave, <strong>decision point clinici</strong> (momenti in cui il clinico deve scegliere tra alternative).</p>
+                    <p>Catalogazione per PDF: ogni presentazione viene analizzata separatamente. Il sistema cross-referenzia i decision point tra PDF diversi della stessa sessione.</p>
+                    <div class="feature-box" style="border-left-color: #F44336;">
+                        <h4 style="color: #F44336;">Da implementare</h4>
                         <ul>
-                            <li><strong>Concetti chiave:</strong> terminologia, classificazioni, protocolli</li>
-                            <li><strong>Decision point:</strong> momenti di scelta clinica (il cuore del sistema)</li>
-                            <li><strong>Livelli complessita':</strong> base, intermedio, avanzato per argomento</li>
-                            <li><strong>Relazioni:</strong> collegamenti tra argomenti di presentazioni diverse</li>
-                            <li><strong>Fonte:</strong> relatore, titolo lezione, slide/pagina di riferimento</li>
+                            <li>Il JSON della catalogazione deve essere <strong>persistito in DB</strong> per ogni PDF processato</li>
+                            <li>Struttura: concetti, decision_points, complessita', fonte (relatore, titolo, pagina)</li>
+                            <li>Il JSON viene poi passato come input al Master Prompt per la generazione domande</li>
                         </ul>
                     </div>
                 </div>
-                <div class="slide-image">
-                    <div style="width: 520px; background: #1e1e2e; border-radius: 12px; padding: 18px; font-family: 'Courier New', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-                            <div style="width: 10px; height: 10px; border-radius: 50%; background: #F44336;"></div>
-                            <div style="width: 10px; height: 10px; border-radius: 50%; background: #FFC107;"></div>
-                            <div style="width: 10px; height: 10px; border-radius: 50%; background: #4CAF50;"></div>
-                            <span style="font-size: 10px; color: rgba(255,255,255,0.4); margin-left: 8px;">catalogazione_output.json</span>
+                <div class="slide-image" style="flex: 1;">
+                    <div style="width: 100%; max-width: 600px; background: #1e1e2e; border-radius: 12px; padding: 22px; font-family: 'Courier New', monospace; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #F44336;"></div>
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #FFC107;"></div>
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #4CAF50;"></div>
+                            <span style="font-size: 11px; color: rgba(255,255,255,0.4); margin-left: 8px;">catalogazione_output.json</span>
                         </div>
-                        <div style="font-size: 10px; line-height: 1.7; color: #e0e0e0;">
-                            <div><span style="color: #42A5F5;">PDF:</span> "Scompenso Cardiaco Acuto"</div>
-                            <div><span style="color: #42A5F5;">Relatore:</span> Dr. Rossi | <span style="color: #42A5F5;">Pag:</span> 42 | <span style="color: #42A5F5;">Cap:</span> 3</div>
-                            <div style="margin-top: 8px; color: #FFA726; font-weight: 600;">CONCETTI ESTRATTI:</div>
-                            <div style="padding-left: 12px;">
-                                <div>├── Classificazione NYHA (I-IV)</div>
-                                <div>├── Terapia farmacologica prima linea</div>
-                                <div>│&nbsp;&nbsp;&nbsp;├── ACE-inibitori vs ARB</div>
-                                <div>│&nbsp;&nbsp;&nbsp;├── Beta-bloccanti: timing</div>
-                                <div>│&nbsp;&nbsp;&nbsp;└── Diuretici: loop vs tiazidici</div>
-                                <div>└── Gestione complicanze</div>
-                                <div>&nbsp;&nbsp;&nbsp;&nbsp;├── Edema polmonare acuto</div>
-                                <div>&nbsp;&nbsp;&nbsp;&nbsp;└── Shock cardiogeno</div>
-                            </div>
-                            <div style="margin-top: 8px; color: #F44336; font-weight: 600;">DECISION POINT RILEVATI:</div>
-                            <div style="padding-left: 12px;">
-                                <div><span style="color: #EF5350;">DP1:</span> Quando iniziare beta-bloccante in acuto?</div>
-                                <div><span style="color: #EF5350;">DP2:</span> ACE-i o ARB come prima scelta?</div>
-                                <div><span style="color: #EF5350;">DP3:</span> Quando trasferire in terapia intensiva?</div>
-                                <div><span style="color: #EF5350;">DP4:</span> Furosemide ev: bolo o infusione?</div>
-                            </div>
-                            <div style="margin-top: 8px; color: #66BB6A; font-weight: 600;">COMPLESSITA':</div>
-                            <div style="padding-left: 12px;">
-                                <div><span style="color: #81C784;">Base:</span> classificazione, definizioni</div>
-                                <div><span style="color: #FFB74D;">Intermedio:</span> scelta farmacologica</div>
-                                <div><span style="color: #EF5350;">Avanzato:</span> gestione emergenze</div>
-                            </div>
+                        <div style="font-size: 12px; line-height: 1.8; color: #e0e0e0;">
+                            <div>{</div>
+                            <div>&nbsp;&nbsp;<span style="color: #81C784;">"pdf"</span>: <span style="color: #CE9178;">"Scompenso Cardiaco Acuto"</span>,</div>
+                            <div>&nbsp;&nbsp;<span style="color: #81C784;">"relatore"</span>: <span style="color: #CE9178;">"Dr. Rossi"</span>,</div>
+                            <div>&nbsp;&nbsp;<span style="color: #81C784;">"pagine"</span>: <span style="color: #B5CEA8;">42</span>,</div>
+                            <div>&nbsp;&nbsp;<span style="color: #81C784;">"capitolo"</span>: <span style="color: #B5CEA8;">3</span>,</div>
+                            <div style="margin-top: 6px;">&nbsp;&nbsp;<span style="color: #81C784;">"concetti"</span>: [</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CE9178;">"Classificazione NYHA (I-IV)"</span>,</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CE9178;">"Terapia farmacologica prima linea"</span>,</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CE9178;">"ACE-inibitori vs ARB"</span>,</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CE9178;">"Beta-bloccanti: timing"</span>,</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #CE9178;">"Diuretici: loop vs tiazidici"</span></div>
+                            <div>&nbsp;&nbsp;],</div>
+                            <div style="margin-top: 6px;">&nbsp;&nbsp;<span style="color: #81C784;">"decision_points"</span>: [</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;{ <span style="color: #81C784;">"id"</span>: <span style="color: #CE9178;">"DP1"</span>, <span style="color: #81C784;">"q"</span>: <span style="color: #CE9178;">"Quando iniziare beta-bloccante in acuto?"</span> },</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;{ <span style="color: #81C784;">"id"</span>: <span style="color: #CE9178;">"DP2"</span>, <span style="color: #81C784;">"q"</span>: <span style="color: #CE9178;">"ACE-i o ARB come prima scelta?"</span> },</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;{ <span style="color: #81C784;">"id"</span>: <span style="color: #CE9178;">"DP3"</span>, <span style="color: #81C784;">"q"</span>: <span style="color: #CE9178;">"Quando trasferire in terapia intensiva?"</span> },</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;{ <span style="color: #81C784;">"id"</span>: <span style="color: #CE9178;">"DP4"</span>, <span style="color: #81C784;">"q"</span>: <span style="color: #CE9178;">"Furosemide ev: bolo o infusione?"</span> }</div>
+                            <div>&nbsp;&nbsp;],</div>
+                            <div style="margin-top: 6px;">&nbsp;&nbsp;<span style="color: #81C784;">"complessita"</span>: {</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #81C784;">"base"</span>: [<span style="color: #CE9178;">"classificazione"</span>, <span style="color: #CE9178;">"definizioni"</span>],</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #81C784;">"intermedio"</span>: [<span style="color: #CE9178;">"scelta farmacologica"</span>],</div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #81C784;">"avanzato"</span>: [<span style="color: #CE9178;">"gestione emergenze"</span>]</div>
+                            <div>&nbsp;&nbsp;}</div>
+                            <div>}</div>
                         </div>
                     </div>
                 </div>
@@ -1756,21 +1769,28 @@
             </div>
             <div class="thumb-strip" id="thumbs-fix-5"></div>
             <h1 class="slide-title">Master Prompt</h1>
-            <p class="slide-subtitle">Fix & Refinment 1.0 • Il cuore dell'Intelligence Engine</p>
+            <p class="slide-subtitle">Fix & Refinment 1.0 / System prompt che guida la generazione domande AI</p>
             <div class="slide-content">
                 <div class="slide-description">
-                    <p>Il <span class="highlight insight">Master Prompt</span> e' il system prompt che guida l'AI nella generazione delle domande. Non e' un prompt generico: e' un documento di <strong>10+ pagine</strong> che codifica esattamente cosa si vuole ottenere dalle risposte dei clinici.</p>
-                    <p>Il Master Prompt riceve in input il <strong>contenuto catalogato</strong> (concetti + decision point) e lo trasforma in domande che funzionano come <strong>strumenti di osservazione comportamentale</strong>.</p>
-                    <p>Regole chiave: ogni domanda presenta una <strong>decisione reale</strong> (non una nozione). Le opzioni sono <strong>tutte plausibili</strong> (nessuna risposta ovviamente sbagliata). La distribuzione delle risposte rivela il comportamento clinico prevalente.</p>
-                    <div class="feature-box">
-                        <h4>Come il Master Prompt influenza la generazione</h4>
+                    <p>Il Master Prompt e' il system prompt passato all'AI per la generazione domande. Riceve in input il <strong>JSON catalogato</strong> (concetti + decision point) e produce domande che sono proxy di decisioni cliniche reali.</p>
+                    <p>Regole: ogni domanda presenta una decisione reale (non una nozione). Le opzioni sono tutte plausibili. La distribuzione delle risposte rivela il comportamento clinico.</p>
+                    <div class="feature-box" style="border-left-color: #FF9800;">
+                        <h4 style="color: #FF9800;">Permessi</h4>
                         <ul>
-                            <li><strong>Input:</strong> contenuto catalogato + decision point estratti</li>
-                            <li><strong>Regola 1:</strong> ogni domanda = proxy di una decisione clinica reale</li>
-                            <li><strong>Regola 2:</strong> opzioni = alternative che un clinico considererebbe davvero</li>
-                            <li><strong>Regola 3:</strong> ogni domanda taggata con insight_target primario</li>
+                            <li><strong>Il Master Prompt e' editabile SOLO da SVP</strong> (non dal Creator)</li>
+                            <li>SVP puo' modificare regole, categorie insight, parametri di generazione</li>
+                            <li>Il Creator non ha accesso alla modifica del prompt</li>
+                        </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h4>Specifiche tecniche</h4>
+                        <ul>
+                            <li><strong>Input:</strong> JSON catalogato + decision point estratti</li>
+                            <li><strong>Regola 1:</strong> ogni domanda = proxy di una decisione clinica</li>
+                            <li><strong>Regola 2:</strong> opzioni = alternative plausibili (no risposte ovvie)</li>
+                            <li><strong>Regola 3:</strong> ogni domanda taggata con insight_target</li>
                             <li><strong>Regola 4:</strong> ogni domanda ha un behavioral_signal atteso</li>
-                            <li><strong>Output:</strong> JSON strutturato con domanda + metadata + segnale BI</li>
+                            <li><strong>Output:</strong> JSON con domanda + metadata + segnale BI</li>
                         </ul>
                     </div>
                 </div>
